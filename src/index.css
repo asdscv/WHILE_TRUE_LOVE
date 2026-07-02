@@ -13,7 +13,6 @@
   --line: #d8cfbe; /* hairline */
   --accent: #a8c3bc; /* 청자 옥색(포인트) */
   --accent-deep: #5c7b71; /* 옥색 짙은 변형(소형 텍스트 대비 확보) */
-  --seal: #a23b2e; /* 낙관 인주(囍 전용) */
   --sun: #9c766e; /* 일요일 */
 
   --dark: #1f1e1c;
@@ -176,33 +175,6 @@ button {
   }
 }
 
-/* ---------- 낙관 도장 ---------- */
-.seal {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: var(--seal);
-  color: var(--paper);
-  font-family: var(--song);
-  font-size: 26px;
-  line-height: 1;
-  border-radius: 2px;
-  transform: rotate(-3deg);
-  position: relative;
-  overflow: hidden;
-}
-.seal::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--hanji);
-  background-size: 90px 90px;
-  opacity: 0.3;
-  mix-blend-mode: screen;
-}
-
 /* ============ 인트로 ============ */
 .intro {
   position: fixed;
@@ -336,88 +308,66 @@ button {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(31, 30, 28, 0.5) 0%,
-    rgba(31, 30, 28, 0.08) 30%,
-    rgba(31, 30, 28, 0.1) 58%,
-    rgba(31, 30, 28, 0.55) 100%
+    rgba(31, 30, 28, 0.34) 0%,
+    rgba(31, 30, 28, 0.22) 42%,
+    rgba(31, 30, 28, 0.4) 100%
   );
 }
-.cover__mark {
+.cover__center {
   position: absolute;
-  top: 34px;
-  right: var(--gutter-r);
-  z-index: 2;
-}
-.cover__mark .seal {
-  width: 40px;
-  height: 40px;
-  font-size: 23px;
-}
-.cover__masthead {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  right: 0;
-  padding: 0 var(--gutter-l);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
   z-index: 2;
 }
 .cover__eyebrow {
   font-family: var(--serif);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.3em;
   text-indent: 0.3em;
-  margin: 0 0 16px;
-  color: rgba(245, 240, 228, 0.9);
+  margin: 0 0 20px;
+  color: rgba(245, 240, 228, 0.92);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+  animation: inkBleed 1.6s ease both;
 }
 .cover__title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   font-family: var(--song);
   font-weight: 400;
-  font-size: clamp(3.1rem, 16.5vw, 5.6rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  font-size: clamp(34px, 10.5vw, 54px);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
   margin: 0;
-  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.45);
+  animation: inkBleed 1.9s ease both;
 }
 .cover__amp {
   font-family: var(--fig);
   font-style: italic;
   font-weight: 400;
-  font-size: 0.4em;
-  opacity: 0.82;
-  margin: 0.04em 0 0.06em;
+  opacity: 0.9;
+  margin: 0 0.1em;
 }
-.cover__issue {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
-  margin-top: 24px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(245, 240, 228, 0.4);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  color: rgba(245, 240, 228, 0.88);
-}
-.cover__issue .num {
+.cover__date {
   font-family: var(--fig);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  font-size: 15px;
+  margin: 22px 0 0;
+  color: rgba(245, 240, 228, 0.92);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 2.4s ease both;
 }
-.cover__foot {
+.cover__scroll {
   position: absolute;
-  left: var(--gutter-l);
-  bottom: 30px;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
-}
-.cover__venue {
-  font-family: var(--serif);
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  color: rgba(245, 240, 228, 0.9);
-  margin: 0 0 16px;
 }
 .cover__scroll span {
   display: block;
@@ -1185,11 +1135,6 @@ button {
 .footer {
   text-align: left;
   padding: 96px var(--gutter-l) 80px;
-}
-.footer__seal {
-  display: flex;
-  justify-content: flex-start;
-  margin: 0 0 26px;
 }
 .footer__names {
   font-family: var(--song);

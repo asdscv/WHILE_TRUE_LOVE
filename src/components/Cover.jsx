@@ -1,19 +1,11 @@
 import { config } from '../config'
 import { galleryImages } from '../gallery'
-import Seal from './Seal'
-
-function ymd(iso) {
-  const [d] = iso.split('T')
-  const [y, m, dd] = d.split('-')
-  return { y, m: Number(m), d: Number(dd) }
-}
 
 export default function Cover() {
   const { groom, bride, groomFirst, wedding } = config
   const [a, b] = groomFirst ? [groom, bride] : [bride, groom]
   const cover = galleryImages[0]
-  const { y, m, d } = ymd(wedding.dateISO)
-  const pad = (n) => String(n).padStart(2, '0')
+  const dateNum = wedding.dateISO.split('T')[0].replace(/-/g, '. ')
 
   return (
     <header className="cover">
@@ -25,32 +17,16 @@ export default function Cover() {
       />
       <div className="cover__overlay" />
 
-      <div className="cover__mark">
-        <Seal />
-      </div>
-
-      <div className="cover__masthead">
-        <p className="cover__eyebrow">우리 결혼합니다</p>
+      <div className="cover__center">
+        <p className="cover__eyebrow">저희 결혼합니다</p>
         <h1 className="cover__title">
-          <span className="cover__nm">{a.name}</span>
-          <span className="cover__amp">&amp;</span>
-          <span className="cover__nm">{b.name}</span>
+          {a.name} <span className="cover__amp">&amp;</span> {b.name}
         </h1>
-        <div className="cover__issue">
-          <span>
-            {wedding.timeText} · {wedding.venue.name}
-          </span>
-          <span className="num">
-            {y} · {pad(m)} · {pad(d)}
-          </span>
-        </div>
+        <p className="cover__date">{dateNum}</p>
       </div>
 
-      <div className="cover__foot">
-        <p className="cover__venue">{wedding.dateText}</p>
-        <div className="cover__scroll" aria-hidden="true">
-          <span />
-        </div>
+      <div className="cover__scroll" aria-hidden="true">
+        <span />
       </div>
     </header>
   )
