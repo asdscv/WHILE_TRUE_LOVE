@@ -19,7 +19,7 @@ export default function Intro({ onDone }) {
     const t = setTimeout(() => {
       document.body.style.overflow = ''
       onDone()
-    }, 1100)
+    }, 1300)
     return () => clearTimeout(t)
   }, [leaving, onDone])
 
