@@ -12,6 +12,7 @@ import Location from './components/Location'
 import Account from './components/Account'
 import Guestbook from './components/Guestbook'
 import Gallery from './components/Gallery'
+import Seal from './components/Seal'
 import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
@@ -42,6 +43,9 @@ export default function App() {
         <Gallery />
 
         <footer className="footer">
+          <div className="footer__seal">
+            <Seal paper />
+          </div>
           <p className="footer__names">
             {a.name} · {b.name}
           </p>
