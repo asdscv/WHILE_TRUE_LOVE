@@ -484,6 +484,81 @@ button {
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
 
+/* ============ Countdown 밴드 (사진 위 카운트다운) ============ */
+.countdown {
+  position: relative;
+  min-height: 58vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.countdown__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 15, 10, 0.4),
+    rgba(18, 15, 10, 0.52)
+  );
+}
+.countdown__inner {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  padding: 0 20px;
+}
+.countdown__caption {
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.cd {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.cd__group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.cd__u {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 1.4em;
+}
+.cd__n {
+  font-family: var(--fig);
+  font-weight: 500;
+  font-size: clamp(40px, 13vw, 60px);
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+.cd__l {
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+  color: rgba(255, 255, 255, 0.72);
+}
+.cd__sep {
+  font-family: var(--fig);
+  font-weight: 400;
+  font-size: clamp(36px, 12vw, 54px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* ============ Calendar / D-Day ============ */
 .calendar__bigdate {
   font-family: var(--fig);

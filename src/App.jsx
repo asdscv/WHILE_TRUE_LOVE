@@ -7,6 +7,7 @@ import Cover from './components/Cover'
 import Greeting from './components/Greeting'
 import PhotoBand from './components/PhotoBand'
 import CalendarDday from './components/CalendarDday'
+import CountdownBand from './components/CountdownBand'
 import Location from './components/Location'
 import Account from './components/Account'
 import Guestbook from './components/Guestbook'
@@ -34,8 +35,8 @@ export default function App() {
         <Greeting />
         <PhotoBand quote={config.photoQuote} index={2} />
         <CalendarDday />
+        <CountdownBand index={3} />
         <Location />
-        <PhotoBand quote={config.photoQuote2} index={5} />
         {accountVisible && <Account />}
         <Guestbook />
         <Gallery />

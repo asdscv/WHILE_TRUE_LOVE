@@ -82,27 +82,7 @@ export default function CalendarDday() {
         </div>
       </Reveal>
 
-      <Reveal delay={180}>
-        {cd.past ? (
-          <p className="dday__done">함께해 주셔서 감사합니다</p>
-        ) : (
-          <div className="dday">
-            {[
-              ['일', cd.days],
-              ['시', cd.hours],
-              ['분', cd.minutes],
-              ['초', cd.seconds],
-            ].map(([label, val]) => (
-              <div className="dday__box" key={label}>
-                <span className="dday__num">{String(val).padStart(2, '0')}</span>
-                <span className="dday__label">{label}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </Reveal>
-
-      <Reveal delay={240}>
+      <Reveal delay={200}>
         <p className="dday__text">
           <b>{gA}</b> · <b>{gB}</b>의 결혼식이{' '}
           {cd.past ? '있었습니다' : <>{cd.days}일 남았습니다</>}
