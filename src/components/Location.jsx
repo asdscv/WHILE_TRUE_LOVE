@@ -64,11 +64,16 @@ export default function Location() {
 
       <Reveal delay={200}>
         <div className="nav-buttons">
+          <a
+            className="nav-btn nav-btn--primary"
+            href={naver}
+            target="_blank"
+            rel="noreferrer"
+          >
+            네이버지도
+          </a>
           <a className="nav-btn" href={kakao} target="_blank" rel="noreferrer">
             카카오맵
-          </a>
-          <a className="nav-btn" href={naver} target="_blank" rel="noreferrer">
-            네이버지도
           </a>
           <a className="nav-btn" href={tmap}>
             T map
