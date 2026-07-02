@@ -1,0 +1,48 @@
+name: Keepalive (Supabase + repo)
+
+# Supabase 무료 플랜은 7일 미사용 시 일시정지되므로 매일 가볍게 깨웁니다.
+# 또한 GitHub은 60일간 저장소 활동이 없으면 스케줄 워크플로우를 자동 비활성화하므로,
+# 매일 타임스탬프 파일을 커밋해 저장소를 "활성" 상태로 유지합니다.
+on:
+  schedule:
+    - cron: '17 3 * * *' # 매일 03:17 UTC (한국시간 12:17)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# 동시에 하나만 실행
+concurrency:
+  group: keepalive
+  cancel-in-progress: false
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1) Supabase 깨우기 — 실제 DB 쿼리(anon SELECT) 1회
+      #    아래 키는 publishable(공개용) 키라 노출돼도 안전합니다.
+      #    ※ 만약 Supabase에서 publishable 키를 재발급하면 src/config.js 와 이 값을 함께 바꾸세요.
+      - name: Ping Supabase (7일 정지 방지)
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" \
+            "https://pkqdrrsruxjbchzymujd.supabase.co/rest/v1/guestbook?select=id&limit=1" \
+            -H "apikey: sb_publishable_ISk4ObsaY9D2wa0oawAPOQ_tTRXteh8" \
+            -H "Authorization: Bearer sb_publishable_ISk4ObsaY9D2wa0oawAPOQ_tTRXteh8")
+          echo "Supabase ping status: $code"
+          # 200(정상) 또는 프로젝트가 막 깨어나는 중일 수 있으니 실패해도 잡(job)은 계속 진행
+          test "$code" = "200" || echo "warning: unexpected status $code (계속 진행)"
+
+      # 2) 저장소 활동 유지 — 타임스탬프 커밋 (60일 cron 비활성화 방지)
+      #    GITHUB_TOKEN 으로 푸시하므로 다른 워크플로우(deploy)를 재트리거하지 않습니다.
+      - name: Keepalive commit (60일 cron 비활성화 방지)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p .github
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/keepalive.txt
+          git add .github/keepalive.txt
+          git commit -m "chore: keepalive [skip ci]" || { echo "변경 없음"; exit 0; }
+          git push
