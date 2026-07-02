@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
+import Folio from './Folio'
 
 export default function Location() {
   const { venue } = config.wedding
@@ -28,6 +29,7 @@ export default function Location() {
   return (
     <section className="section location">
       <Reveal>
+        <Folio n="03" label="오시는 길" />
         <h2 className="section__title">오시는 길</h2>
       </Reveal>
 

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import Reveal from './Reveal'
+import Folio from './Folio'
 import { galleryImages } from '../gallery'
 
 export default function Gallery() {
@@ -36,6 +37,7 @@ export default function Gallery() {
   return (
     <section className="section gallery">
       <Reveal>
+        <Folio n="06" label="사진" />
         <h2 className="section__title">사진첩</h2>
         <p className="section__sub">우리의 순간들</p>
       </Reveal>

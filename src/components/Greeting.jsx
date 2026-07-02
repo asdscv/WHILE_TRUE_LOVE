@@ -1,6 +1,7 @@
 import { config } from '../config'
 import { galleryImages } from '../gallery'
 import Reveal from './Reveal'
+import Folio from './Folio'
 
 export default function Greeting() {
   const { greeting, groom, bride, groomFirst } = config
@@ -10,6 +11,7 @@ export default function Greeting() {
   return (
     <section className="section greeting">
       <Reveal>
+        <Folio n="01" label="초대" />
         <h2 className="section__title">{greeting.title}</h2>
       </Reveal>
 

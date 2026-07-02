@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
+import Folio from './Folio'
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 
@@ -49,6 +50,7 @@ export default function CalendarDday() {
   return (
     <section className="section calendar">
       <Reveal>
+        <Folio n="02" label="예식" />
         <p className="calendar__bigdate">{bigDate}</p>
         <p className="calendar__sub">
           {wedding.dateText} · {wedding.timeText}

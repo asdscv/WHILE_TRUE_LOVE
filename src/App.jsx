@@ -6,6 +6,7 @@ import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
 import PhotoBand from './components/PhotoBand'
+import Pullquote from './components/Pullquote'
 import CalendarDday from './components/CalendarDday'
 import CountdownBand from './components/CountdownBand'
 import Location from './components/Location'
@@ -38,6 +39,7 @@ export default function App() {
         <CalendarDday />
         <CountdownBand index={3} />
         <Location />
+        <Pullquote text={config.photoQuote2} />
         {accountVisible && <Account />}
         <Guestbook />
         <Gallery />

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
+import Folio from './Folio'
 import {
   addGuestbook,
   addRsvp,
@@ -218,6 +219,7 @@ export default function Guestbook() {
       {showRsvp && (
         <>
           <Reveal>
+            <Folio n="05" label="축하" />
             <h2 className="section__title">참석 여부 전달</h2>
             <p className="account__desc">
               원활한 예식 준비를 위해
