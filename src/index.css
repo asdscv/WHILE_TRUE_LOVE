@@ -296,8 +296,7 @@ button {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: var(--grade);
-  transform: scale(1.03);
+  animation: fadeIn 1.2s ease both;
 }
 .cover__overlay {
   position: absolute;

@@ -1,30 +1,15 @@
-import { config } from '../config'
-import { galleryImages } from '../gallery'
+import { coverImage } from '../cover'
 
+// 전환 후 첫 화면(표지). 완성 시안 이미지를 전체화면으로 표시합니다.
 export default function Cover() {
-  const { groom, bride, groomFirst, wedding } = config
-  const [a, b] = groomFirst ? [groom, bride] : [bride, groom]
-  const cover = galleryImages[0]
-  const dateNum = wedding.dateISO.split('T')[0].replace(/-/g, '. ')
-
   return (
     <header className="cover">
       <div
         className="cover__photo"
-        style={{ backgroundImage: `url(${cover})` }}
+        style={{ backgroundImage: `url(${coverImage})` }}
         role="img"
         aria-label="메인 사진"
       />
-      <div className="cover__overlay" />
-
-      <div className="cover__center">
-        <p className="cover__eyebrow">저희 결혼합니다</p>
-        <h1 className="cover__title">
-          {a.name} <span className="cover__amp">&amp;</span> {b.name}
-        </h1>
-        <p className="cover__date">{dateNum}</p>
-      </div>
-
       <div className="cover__scroll" aria-hidden="true">
         <span />
       </div>
