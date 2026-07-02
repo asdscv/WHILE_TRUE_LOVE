@@ -141,8 +141,9 @@ export const config = {
   //   3) Project URL 과 anon public key 를 아래에 입력
   // anon key 는 원래 공개되는 클라이언트용 키라 커밋해도 안전합니다(보안은 RLS로 제어).
   supabase: {
-    url: '', // 예: 'https://xxxxxxxxxxxx.supabase.co'
-    anonKey: '', // anon public key
+    url: 'https://pkqdrrsruxjbchzymujd.supabase.co',
+    // publishable key (구 anon key). 공개용 클라이언트 키라 커밋 안전.
+    anonKey: 'sb_publishable_ISk4ObsaY9D2wa0oawAPOQ_tTRXteh8',
   },
   guestbook: { enabled: true },
   rsvp: { enabled: true },
