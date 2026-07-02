@@ -249,8 +249,8 @@ export default function Guestbook() {
       {!isRemote() && (
         <p className="gb-note">
           ※ 현재 방명록/참석여부는 <b>이 기기에만 저장</b>됩니다. 하객들과
-          공유하려면 <code>src/config.js</code> 의 endpoint 를 설정하세요.
-          (docs/guestbook-apps-script.md)
+          공유·보존하려면 <code>src/config.js</code> 의 supabase 값을 설정하세요.
+          (docs/supabase-setup.md)
         </p>
       )}
     </section>

@@ -27,7 +27,7 @@ npm run preview   # 빌드 결과 미리보기
 | 축의금 계좌번호 | `src/config.js` → `account` |
 | **사진 추가** | `src/assets/gallery/` 폴더에 이미지 넣기 (자동 인식, 수십 장 OK) |
 | **배경음악 변경** | `public/bgm/` 에 mp3 넣고 `config.bgm.file` 수정 |
-| 방명록/RSVP 실제 저장 | `docs/guestbook-apps-script.md` 참고 후 `config` 에 endpoint 입력 |
+| 방명록/RSVP 실제 저장 | `docs/supabase-setup.md` 참고 후 `config.supabase` 에 url·anonKey 입력 |
 | 공유 미리보기 이미지 | `public/og.jpg` 로 이미지 저장 |
 
 ## 💌 계좌 있는 링크 / 없는 링크 (두 버전)
@@ -69,5 +69,5 @@ src/
   components/          # 각 섹션 컴포넌트
   lib/                 # 저장소·URL 유틸
 docs/
-  guestbook-apps-script.md   # 방명록 백엔드 설정법
+  supabase-setup.md          # 방명록/RSVP 영속화(Supabase) 설정법
 ```

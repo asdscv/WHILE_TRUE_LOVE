@@ -132,20 +132,20 @@ export const config = {
   },
 
   // ---------------------------------------------------------
-  // 방명록 / 참석여부(RSVP)
+  // 방명록 / 참석여부(RSVP) 데이터 저장 (영속화)
   // ---------------------------------------------------------
-  // endpoint 가 비어 있으면 브라우저(localStorage)에만 저장되어
-  // "혼자 미리보기"는 되지만 하객들 간 공유는 안 됩니다.
-  // 실제 공유하려면 Google Apps Script 웹앱 주소를 넣으세요.
-  // 설정 방법: docs/guestbook-apps-script.md 참고
-  guestbook: {
-    enabled: true,
-    endpoint: '', // 예: 'https://script.google.com/macros/s/XXXX/exec'
+  // 아래 supabase 값이 비어 있으면 접속 기기(localStorage)에만 저장됩니다(미리보기용).
+  // 하객들과 공유·영구 보존하려면 Supabase 프로젝트를 만들고 아래에 넣으세요.
+  //   1) https://supabase.com 에서 프로젝트 생성
+  //   2) docs/supabase-setup.md 의 SQL 을 SQL Editor 에 붙여넣고 실행
+  //   3) Project URL 과 anon public key 를 아래에 입력
+  // anon key 는 원래 공개되는 클라이언트용 키라 커밋해도 안전합니다(보안은 RLS로 제어).
+  supabase: {
+    url: '', // 예: 'https://xxxxxxxxxxxx.supabase.co'
+    anonKey: '', // anon public key
   },
-  rsvp: {
-    enabled: true,
-    endpoint: '', // 비워두면 guestbook.endpoint 를 함께 사용합니다.
-  },
+  guestbook: { enabled: true },
+  rsvp: { enabled: true },
 }
 
 export default config
