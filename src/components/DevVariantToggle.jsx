@@ -1,7 +1,12 @@
-// 개발 중에만 보이는 미리보기 토글 (배포본에는 나타나지 않습니다).
-// "계좌 있는 버전 / 없는 버전"을 딸깍으로 전환해 확인할 수 있습니다.
+// "계좌 있는 버전 / 없는 버전"을 딸깍으로 전환하는 미리보기 토글.
+// 개발 모드, 또는 배포된 사이트에서 URL 뒤에 ?preview 를 붙였을 때만 보입니다.
+// (하객이 보는 일반 링크에는 나타나지 않습니다.)
 export default function DevVariantToggle({ visible, setVisible }) {
-  if (!import.meta.env.DEV) return null
+  const enabled =
+    import.meta.env.DEV ||
+    (typeof window !== 'undefined' &&
+      new URLSearchParams(window.location.search).has('preview'))
+  if (!enabled) return null
   return (
     <div className="dev-toggle">
       <span className="dev-toggle__label">미리보기</span>

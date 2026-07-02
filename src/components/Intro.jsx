@@ -35,12 +35,6 @@ export default function Intro({ onDone }) {
           className="intro__photo"
           style={{ backgroundImage: `url(${introImage})` }}
         />
-        <div className="intro__overlay" />
-        <div className="intro__inner">
-          <p className="intro__phrase">{intro.phrase}</p>
-          <span className="intro__rule" />
-          <p className="intro__date">{intro.dateText}</p>
-        </div>
         <span className="intro__chevron" aria-hidden="true" />
       </div>
     </div>
