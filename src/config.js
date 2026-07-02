@@ -122,8 +122,8 @@ export const config = {
   // 축의금 계좌 (계좌 포함 버전에서만 노출)
   // ---------------------------------------------------------
   account: {
-    // 기본 노출 여부. false 면 ?account=on 링크에서만 계좌가 보입니다.
-    defaultVisible: false,
+    // 기본 노출 여부. true = 메인에서 계좌 보임 / 계좌 없는 버전은 ?account=off
+    defaultVisible: true,
     groom: [
       { relation: '신랑', name: '박지용', bank: '국민은행', number: '123456-01-234567', kakaopay: '' },
       { relation: '아버지', name: '박희서', bank: '신한은행', number: '110-123-456789', kakaopay: '' },
