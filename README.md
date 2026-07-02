@@ -2,7 +2,7 @@
 
 모바일 청첩장 (React + Vite). 백인제가옥 · 2026.10.18.
 
-**배포 주소:** https://asdscv.github.io/WHILE_TRUE_LOVE/
+**배포 주소:** https://aeshin-jiyong.life/
 
 ---
 
@@ -34,8 +34,8 @@ npm run preview   # 빌드 결과 미리보기
 
 계좌 포함 여부는 **URL 로 구분**합니다. (하객에게 보이는 버튼 없이 링크만 다르게 공유)
 
-- 계좌 **없는** 링크 (기본): `https://asdscv.github.io/WHILE_TRUE_LOVE/`
-- 계좌 **있는** 링크: `https://asdscv.github.io/WHILE_TRUE_LOVE/?account=on`
+- 계좌 **없는** 링크 (기본): `https://aeshin-jiyong.life/`
+- 계좌 **있는** 링크: `https://aeshin-jiyong.life/?account=on`
 
 가까운 친지에게는 `?account=on` 링크를, 그 외에는 기본 링크를 공유하면 됩니다.
 기본 노출 여부는 `config.account.defaultVisible` 로 조정할 수 있습니다.
