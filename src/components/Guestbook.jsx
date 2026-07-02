@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
-import Folio from './Folio'
+import Collapsible from './Collapsible'
 import {
   addGuestbook,
   addRsvp,
@@ -217,36 +217,24 @@ export default function Guestbook() {
   return (
     <section className="section guestbook">
       {showRsvp && (
-        <>
-          <Reveal>
-            <Folio n="05" label="축하" />
-            <h2 className="section__title">참석 여부 전달</h2>
+        <Reveal>
+          <Collapsible n="05" label="축하" title="참석 여부 전달">
             <p className="account__desc">
               원활한 예식 준비를 위해
               <br />
               참석 여부를 알려주시면 감사하겠습니다.
             </p>
-          </Reveal>
-          <Reveal delay={100}>
             <Rsvp />
-          </Reveal>
-        </>
+          </Collapsible>
+        </Reveal>
       )}
 
       {showGb && (
-        <>
-          <Reveal>
-            <h2
-              className="section__title"
-              style={{ marginTop: showRsvp ? 64 : 0 }}
-            >
-              축하 메시지
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
+        <Reveal>
+          <Collapsible n="06" label="메시지" title="축하 메시지">
             <GuestbookBoard />
-          </Reveal>
-        </>
+          </Collapsible>
+        </Reveal>
       )}
 
       {!isRemote() && (

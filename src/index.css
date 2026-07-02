@@ -147,6 +147,49 @@ button {
   color: var(--muted);
 }
 
+/* ---------- 접이식 섹션(아코디언) ---------- */
+.collapse__head {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+.collapse__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.collapse__title {
+  font-family: var(--song);
+  font-weight: 400;
+  font-size: clamp(24px, 7vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.collapse__icon {
+  flex: none;
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.collapse--open .collapse__icon {
+  color: var(--accent-deep);
+}
+.collapse__body {
+  margin-top: 30px;
+  animation: fadeIn 0.45s ease both;
+}
+.guestbook .reveal + .reveal {
+  margin-top: 56px;
+}
+
 /* ---------- 스크롤 등장(먹 번짐 fade) ---------- */
 .reveal {
   opacity: 0;

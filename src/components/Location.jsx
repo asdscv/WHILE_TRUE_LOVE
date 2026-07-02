@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
-import Folio from './Folio'
+import Collapsible from './Collapsible'
 
 export default function Location() {
   const { venue } = config.wedding
@@ -29,69 +29,60 @@ export default function Location() {
   return (
     <section className="section location">
       <Reveal>
-        <Folio n="03" label="오시는 길" />
-        <h2 className="section__title">오시는 길</h2>
-      </Reveal>
-
-      <Reveal delay={100}>
-        <div className="location__venue">
-          <p className="location__name">
-            {name} <span>{venue.hall}</span>
-          </p>
-          <p className="location__addr">{address}</p>
-          <div className="location__actions">
-            <button className="btn-line" onClick={copyAddress}>
-              {copied ? '✓ 복사됨' : '주소 복사'}
-            </button>
-            {venue.tel && (
-              <a className="btn-line" href={`tel:${venue.tel}`}>
-                전화하기
-              </a>
-            )}
+        <Collapsible n="03" label="오시는 길" title="오시는 길">
+          <div className="location__venue">
+            <p className="location__name">
+              {name} <span>{venue.hall}</span>
+            </p>
+            <p className="location__addr">{address}</p>
+            <div className="location__actions">
+              <button className="btn-line" onClick={copyAddress}>
+                {copied ? '✓ 복사됨' : '주소 복사'}
+              </button>
+              {venue.tel && (
+                <a className="btn-line" href={`tel:${venue.tel}`}>
+                  전화하기
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-      </Reveal>
 
-      <Reveal delay={150}>
-        <div className="map">
-          <iframe
-            title="예식장 위치"
-            src={mapEmbed}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </Reveal>
+          <div className="map">
+            <iframe
+              title="예식장 위치"
+              src={mapEmbed}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
 
-      <Reveal delay={200}>
-        <div className="nav-buttons">
-          <a
-            className="nav-btn nav-btn--primary"
-            href={naver}
-            target="_blank"
-            rel="noreferrer"
-          >
-            네이버지도
-          </a>
-          <a className="nav-btn" href={kakao} target="_blank" rel="noreferrer">
-            카카오맵
-          </a>
-          <a className="nav-btn" href={tmap}>
-            티맵
-          </a>
-        </div>
-      </Reveal>
+          <div className="nav-buttons">
+            <a
+              className="nav-btn nav-btn--primary"
+              href={naver}
+              target="_blank"
+              rel="noreferrer"
+            >
+              네이버지도
+            </a>
+            <a className="nav-btn" href={kakao} target="_blank" rel="noreferrer">
+              카카오맵
+            </a>
+            <a className="nav-btn" href={tmap}>
+              티맵
+            </a>
+          </div>
 
-      <Reveal delay={250}>
-        <ul className="transport">
-          {transport.map((t, i) => (
-            <li key={i}>
-              <span className="transport__icon">{t.icon}</span>
-              <span className="transport__title">{t.title}</span>
-              <span className="transport__desc">{t.desc}</span>
-            </li>
-          ))}
-        </ul>
+          <ul className="transport">
+            {transport.map((t, i) => (
+              <li key={i}>
+                <span className="transport__icon">{t.icon}</span>
+                <span className="transport__title">{t.title}</span>
+                <span className="transport__desc">{t.desc}</span>
+              </li>
+            ))}
+          </ul>
+        </Collapsible>
       </Reveal>
     </section>
   )

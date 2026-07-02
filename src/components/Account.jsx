@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
-import Folio from './Folio'
+import Collapsible from './Collapsible'
 
 function AccountRow({ row }) {
   const [copied, setCopied] = useState(false)
@@ -78,21 +78,18 @@ export default function Account() {
   return (
     <section className="section account">
       <Reveal>
-        <Folio n="04" label="마음" />
-        <h2 className="section__title">마음 전하실 곳</h2>
-        <p className="account__desc">
-          축하의 마음을 전하고 싶으신 분들을 위해
-          <br />
-          계좌번호를 안내드립니다.
-        </p>
-      </Reveal>
-
-      <Reveal delay={100}>
-        <div className="account__groups">
-          {groups.map(([title, rows]) => (
-            <AccordionGroup key={title} title={title} rows={rows} />
-          ))}
-        </div>
+        <Collapsible n="04" label="마음" title="마음 전하실 곳">
+          <p className="account__desc">
+            축하의 마음을 전하고 싶으신 분들을 위해
+            <br />
+            계좌번호를 안내드립니다.
+          </p>
+          <div className="account__groups">
+            {groups.map(([title, rows]) => (
+              <AccordionGroup key={title} title={title} rows={rows} />
+            ))}
+          </div>
+        </Collapsible>
       </Reveal>
     </section>
   )
