@@ -5,11 +5,12 @@ import Bgm from './components/Bgm'
 import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
+import PhotoBand from './components/PhotoBand'
 import CalendarDday from './components/CalendarDday'
-import Gallery from './components/Gallery'
 import Location from './components/Location'
 import Account from './components/Account'
 import Guestbook from './components/Guestbook'
+import Gallery from './components/Gallery'
 import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
@@ -20,6 +21,10 @@ export default function App() {
       new URLSearchParams(window.location.search).get('intro') === 'off',
   )
 
+  const [a, b] = config.groomFirst
+    ? [config.groom, config.bride]
+    : [config.bride, config.groom]
+
   return (
     <div className="app">
       <Bgm />
@@ -27,18 +32,19 @@ export default function App() {
       <div className={`frame ${introDone ? 'frame--in' : ''}`}>
         <Cover />
         <Greeting />
+        <PhotoBand />
         <CalendarDday />
-        <Gallery />
         <Location />
         {accountVisible && <Account />}
         <Guestbook />
+        <Gallery />
 
         <footer className="footer">
           <p className="footer__names">
-            {config.groom.name} &amp; {config.bride.name}
+            {a.name} · {b.name}
           </p>
           <p className="footer__date">{config.wedding.dateText}</p>
-          <p className="footer__credit">WHILE_TRUE_LOVE ♥</p>
+          <p className="footer__thanks">감사합니다</p>
         </footer>
       </div>
 

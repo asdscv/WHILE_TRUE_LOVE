@@ -2,20 +2,18 @@ import { useEffect, useState } from 'react'
 import { config } from '../config'
 import { introImage } from '../intro'
 
-// 첫 화면(스플래시): 전체화면 사진 + 감각적인 타이포.
+// 첫 화면(스플래시): 전체화면 사진 + 한글 문구.
 // duration(ms) 후 자동으로, 또는 탭하면 즉시 본문으로 전환됩니다.
 export default function Intro({ onDone }) {
   const { intro } = config
   const [leaving, setLeaving] = useState(false)
 
-  // 자동 전환 타이머
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     const t = setTimeout(() => setLeaving(true), intro.duration)
     return () => clearTimeout(t)
   }, [intro.duration])
 
-  // 퇴장 애니메이션 후 언마운트
   useEffect(() => {
     if (!leaving) return
     const t = setTimeout(() => {
@@ -24,9 +22,6 @@ export default function Intro({ onDone }) {
     }, 1100)
     return () => clearTimeout(t)
   }, [leaving, onDone])
-
-  const caption =
-    intro.caption || `${config.groom.name} · ${config.bride.name}`
 
   return (
     <div
@@ -42,11 +37,11 @@ export default function Intro({ onDone }) {
         />
         <div className="intro__overlay" />
         <div className="intro__inner">
-          <p className="intro__script">{intro.scriptText}</p>
-          <h1 className="intro__title">{intro.title}</h1>
-          <p className="intro__caption">{caption}</p>
+          <p className="intro__phrase">{intro.phrase}</p>
+          <span className="intro__rule" />
+          <p className="intro__date">{intro.dateText}</p>
         </div>
-        <span className="intro__hint">TAP TO ENTER</span>
+        <span className="intro__chevron" aria-hidden="true" />
       </div>
     </div>
   )

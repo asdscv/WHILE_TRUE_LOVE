@@ -36,8 +36,8 @@ export default function Gallery() {
   return (
     <section className="section gallery">
       <Reveal>
-        <p className="section__eng">GALLERY</p>
-        <h2 className="section__title">우리의 순간</h2>
+        <h2 className="section__title">사진첩</h2>
+        <p className="section__sub">우리의 순간들</p>
       </Reveal>
 
       <Reveal delay={100}>

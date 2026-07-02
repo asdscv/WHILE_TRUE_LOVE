@@ -77,7 +77,6 @@ export default function Account() {
   return (
     <section className="section account">
       <Reveal>
-        <p className="section__eng">ACCOUNT</p>
         <h2 className="section__title">마음 전하실 곳</h2>
         <p className="account__desc">
           축하의 마음을 전하고 싶으신 분들을 위해

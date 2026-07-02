@@ -218,7 +218,6 @@ export default function Guestbook() {
       {showRsvp && (
         <>
           <Reveal>
-            <p className="section__eng">R.S.V.P</p>
             <h2 className="section__title">참석 여부 전달</h2>
             <p className="account__desc">
               원활한 예식 준비를 위해
@@ -235,10 +234,12 @@ export default function Guestbook() {
       {showGb && (
         <>
           <Reveal>
-            <p className="section__eng" style={{ marginTop: showRsvp ? 56 : 0 }}>
-              GUESTBOOK
-            </p>
-            <h2 className="section__title">축하 메시지</h2>
+            <h2
+              className="section__title"
+              style={{ marginTop: showRsvp ? 64 : 0 }}
+            >
+              축하 메시지
+            </h2>
           </Reveal>
           <Reveal delay={100}>
             <GuestbookBoard />

@@ -28,7 +28,6 @@ export default function Location() {
   return (
     <section className="section location">
       <Reveal>
-        <p className="section__eng">LOCATION</p>
         <h2 className="section__title">오시는 길</h2>
       </Reveal>
 
@@ -76,7 +75,7 @@ export default function Location() {
             카카오맵
           </a>
           <a className="nav-btn" href={tmap}>
-            T map
+            티맵
           </a>
         </div>
       </Reveal>
