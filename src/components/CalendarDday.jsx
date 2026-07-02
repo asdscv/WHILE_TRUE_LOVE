@@ -42,7 +42,7 @@ export default function CalendarDday() {
   for (let i = 0; i < firstWeekday; i++) cells.push(null)
   for (let day = 1; day <= daysInMonth; day++) cells.push(day)
 
-  const bigDate = `${y}. ${String(m).padStart(2, '0')}. ${String(d).padStart(2, '0')}`
+  const md = `${String(m).padStart(2, '0')}.${String(d).padStart(2, '0')}`
   const [gA, gB] = config.groomFirst
     ? [config.groom.name, config.bride.name]
     : [config.bride.name, config.groom.name]
@@ -51,7 +51,8 @@ export default function CalendarDday() {
     <section className="section calendar">
       <Reveal>
         <Folio n="02" label="예식" />
-        <p className="calendar__bigdate">{bigDate}</p>
+        <p className="calendar__year">{y}</p>
+        <p className="calendar__md">{md}</p>
         <p className="calendar__sub">
           {wedding.dateText} · {wedding.timeText}
         </p>

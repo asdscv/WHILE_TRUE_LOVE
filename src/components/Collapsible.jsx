@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Folio from './Folio'
 
-// 접었다 폈다 하는 섹션 (기본 접힘). 헤더(폴리오+제목+아이콘) 클릭으로 토글.
+// 접었다 폈다 하는 섹션 (기본 접힘). 헤더 클릭으로 토글, 높이 전환 애니메이션.
 export default function Collapsible({ n, label, title, defaultOpen = false, children }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
@@ -15,12 +15,12 @@ export default function Collapsible({ n, label, title, defaultOpen = false, chil
         <Folio n={n} label={label} />
         <span className="collapse__bar">
           <span className="collapse__title">{title}</span>
-          <span className="collapse__icon" aria-hidden="true">
-            {open ? '−' : '+'}
-          </span>
+          <span className="collapse__toggle" aria-hidden="true" />
         </span>
       </button>
-      {open && <div className="collapse__body">{children}</div>}
+      <div className="collapse__body">
+        <div className="collapse__inner">{children}</div>
+      </div>
     </div>
   )
 }

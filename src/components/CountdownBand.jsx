@@ -48,13 +48,10 @@ export default function CountdownBand({ index = 3 }) {
         </p>
         {!cd.past && (
           <div className="cd">
-            {units.map(([num, label], i) => (
-              <div className="cd__group" key={label}>
-                <div className="cd__u">
-                  <span className="cd__n">{num}</span>
-                  <span className="cd__l">{label}</span>
-                </div>
-                {i < units.length - 1 && <span className="cd__sep">:</span>}
+            {units.map(([num, label]) => (
+              <div className="cd__u" key={label}>
+                <span className="cd__n">{num}</span>
+                <span className="cd__l">{label}</span>
               </div>
             ))}
           </div>
