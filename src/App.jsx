@@ -32,9 +32,10 @@ export default function App() {
       <div className={`frame ${introDone ? 'frame--in' : ''}`}>
         <Cover />
         <Greeting />
-        <PhotoBand />
+        <PhotoBand quote={config.photoQuote} index={2} />
         <CalendarDday />
         <Location />
+        <PhotoBand quote={config.photoQuote2} index={5} />
         {accountVisible && <Account />}
         <Guestbook />
         <Gallery />

@@ -15,12 +15,13 @@
   --line: #e1d9ca; /* 구분선 */
   --sun: #b06a5f; /* 일요일 */
 
-  --serif: 'Hahmlet', serif;
+  --serif: 'Maru Buri', serif; /* 한글 세리프(마루부리) */
+  --fig: 'Cormorant Garamond', serif; /* 숫자/라틴 디스플레이 */
   --sans: 'Pretendard Variable', 'Pretendard', -apple-system,
     BlinkMacSystemFont, sans-serif;
 
-  --grade: saturate(0.85) contrast(1.04) brightness(0.98) sepia(0.06);
-  --frame-w: 480px;
+  --grade: saturate(1.06) contrast(1.04); /* 사진: 회색기 없이 리치하게 */
+  --frame-w: 500px;
 }
 
 * {
@@ -55,7 +56,7 @@ button {
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  opacity: 0.045;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 140px 140px;
 }
@@ -73,7 +74,7 @@ button {
   max-width: var(--frame-w);
   background: var(--paper);
   overflow: hidden;
-  box-shadow: 0 12px 60px rgba(50, 42, 30, 0.16);
+  box-shadow: 0 6px 44px rgba(50, 42, 30, 0.09);
 }
 .frame--in {
   animation: frameIn 0.9s ease both;
@@ -101,19 +102,21 @@ button {
   content: counter(sec, decimal-leading-zero);
   position: absolute;
   top: 30px;
-  left: 28px;
-  font-family: var(--serif);
-  font-size: 12px;
-  letter-spacing: 0.1em;
+  left: 30px;
+  font-family: var(--fig);
+  font-style: italic;
+  font-size: 17px;
+  letter-spacing: 0.05em;
   color: var(--accent);
-  opacity: 0.75;
+  opacity: 0.85;
 }
 .section__title {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 25px;
+  font-size: 26px;
   color: var(--ink);
   line-height: 1.55;
+  letter-spacing: 0.02em;
   margin: 0 0 26px;
 }
 .section__title::before {
@@ -306,8 +309,8 @@ button {
 }
 .cover__name {
   font-weight: 500;
-  font-size: clamp(30px, 9vw, 40px);
-  letter-spacing: 0.02em;
+  font-size: clamp(34px, 10.5vw, 48px);
+  letter-spacing: 0.03em;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
 }
 .cover__dot {
@@ -371,6 +374,16 @@ button {
 }
 
 /* ============ Greeting(인사말) ============ */
+.greeting__lead {
+  font-family: var(--serif);
+  font-weight: 500;
+  white-space: pre-line;
+  font-size: clamp(23px, 6.6vw, 31px);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 0 0 40px;
+}
 .greeting__figure {
   width: 70%;
   margin: 6px 0 34px auto; /* 우측으로 치우친 비대칭 배치 */
@@ -440,7 +453,7 @@ button {
 /* ============ 포토 밴드(매거진 분리대) ============ */
 .photoband {
   position: relative;
-  min-height: 62vh;
+  min-height: 76vh;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -451,27 +464,32 @@ button {
 .photoband__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(24, 20, 14, 0.42);
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 16, 10, 0.28),
+    rgba(20, 16, 10, 0.42)
+  );
 }
 .photoband__quote {
   position: relative;
   z-index: 1;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 500;
   white-space: pre-line;
   color: #fff;
-  font-size: clamp(18px, 5.2vw, 23px);
-  line-height: 2;
+  font-size: clamp(22px, 6.2vw, 28px);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
   padding: 0 30px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
 
 /* ============ Calendar / D-Day ============ */
 .calendar__bigdate {
-  font-family: var(--serif);
+  font-family: var(--fig);
   font-weight: 500;
-  font-size: clamp(40px, 13vw, 58px);
-  letter-spacing: 0.01em;
+  font-size: clamp(48px, 15vw, 66px);
+  letter-spacing: 0.02em;
   color: var(--ink);
   line-height: 1;
   margin: 0 0 12px;
@@ -537,8 +555,8 @@ button {
   gap: 4px;
 }
 .dday__num {
-  font-family: var(--serif);
-  font-size: 24px;
+  font-family: var(--fig);
+  font-size: 30px;
   font-weight: 600;
   color: var(--ink);
 }
@@ -640,8 +658,8 @@ button {
   left: 50%;
   transform: translateX(-50%);
   color: #fff;
-  font-family: var(--serif);
-  font-size: 13px;
+  font-family: var(--fig);
+  font-size: 15px;
   letter-spacing: 0.12em;
 }
 

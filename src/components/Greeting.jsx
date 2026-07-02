@@ -13,6 +13,12 @@ export default function Greeting() {
         <h2 className="section__title">{greeting.title}</h2>
       </Reveal>
 
+      {greeting.lead && (
+        <Reveal delay={60}>
+          <p className="greeting__lead">{greeting.lead}</p>
+        </Reveal>
+      )}
+
       <Reveal delay={80}>
         <figure className="greeting__figure">
           <img src={accent} alt="" loading="lazy" />
