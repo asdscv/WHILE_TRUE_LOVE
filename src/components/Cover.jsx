@@ -15,20 +15,27 @@ export default function Cover() {
         aria-label="메인 사진"
       />
       <div className="cover__overlay" />
+
+      <div className="cover__top">
+        <p className="cover__eng">THE WEDDING OF</p>
+      </div>
+
       <div className="cover__inner">
-        <p className="cover__eng">THE MARRIAGE OF</p>
-        <h1 className="cover__names">
-          <span>{a.name}</span>
+        <div className="cover__names">
+          <span className="cover__name">{a.name}</span>
           <span className="cover__amp">&amp;</span>
-          <span>{b.name}</span>
-        </h1>
+          <span className="cover__name">{b.name}</span>
+        </div>
+        <span className="cover__rule" />
         <p className="cover__date">
-          {wedding.dateText} · {wedding.timeText}
+          {wedding.dateText.replace(/\s?\S+요일$/, '')} · {wedding.timeText}
         </p>
         <p className="cover__venue">
-          {wedding.venue.name} {wedding.venue.hall}
+          {wedding.venue.name}
+          {wedding.venue.hall ? ` ${wedding.venue.hall}` : ''}
         </p>
       </div>
+
       <div className="cover__scroll" aria-hidden="true">
         <span />
       </div>

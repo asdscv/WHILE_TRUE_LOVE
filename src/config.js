@@ -16,15 +16,15 @@ export const config = {
   groom: {
     name: '박지용',
     label: '아들', // 아들 / 장남 / 차남 등
-    father: '박OO',
-    mother: '김OO',
+    father: '박희서',
+    mother: '설옥선',
     phone: '010-1234-5678',
   },
   bride: {
-    name: '홍서연',
+    name: '오애신',
     label: '딸', // 딸 / 장녀 / 차녀 등
-    father: '홍OO',
-    mother: '이OO',
+    father: '오OO', // TODO: 신부 아버님 성함
+    mother: '이OO', // TODO: 신부 어머님 성함
     phone: '010-8765-4321',
   },
   // 순서 표기(신랑 먼저 / 신부 먼저). true = 신랑 먼저
@@ -68,6 +68,19 @@ export const config = {
   },
 
   // ---------------------------------------------------------
+  // 인트로 (첫 화면 → 일정 시간 후 본문으로 전환)
+  // ---------------------------------------------------------
+  intro: {
+    enabled: true,
+    duration: 3800, // 이 시간(ms) 후 자동으로 본문으로 전환. 탭하면 즉시 전환.
+    scriptText: "There's", // 필기체로 표시되는 윗 문구
+    title: 'A GREATEST DAY\nCOMING', // 대문자 세리프 (줄바꿈 \n)
+    caption: '', // 아래 작은 문구. 비우면 "신랑 · 신부" 자동 표시
+    // 인트로 배경 사진: src/assets/intro/ 폴더에 이미지를 넣으면 사용됩니다.
+    // (없으면 갤러리 첫 사진이 사용됩니다.)
+  },
+
+  // ---------------------------------------------------------
   // 배경음악 (페이지 진입 시 재생)
   // ---------------------------------------------------------
   bgm: {
@@ -108,12 +121,12 @@ export const config = {
     defaultVisible: false,
     groom: [
       { relation: '신랑', name: '박지용', bank: '국민은행', number: '123456-01-234567', kakaopay: '' },
-      { relation: '아버지', name: '박OO', bank: '신한은행', number: '110-123-456789', kakaopay: '' },
-      { relation: '어머니', name: '김OO', bank: '농협은행', number: '302-1234-5678-91', kakaopay: '' },
+      { relation: '아버지', name: '박희서', bank: '신한은행', number: '110-123-456789', kakaopay: '' },
+      { relation: '어머니', name: '설옥선', bank: '농협은행', number: '302-1234-5678-91', kakaopay: '' },
     ],
     bride: [
-      { relation: '신부', name: '홍서연', bank: '카카오뱅크', number: '3333-01-2345678', kakaopay: '' },
-      { relation: '아버지', name: '홍OO', bank: '우리은행', number: '1002-123-456789', kakaopay: '' },
+      { relation: '신부', name: '오애신', bank: '카카오뱅크', number: '3333-01-2345678', kakaopay: '' },
+      { relation: '아버지', name: '오OO', bank: '우리은행', number: '1002-123-456789', kakaopay: '' },
       { relation: '어머니', name: '이OO', bank: '하나은행', number: '123-456789-01234', kakaopay: '' },
     ],
   },

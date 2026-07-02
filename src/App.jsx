@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { config } from './config'
 import { useAccountVisible } from './lib/useAccountVisible'
 import Bgm from './components/Bgm'
+import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
 import CalendarDday from './components/CalendarDday'
@@ -12,11 +14,17 @@ import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
   const [accountVisible, setAccountVisible] = useAccountVisible()
+  const [introDone, setIntroDone] = useState(
+    () =>
+      !config.intro.enabled ||
+      new URLSearchParams(window.location.search).get('intro') === 'off',
+  )
 
   return (
     <div className="app">
       <Bgm />
-      <div className="frame">
+      {!introDone && <Intro onDone={() => setIntroDone(true)} />}
+      <div className={`frame ${introDone ? 'frame--in' : ''}`}>
         <Cover />
         <Greeting />
         <CalendarDday />
