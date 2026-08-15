@@ -500,245 +500,6 @@ button {
   color: #221d0e;
 }
 
-/* ============ 대형 인용구(세로 룰) ============ */
-.pullquote {
-  padding: var(--sp-12) var(--gutter);
-}
-.pullquote__text {
-  font-family: var(--song);
-  font-weight: 300;
-  font-size: clamp(22px, 6.4vw, 28px);
-  line-height: 1.55;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  white-space: pre-line;
-  word-break: keep-all;
-  border-left: 1px solid var(--accent-deep);
-  padding-left: 20px;
-  margin: 0;
-}
-
-/* ============ 02 · 예식 ============ */
-/* 원본 시안(954px 폭)을 실측해 옮긴 값들. --u 는 "시안 1px" 이고 프레임 폭에 비례한다.
-   전체를 키우려면 --cal-scale 하나만 올리면 된다. */
-.cal {
-  --cal-scale: 1;
-  --u: calc(min(0.104822vw, 0.524109px) * var(--cal-scale));
-  background: #fcfaf5;
-  text-align: center;
-  padding: calc(80 * var(--u)) 0 calc(63 * var(--u));
-}
-.cal__folio {
-  display: flex;
-  align-items: center;
-  gap: calc(37 * var(--u));
-  margin: 0 calc(71 * var(--u)) 0 calc(73 * var(--u));
-  font-size: calc(26 * var(--u));
-  line-height: 1.21;
-  letter-spacing: 0.199em;
-  font-weight: 500;
-  color: #6b6451;
-}
-.cal__folio::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #c2bbaf;
-}
-.cal__year {
-  font-size: calc(35 * var(--u));
-  line-height: 1.21;
-  letter-spacing: 0.352em;
-  text-indent: 0.352em;
-  font-weight: 500;
-  color: #6d654d;
-  margin: calc(105 * var(--u)) 0 0;
-}
-.cal__md {
-  font-size: calc(151 * var(--u));
-  line-height: 1;
-  letter-spacing: 0.025em;
-  text-indent: 0.025em;
-  font-weight: 300;
-  color: #786f52;
-  margin: calc(34 * var(--u)) 0 0;
-}
-.cal__rule {
-  display: block;
-  width: calc(2 * var(--u));
-  height: calc(46 * var(--u));
-  margin: calc(13 * var(--u)) auto 0;
-  background: #a9a393;
-}
-.cal__date {
-  font-size: calc(25 * var(--u));
-  line-height: 1.21;
-  letter-spacing: 0.072em;
-  text-indent: 0.072em;
-  font-weight: 500;
-  color: #686046;
-  margin: calc(49 * var(--u)) 0 0;
-}
-.cal__branch {
-  width: calc(102 * var(--u));
-  height: auto;
-  margin: calc(53 * var(--u)) auto 0;
-}
-.cal__card {
-  width: calc(768 * var(--u));
-  margin: calc(67 * var(--u)) auto 0;
-  padding: calc(50 * var(--u)) calc(30.5 * var(--u)) calc(45.75 * var(--u));
-  border-radius: calc(20 * var(--u));
-  background: #f9f5f0;
-}
-.cal__grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-.cal__cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(93.5 * var(--u));
-  font-size: calc(27 * var(--u));
-  line-height: 1;
-  font-weight: 500;
-  color: #1f1d10;
-}
-.cal__cell--sun {
-  color: #946047;
-}
-.cal__grid--head .cal__cell {
-  height: calc(44 * var(--u));
-  font-size: calc(23 * var(--u));
-  color: #695841;
-}
-.cal__grid--head .cal__cell--sun {
-  color: #9a6148;
-}
-.cal__hr {
-  display: block;
-  height: calc(2 * var(--u));
-  margin: calc(17 * var(--u)) calc(18.5 * var(--u)) 0;
-  background: #d1cec4;
-}
-.cal__grid:not(.cal__grid--head) {
-  margin-top: calc(2.75 * var(--u));
-}
-.cal__cell span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: calc(61 * var(--u));
-  height: calc(61 * var(--u));
-  border-radius: 50%;
-}
-.cal__cell--target span {
-  background: #82785b;
-  color: #fff;
-}
-/* 시안에서 잘라 쓰던 D-day 문구 — 이제 위 달력과 같은 --u 스케일을 쓴다. */
-.dday {
-  margin-top: calc(51 * var(--u));
-}
-.dday__rule {
-  display: block;
-  width: calc(2 * var(--u));
-  height: calc(45 * var(--u));
-  margin: 0 auto calc(38 * var(--u));
-  background: #a9a393;
-}
-.dday__text {
-  font-size: calc(24 * var(--u));
-  line-height: 1.667;
-  letter-spacing: 0.083em;
-  text-indent: 0.083em;
-  font-weight: 500;
-  color: #635240;
-  margin: 0;
-}
-
-/* ============ 사진첩 ============ */
-.gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-2);
-}
-.gallery__item {
-  padding: 0;
-  border: none;
-  background: var(--paper-2);
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.gallery__item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: var(--grade);
-  transition: transform 0.4s var(--ease);
-}
-.gallery__item:hover img {
-  transform: scale(1.03);
-}
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 600;
-  background: rgba(20, 18, 14, 0.96);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overscroll-behavior: contain;
-  animation: fadeIn 0.24s ease both;
-}
-.lightbox__img {
-  max-width: 92vw;
-  max-height: 82vh;
-  object-fit: contain;
-}
-.lightbox__close,
-.lightbox__nav {
-  position: absolute;
-  background: rgba(246, 243, 236, 0.12);
-  color: #f6f3ec;
-  border: none;
-  border-radius: 50%;
-  width: 46px;
-  height: 46px;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.lightbox__close {
-  top: 20px;
-  right: 20px;
-  font-size: 18px;
-}
-.lightbox__nav--prev {
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.lightbox__nav--next {
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.lightbox__count {
-  position: absolute;
-  bottom: 26px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #f6f3ec;
-  font-family: var(--fig);
-  font-size: 15px;
-  letter-spacing: 0.12em;
-}
-
 /* ============ 오시는 길 ============ */
 .location__venue {
   /* 장소명·주소 왼쪽, 주소복사 버튼은 그 오른편에 */
@@ -1052,6 +813,27 @@ button {
   color: var(--faint);
   font-size: 12px;
   cursor: pointer;
+}
+.gb-more {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-top: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.gb-more:hover:not(:disabled) {
+  border-color: var(--accent-deep);
+  color: var(--accent-deep);
+}
+.gb-more:disabled {
+  opacity: 0.5;
 }
 .gb-item__msg {
   margin: 0;

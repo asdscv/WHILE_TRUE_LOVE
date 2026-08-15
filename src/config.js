@@ -80,9 +80,6 @@ export const config = {
     // (없으면 갤러리 첫 사진이 사용됩니다.)
   },
 
-  // 본문 중간 대형 인용구(세로 룰 + 문구)
-  photoQuote2: '변함없는 마음으로\n함께 걸어가겠습니다',
-
   // ---------------------------------------------------------
   // 배경음악 (페이지 진입 시 재생)
   // ---------------------------------------------------------
@@ -151,6 +148,15 @@ export const config = {
   guestbook: { enabled: true },
   rsvp: {
     enabled: true,
+    // 참석여부가 제출되면 메일로도 알려줍니다. endpoint 가 비어 있으면
+    // 메일은 보내지 않고 Supabase 에만 기록됩니다(대시보드에서 확인).
+    //  · FormSubmit(가입 불필요): 'https://formsubmit.co/ajax/받는주소@example.com'
+    //    첫 제출 때 오는 인증 메일을 한 번 클릭해야 이후 메일이 옵니다.
+    //  · Web3Forms(가입 필요): endpoint 'https://api.web3forms.com/submit' + accessKey
+    email: {
+      endpoint: '',
+      accessKey: '',
+    },
     // 첫 화면(인트로)이 끝나고 본문으로 넘어갈 때 뜨는 참석 여부 안내 팝업.
     // 팝업과 본문 "참석 여부" 섹션은 같은 폼을 쓰며, 어느 쪽에서 작성해도 동일하게 저장됩니다.
     popup: {

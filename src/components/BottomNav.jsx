@@ -1,6 +1,6 @@
 const ITEMS = [
-  { id: 'rsvp', label: '참석여부' },
   { id: 'location', label: '오시는길' },
+  { id: 'rsvp', label: '참석여부' },
   { id: 'guestbook', label: '축하의 글' },
 ]
 

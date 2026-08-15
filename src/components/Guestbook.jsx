@@ -16,12 +16,40 @@ function formatDate(ts) {
   return `${d.getFullYear()}.${p(d.getMonth() + 1)}.${p(d.getDate())}`
 }
 
+const PAGE = 5
+
 function GuestbookBoard() {
   const [items, setItems] = useState([])
+  const [hasMore, setHasMore] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [form, setForm] = useState({ name: '', message: '', password: '' })
   const [busy, setBusy] = useState(false)
 
-  const refresh = () => listGuestbook().then(setItems).catch(() => {})
+  // 처음엔 5개만, "더보기" 를 누를 때마다 5개씩 이어붙인다.
+  const refresh = () =>
+    listGuestbook({ limit: PAGE, offset: 0 })
+      .then(({ items: got, hasMore: more }) => {
+        setItems(got)
+        setHasMore(more)
+      })
+      .catch(() => {})
+
+  const loadMore = async () => {
+    setLoadingMore(true)
+    try {
+      const { items: got, hasMore: more } = await listGuestbook({
+        limit: PAGE,
+        offset: items.length,
+      })
+      setItems((prev) => [...prev, ...got])
+      setHasMore(more)
+    } catch {
+      /* 실패해도 기존 목록은 유지 */
+    } finally {
+      setLoadingMore(false)
+    }
+  }
+
   useEffect(() => {
     refresh()
   }, [])
@@ -108,6 +136,17 @@ function GuestbookBoard() {
           </li>
         ))}
       </ul>
+
+      {hasMore && (
+        <button
+          type="button"
+          className="gb-more"
+          onClick={loadMore}
+          disabled={loadingMore}
+        >
+          {loadingMore ? '불러오는 중…' : '더보기'}
+        </button>
+      )}
     </>
   )
 }

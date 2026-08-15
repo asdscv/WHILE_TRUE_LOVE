@@ -5,7 +5,6 @@ import Bgm from './components/Bgm'
 import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
-import Pullquote from './components/Pullquote'
 import CalendarDday from './components/CalendarDday'
 import Location from './components/Location'
 import Account from './components/Account'
@@ -36,7 +35,6 @@ export default function App() {
         <Greeting />
         <CalendarDday />
         <Location />
-        <Pullquote text={config.photoQuote2} />
         {accountVisible && <Account />}
         <Guestbook />
         <Gallery />
