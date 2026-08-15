@@ -6,6 +6,7 @@ import { introImage } from '../intro'
 // duration(ms) 후 자동으로, 또는 탭하면 즉시 본문으로 전환됩니다.
 export default function Intro({ onDone }) {
   const { intro } = config
+  const fadeMs = intro.fadeMs ?? 1200
   const [leaving, setLeaving] = useState(false)
 
   useEffect(() => {
@@ -14,18 +15,21 @@ export default function Intro({ onDone }) {
     return () => clearTimeout(t)
   }, [intro.duration])
 
+  // 페이드가 끝난 뒤에 걷어낸다. 전환 시간은 --intro-fade 로 CSS 에 그대로 넘겨
+  // 두 값이 어긋나지 않게 한다.
   useEffect(() => {
     if (!leaving) return
     const t = setTimeout(() => {
       document.body.style.overflow = ''
       onDone()
-    }, 1300)
+    }, fadeMs)
     return () => clearTimeout(t)
-  }, [leaving, onDone])
+  }, [leaving, onDone, fadeMs])
 
   return (
     <div
       className={`intro ${leaving ? 'intro--out' : ''}`}
+      style={{ '--intro-fade': `${fadeMs}ms` }}
       onClick={() => setLeaving(true)}
       role="button"
       aria-label="청첩장 열기"

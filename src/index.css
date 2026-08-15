@@ -285,7 +285,8 @@ button {
   background: #efe7d8;
   display: flex;
   justify-content: center;
-  transition: opacity 1.2s ease;
+  /* 전환 시간은 config.intro.fadeMs 가 --intro-fade 로 내려준다 */
+  transition: opacity var(--intro-fade, 1200ms) ease;
 }
 .intro--out {
   opacity: 0;
