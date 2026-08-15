@@ -63,6 +63,7 @@ export default function CalendarDday() {
 
       <Reveal delay={60}>
         <div className="cal__card">
+          <p className="cal__month">{m}월</p>
           <div className="cal__grid cal__grid--head">
             {WEEKDAYS.map((w, i) => (
               <div

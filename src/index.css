@@ -507,9 +507,18 @@ button {
 .cal__card {
   width: calc(768 * var(--u));
   margin: calc(67 * var(--u)) auto 0;
-  padding: calc(50 * var(--u)) calc(30.5 * var(--u)) calc(45.75 * var(--u));
+  padding: calc(40 * var(--u)) calc(30.5 * var(--u)) calc(45.75 * var(--u));
   border-radius: calc(20 * var(--u));
   background: #f9f5f0;
+}
+.cal__month {
+  text-align: left;
+  font-size: calc(28 * var(--u));
+  line-height: 1.21;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: #6b6451;
+  margin: 0 0 calc(22 * var(--u));
 }
 .cal__grid {
   display: grid;
