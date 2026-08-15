@@ -334,84 +334,11 @@ button {
 /* ============ 표지(사용자 완성 이미지) ============ */
 .cover {
   position: relative;
-  height: 100vh;
-  height: 100dvh;
-  min-height: 620px;
-  overflow: hidden;
 }
-.cover__photo {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
+.cover__img {
+  width: 100%;
+  height: auto;
   animation: fadeIn 1.2s ease both;
-}
-.cover__scroll {
-  position: absolute;
-  bottom: 26px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-.cover__scroll span {
-  display: block;
-  width: 1px;
-  height: 44px;
-  background: rgba(50, 42, 34, 0.4);
-  transform-origin: top;
-  animation: scrollLine 2s ease-in-out infinite;
-}
-@keyframes scrollLine {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-    transform-origin: top;
-  }
-  45% {
-    transform: scaleY(1);
-    opacity: 1;
-    transform-origin: top;
-  }
-  55% {
-    transform: scaleY(1);
-    opacity: 1;
-    transform-origin: bottom;
-  }
-  100% {
-    transform: scaleY(0);
-    opacity: 0;
-    transform-origin: bottom;
-  }
-}
-
-/* 공통 버튼/칩 (제품감) */
-.btn-line,
-.nav-btn,
-.copy-btn,
-.kakaopay-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  min-height: 44px;
-  padding: 0 18px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--text);
-  text-decoration: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    color 0.15s ease;
-}
-.btn-line:hover,
-.nav-btn:hover,
-.copy-btn:hover {
-  border-color: var(--accent-deep);
-  color: var(--accent-deep);
 }
 
 /* ============ 01 · 초대 ============ */
@@ -1145,66 +1072,14 @@ button {
 }
 
 /* ============ 푸터 ============ */
+/* 이름·날짜·맺음말까지 들어간 완성 이미지 한 장.
+   아래 여백은 하단 고정 바에 이미지가 가리지 않게 확보한다. */
 .footer {
-  text-align: center;
-  padding: var(--sp-12) var(--gutter) calc(var(--sp-12) + 54px);
+  padding-bottom: 54px;
 }
-.footer__names {
-  font-family: var(--song);
-  font-weight: 300;
-  font-size: clamp(26px, 7.4vw, 34px);
-  line-height: 1.2;
-  letter-spacing: 0.16em;
-  text-indent: 0.16em;
-  color: var(--ink);
-  margin: 0;
-}
-.footer__date {
-  font-family: var(--fig);
-  font-variant-numeric: lining-nums tabular-nums;
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  text-indent: 0.12em;
-  color: var(--muted);
-  margin: var(--sp-3) 0 0;
-}
-.footer__rule {
-  display: block;
-  width: 1px;
-  height: 52px;
-  margin: var(--sp-4) auto 0;
-  background: #a9a393;
-}
-.footer__msg {
-  white-space: pre-line;
-  font-size: 15px;
-  line-height: 2.2;
-  letter-spacing: 0.03em;
-  color: var(--text);
-  margin: var(--sp-4) 0 0;
-}
-.footer__branch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: var(--sp-6);
-}
-.footer__branch img {
-  width: 62px;
+.footer__img {
+  width: 100%;
   height: auto;
-  opacity: 0.85;
-}
-/* 두 가지가 서로 마주보도록 왼쪽 것만 좌우 반전 */
-.footer__branch img:first-child {
-  transform: scaleX(-1);
-}
-.footer__end {
-  display: block;
-  width: 26px;
-  height: 1px;
-  margin: var(--sp-6) auto 0;
-  background: #a9a393;
 }
 
 /* ============ 참석 여부 팝업 ============ */

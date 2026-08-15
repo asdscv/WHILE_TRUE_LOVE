@@ -12,7 +12,7 @@ import Guestbook from './components/Guestbook'
 import Gallery from './components/Gallery'
 import RsvpPopup from './components/RsvpPopup'
 import BottomNav from './components/BottomNav'
-import branch from './assets/sections/branch.webp'
+import footerImage from './assets/sections/footer.webp'
 import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
@@ -41,17 +41,11 @@ export default function App() {
         <Gallery />
 
         <footer className="footer">
-          <p className="footer__names">
-            {a.name} · {b.name}
-          </p>
-          <p className="footer__date">{config.wedding.dateText}</p>
-          <span className="footer__rule" aria-hidden="true" />
-          <p className="footer__msg">{config.footer.message}</p>
-          <div className="footer__branch" aria-hidden="true">
-            <img src={branch} alt="" />
-            <img src={branch} alt="" />
-          </div>
-          <span className="footer__end" aria-hidden="true" />
+          <img
+            className="footer__img"
+            src={footerImage}
+            alt={`${a.name} · ${b.name} — ${config.wedding.dateText}. ${config.footer.message}`}
+          />
         </footer>
       </div>
 
