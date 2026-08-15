@@ -45,7 +45,8 @@ function AccountRow({ row }) {
 }
 
 function AccordionGroup({ title, rows }) {
-  const [open, setOpen] = useState(true)
+  // 계좌는 기본 접힘 — 열어보는 사람만 보도록.
+  const [open, setOpen] = useState(false)
   return (
     <div className={`accordion ${open ? 'accordion--open' : ''}`}>
       <button

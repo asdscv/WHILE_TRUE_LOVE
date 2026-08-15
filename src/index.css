@@ -871,6 +871,12 @@ button {
 .accordion__head:hover {
   color: var(--accent-deep);
 }
+.accordion__head:focus-visible,
+.collapse__head:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
 /* 가로로 누운 가지 이미지를 세워서 작은 장식으로 쓴다 */
 .accordion__i {
   display: flex;
