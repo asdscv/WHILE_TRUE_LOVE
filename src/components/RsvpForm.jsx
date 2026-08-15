@@ -9,7 +9,7 @@ export default function RsvpForm({ onSubmitted, submitLabel = '참석 여부 전
     name: '',
     attend: '참석',
     count: 1,
-    meal: '예정',
+    meal: '식사O',
     phone: '',
   })
   const [done, setDone] = useState(false)
@@ -60,8 +60,8 @@ export default function RsvpForm({ onSubmitted, submitLabel = '참석 여부 전
           <span>참석여부</span>
           <select value={form.attend} onChange={set('attend')}>
             <option>참석</option>
-            <option>미정</option>
             <option>불참</option>
+            <option>미정</option>
           </select>
         </label>
       </div>
@@ -84,8 +84,8 @@ export default function RsvpForm({ onSubmitted, submitLabel = '참석 여부 전
         <label>
           <span>식사여부</span>
           <select value={form.meal} onChange={set('meal')}>
-            <option>예정</option>
-            <option>안함</option>
+            <option>식사O</option>
+            <option>식사X</option>
             <option>미정</option>
           </select>
         </label>
