@@ -4,6 +4,7 @@ import Reveal from './Reveal'
 import Collapsible from './Collapsible'
 import RsvpForm from './RsvpForm'
 import {
+  RateLimitError,
   addGuestbook,
   deleteGuestbook,
   isRemote,
@@ -63,8 +64,12 @@ function GuestbookBoard() {
       await addGuestbook(form)
       setForm({ name: '', message: '', password: '' })
       await refresh()
-    } catch {
-      alert('등록에 실패했습니다. 잠시 후 다시 시도해주세요.')
+    } catch (err) {
+      alert(
+        err instanceof RateLimitError
+          ? err.message
+          : '등록에 실패했습니다. 잠시 후 다시 시도해주세요.',
+      )
     } finally {
       setBusy(false)
     }

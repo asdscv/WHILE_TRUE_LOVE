@@ -51,6 +51,36 @@ $$;
 grant execute on function public.delete_guestbook(uuid, text) to anon;
 ```
 
+## 2-1) 도배 방지 (권장 · SQL 한 번 더 붙여넣기)
+
+브라우저 쪽에도 제출 간격/일일 횟수 제한이 걸려 있지만, 그건 기기 단위라
+직접 API 를 두드리면 우회됩니다. 아래를 **SQL Editor 에 붙여넣고 Run** 하면
+서버에서도 폭주를 막습니다. (1분에 10건 초과 삽입 거부)
+
+```sql
+create or replace function public.throttle_inserts()
+returns trigger language plpgsql security definer set search_path = public as $$
+declare recent int;
+begin
+  execute format(
+    'select count(*) from public.%I where created_at > now() - interval ''1 minute''',
+    tg_table_name
+  ) into recent;
+  if recent >= 10 then
+    raise exception '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.';
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists throttle_rsvp on public.rsvp;
+create trigger throttle_rsvp before insert on public.rsvp
+  for each row execute function public.throttle_inserts();
+
+drop trigger if exists throttle_guestbook on public.guestbook;
+create trigger throttle_guestbook before insert on public.guestbook
+  for each row execute function public.throttle_inserts();
+```
+
 ## 3) 키 복사해서 config 에 입력
 좌측 **Project Settings → API** 에서 두 값을 복사:
 

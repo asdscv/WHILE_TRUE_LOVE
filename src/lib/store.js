@@ -7,6 +7,47 @@ import { supabase } from './supabaseClient'
 
 const LS_GB = 'wtl_guestbook'
 const LS_RSVP = 'wtl_rsvp'
+const LS_THROTTLE = 'wtl_submits'
+
+// ---------------- 제출 제한 ----------------
+// 실수로 여러 번 누르거나 장난삼아 도배하는 걸 막는 기기 단위 제한.
+// 서버(Supabase) 쪽 제한은 docs/supabase-setup.md 의 트리거를 함께 걸어야 완전하다.
+const LIMITS = {
+  rsvp: { minGapMs: 30_000, perDay: 5 },
+  guestbook: { minGapMs: 20_000, perDay: 10 },
+}
+
+export class RateLimitError extends Error {}
+
+function checkRate(kind) {
+  const { minGapMs, perDay } = LIMITS[kind]
+  let log
+  try {
+    log = JSON.parse(localStorage.getItem(LS_THROTTLE) || '{}')
+  } catch {
+    log = {}
+  }
+  const now = Date.now()
+  const times = (log[kind] || []).filter((t) => now - t < 86400000)
+
+  if (times.length && now - times[times.length - 1] < minGapMs) {
+    const wait = Math.ceil((minGapMs - (now - times[times.length - 1])) / 1000)
+    throw new RateLimitError(`잠시 후 다시 시도해주세요. (${wait}초)`)
+  }
+  if (times.length >= perDay) {
+    throw new RateLimitError(
+      '오늘은 더 이상 등록할 수 없습니다. 내일 다시 시도해주세요.',
+    )
+  }
+  return () => {
+    log[kind] = [...times, Date.now()]
+    try {
+      localStorage.setItem(LS_THROTTLE, JSON.stringify(log))
+    } catch {
+      /* 저장 실패는 무시 */
+    }
+  }
+}
 
 const readLS = (key) => {
   try {
@@ -44,17 +85,20 @@ export async function listGuestbook({ limit = 5, offset = 0 } = {}) {
 }
 
 export async function addGuestbook({ name, message, password }) {
+  const commit = checkRate('guestbook')
   if (!supabase) {
     const item = { id: `${Date.now()}`, name, message, password, ts: Date.now() }
     const list = readLS(LS_GB)
     list.unshift(item)
     writeLS(LS_GB, list)
+    commit()
     return item
   }
   const { error } = await supabase
     .from('guestbook')
     .insert({ name, message, password })
   if (error) throw error
+  commit()
 }
 
 export async function deleteGuestbook(id, password) {
@@ -106,12 +150,14 @@ async function notifyByEmail(entry) {
 }
 
 export async function addRsvp(entry) {
+  const commit = checkRate('rsvp')
   const { side, name, attend, count, meal, phone } = entry
   if (!supabase) {
     const item = { ...entry, ts: Date.now() }
     const list = readLS(LS_RSVP)
     list.unshift(item)
     writeLS(LS_RSVP, list)
+    commit()
     await notifyByEmail(entry)
     return item
   }
@@ -124,5 +170,6 @@ export async function addRsvp(entry) {
     phone,
   })
   if (error) throw error
+  commit()
   await notifyByEmail(entry)
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { addRsvp } from '../lib/store'
+import { addRsvp, RateLimitError } from '../lib/store'
 
 // 참석 여부(RSVP) 입력 폼.
 // 본문의 "참석 여부" 섹션과 첫 화면 팝업에서 함께 사용됩니다.
@@ -23,8 +23,12 @@ export default function RsvpForm({ onSubmitted, submitLabel = '참석 여부 전
       await addRsvp(form)
       setDone(true)
       onSubmitted?.(form)
-    } catch {
-      alert('전송에 실패했습니다. 잠시 후 다시 시도해주세요.')
+    } catch (err) {
+      alert(
+        err instanceof RateLimitError
+          ? err.message
+          : '전송에 실패했습니다. 잠시 후 다시 시도해주세요.',
+      )
     } finally {
       setBusy(false)
     }
