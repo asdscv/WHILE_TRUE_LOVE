@@ -377,75 +377,18 @@ button {
   }
 }
 
-/* ============ 인사말 ============ */
+/* ============ 인사말(01 · 초대) ============ */
+/* 문구·혼주 표기까지 포함된 완성 이미지 한 장. 좌우 여백은 이미지 자체가 갖고 있어
+   섹션 패딩 없이 프레임 폭에 꽉 채운다. */
 .greeting {
-  padding-top: var(--sp-12);
-  padding-bottom: var(--sp-12);
+  padding: 0;
 }
-.greeting__lead {
-  font-family: var(--song);
-  font-weight: 300;
-  white-space: pre-line;
-  font-size: clamp(23px, 6.4vw, 29px);
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0 0 var(--sp-6);
-}
-.greeting__figure {
-  width: 64%;
-  margin: 0 0 var(--sp-6);
-}
-.greeting__figure img {
+.greeting__img {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  filter: var(--grade);
-}
-.greeting__figure figcaption {
-  margin-top: var(--sp-2);
-  font-family: var(--sans);
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-}
-.greeting__text {
-  font-family: var(--serif);
-  white-space: pre-line;
-  font-size: 17px;
-  color: var(--text);
-  margin: 0 0 var(--sp-6);
-  max-width: 34ch;
-  line-height: 1.8;
-  word-break: keep-all;
-  text-wrap: pretty;
-}
-.greeting__parents p {
-  margin: var(--sp-2) 0;
-  font-size: 15px;
-}
-.greeting__rel,
-.greeting__of {
-  color: var(--muted);
-}
-.greeting__of {
-  margin: 0 6px;
-  font-size: 14px;
-}
-.greeting__parents b {
-  color: var(--ink);
-  font-weight: 600;
-}
-.greeting__contact {
-  display: flex;
-  gap: var(--sp-2);
-  justify-content: flex-start;
-  margin-top: var(--sp-4);
-  flex-wrap: wrap;
+  height: auto;
 }
 
 /* 공통 버튼/칩 (제품감) */
-.contact-btn,
 .btn-line,
 .nav-btn,
 .copy-btn,
@@ -467,7 +410,6 @@ button {
   transition: background-color 0.15s ease, border-color 0.15s ease,
     color 0.15s ease;
 }
-.contact-btn:hover,
 .btn-line:hover,
 .nav-btn:hover,
 .copy-btn:hover {

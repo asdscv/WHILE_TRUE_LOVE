@@ -1,67 +1,24 @@
 import { config } from '../config'
-import { galleryImages } from '../gallery'
 import Reveal from './Reveal'
-import Folio from './Folio'
+import inviteImage from '../assets/sections/01-invite.webp'
 
+// 01 · 초대 — 한 장의 이미지로 완성된 섹션.
+// 문구·혼주 표기까지 이미지에 포함되어 있으므로 내용을 바꾸려면
+// src/assets/sections/01-invite.webp 를 교체해야 합니다.
 export default function Greeting() {
   const { greeting, groom, bride, groomFirst } = config
   const [a, b] = groomFirst ? [groom, bride] : [bride, groom]
-  const accent = galleryImages[1] || galleryImages[0]
 
   return (
     <section className="section greeting">
       <Reveal>
-        <Folio n="01" label="초대" />
-        <h2 className="section__title">{greeting.title}</h2>
-      </Reveal>
-
-      {greeting.lead && (
-        <Reveal delay={60}>
-          <p className="greeting__lead">{greeting.lead}</p>
-        </Reveal>
-      )}
-
-      <Reveal delay={80}>
-        <figure className="greeting__figure">
-          <img src={accent} alt="" loading="lazy" />
-          <figcaption>
-            {a.name} · {b.name}
-          </figcaption>
-        </figure>
-      </Reveal>
-
-      <Reveal delay={140}>
-        <p className="greeting__text">{greeting.message}</p>
-      </Reveal>
-
-      <Reveal delay={200}>
-        <div className="greeting__parents">
-          <p>
-            <span className="greeting__rel">
-              {a.father} · {a.mother}
-            </span>
-            <span className="greeting__of">의 {a.label}</span>
-            <b>{a.name}</b>
-          </p>
-          <p>
-            <span className="greeting__rel">
-              {b.father} · {b.mother}
-            </span>
-            <span className="greeting__of">의 {b.label}</span>
-            <b>{b.name}</b>
-          </p>
-        </div>
-      </Reveal>
-
-      <Reveal delay={260}>
-        <div className="greeting__contact">
-          <a className="contact-btn" href={`tel:${groom.phone}`}>
-            신랑에게 연락하기
-          </a>
-          <a className="contact-btn" href={`tel:${bride.phone}`}>
-            신부에게 연락하기
-          </a>
-        </div>
+        <img
+          className="greeting__img"
+          src={inviteImage}
+          width={899}
+          height={1748}
+          alt={`${greeting.title} — ${greeting.lead.replace(/\n/g, ' ')}. ${greeting.message.replace(/\n+/g, ' ')} ${a.father} · ${a.mother}의 ${a.label} ${a.name}, ${b.father} · ${b.mother}의 ${b.label} ${b.name}`}
+        />
       </Reveal>
     </section>
   )
