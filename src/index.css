@@ -432,44 +432,13 @@ button {
   margin: 0;
 }
 
-/* ============ 포토 밴드 ============ */
-.photoband {
-  position: relative;
-  min-height: 92vh;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-.photoband__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(28, 26, 23, 0.55),
-    rgba(28, 26, 23, 0.02) 55%
-  );
-}
-.photoband__quote {
-  position: relative;
-  z-index: 1;
-  font-family: var(--song);
-  font-weight: 300;
-  white-space: pre-line;
-  color: #f6f3ec;
-  font-size: clamp(22px, 6.4vw, 30px);
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-  width: 82%;
-  padding: 0 var(--gutter) var(--sp-12);
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
-}
-
 /* ============ 02 · 예식 (완성 이미지 + 실시간 D-day) ============ */
 /* 원본 이미지 954px 기준 치수를 프레임 폭에 비례해 따라가도록 min(vw, px) 로 잠근다.
    (프레임 폭 = min(100vw, 500px) 이므로 이미지 1px = 프레임폭/954) */
 .calendar {
+  /* 앞뒤 섹션(지색 --paper)과 구분되도록 한 톤 밝은 판으로 띄운다.
+     이미지 배경색과 반드시 같은 값이어야 이어 붙인 티가 안 난다. */
+  background: #fcfaf5;
   padding: 0;
 }
 .calendar__img {

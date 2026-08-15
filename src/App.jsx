@@ -5,7 +5,6 @@ import Bgm from './components/Bgm'
 import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
-import PhotoBand from './components/PhotoBand'
 import Pullquote from './components/Pullquote'
 import CalendarDday from './components/CalendarDday'
 import Location from './components/Location'
@@ -34,7 +33,6 @@ export default function App() {
       <div className={`frame ${introDone ? 'frame--in' : ''}`}>
         <Cover />
         <Greeting />
-        <PhotoBand quote={config.photoQuote} index={2} />
         <CalendarDday />
         <Location />
         <Pullquote text={config.photoQuote2} />
