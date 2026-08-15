@@ -42,8 +42,8 @@
   --accent-deep: #4f6e64; /* 은은한 포인트(제목 강조·토글·포커스) */
   /* 눌러야 하는 버튼은 따로. --accent-deep 는 채도가 낮아(28%) 회색빛이 돌고
      프레임 위에 깔린 한지 노이즈(multiply 5%)까지 겹쳐 더 죽어 보인다. */
-  --btn: #256b4c;
-  --btn-hover: #1d5a3e;
+  --btn: #2c855c;
+  --btn-hover: #24704d;
   --sun: #a8756b;
   --shadow: rgba(30, 27, 24, 0.08);
 
@@ -995,7 +995,7 @@ button {
   letter-spacing: 0.02em;
   margin-top: var(--sp-2);
   cursor: pointer;
-  box-shadow: 0 3px 12px rgba(37, 107, 76, 0.3);
+  box-shadow: 0 3px 14px rgba(44, 133, 92, 0.34);
   transition: background-color 0.15s ease, box-shadow 0.15s ease,
     transform 0.08s ease;
 }
@@ -1004,7 +1004,7 @@ button {
 }
 .submit-btn:active:not(:disabled) {
   transform: translateY(1px);
-  box-shadow: 0 1px 5px rgba(37, 107, 76, 0.35);
+  box-shadow: 0 1px 5px rgba(44, 133, 92, 0.4);
 }
 .submit-btn:disabled {
   opacity: 0.45;
