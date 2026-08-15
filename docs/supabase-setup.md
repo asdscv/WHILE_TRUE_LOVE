@@ -57,34 +57,65 @@ $$;
 grant execute on function public.delete_guestbook(uuid, text) to anon;
 ```
 
-## 2-1) 도배 방지 (권장 · SQL 한 번 더 붙여넣기)
+## 2-1) 도배 방지 (권장)
 
-브라우저 쪽에도 제출 간격/일일 횟수 제한이 걸려 있지만, 그건 기기 단위라
-직접 API 를 두드리면 우회됩니다. 아래를 **SQL Editor 에 붙여넣고 Run** 하면
-서버에서도 폭주를 막습니다. (1분에 10건 초과 삽입 거부)
+브라우저 쪽에도 제출 간격/일일 횟수 제한이 걸려 있지만 그건 기기 단위라,
+API 를 직접 두드리면 우회됩니다. 서버에서도 막으려면 아래 블록을
+**SQL Editor 에 통째로 붙여넣고 Run** 하세요. 1분에 10건을 넘는 삽입을 거부합니다.
+(설명 문장은 빼고 아래 코드블록 안의 내용만 복사하세요.)
 
 ```sql
-create or replace function public.throttle_inserts()
-returns trigger language plpgsql security definer set search_path = public as $$
-declare recent int;
+create or replace function public.throttle_rsvp_fn()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $throttle$
+declare
+  recent int;
 begin
-  execute format(
-    'select count(*) from public.%I where created_at > now() - interval ''1 minute''',
-    tg_table_name
-  ) into recent;
+  select count(*) into recent
+  from public.rsvp
+  where created_at > now() - interval '1 minute';
+
   if recent >= 10 then
     raise exception '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.';
   end if;
+
   return new;
-end $$;
+end;
+$throttle$;
+
+create or replace function public.throttle_guestbook_fn()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $throttle$
+declare
+  recent int;
+begin
+  select count(*) into recent
+  from public.guestbook
+  where created_at > now() - interval '1 minute';
+
+  if recent >= 10 then
+    raise exception '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.';
+  end if;
+
+  return new;
+end;
+$throttle$;
 
 drop trigger if exists throttle_rsvp on public.rsvp;
-create trigger throttle_rsvp before insert on public.rsvp
-  for each row execute function public.throttle_inserts();
+create trigger throttle_rsvp
+  before insert on public.rsvp
+  for each row execute function public.throttle_rsvp_fn();
 
 drop trigger if exists throttle_guestbook on public.guestbook;
-create trigger throttle_guestbook before insert on public.guestbook
-  for each row execute function public.throttle_inserts();
+create trigger throttle_guestbook
+  before insert on public.guestbook
+  for each row execute function public.throttle_guestbook_fn();
 ```
 
 ## 3) 키 복사해서 config 에 입력
