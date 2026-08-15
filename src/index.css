@@ -92,10 +92,7 @@ button {
 /* 숫자는 라이닝+등폭 (자릿수 흔들림 방지) */
 .num,
 .folio__n,
-.calendar__year,
-.calendar__md,
-.cd__n,
-.cal-cell,
+.dday__text,
 .account-row__num,
 .gb-item__date,
 .lightbox__count {
@@ -469,141 +466,35 @@ button {
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* ============ 카운트다운 ============ */
-.countdown {
-  position: relative;
-  min-height: 58vh;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+/* ============ 02 · 예식 (완성 이미지 + 실시간 D-day) ============ */
+/* 원본 이미지 954px 기준 치수를 프레임 폭에 비례해 따라가도록 min(vw, px) 로 잠근다.
+   (프레임 폭 = min(100vw, 500px) 이므로 이미지 1px = 프레임폭/954) */
+.calendar {
+  padding: 0;
 }
-.countdown__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(28, 26, 23, 0.6),
-    rgba(28, 26, 23, 0.08) 70%
-  );
-}
-.countdown__inner {
-  position: relative;
-  z-index: 1;
-  color: #f6f3ec;
-  padding: 0 var(--gutter) var(--sp-8);
-}
-.countdown__caption {
-  font-family: var(--sans);
-  font-size: 11.5px;
-  letter-spacing: 0.28em;
-  margin: 0 0 var(--sp-4);
-  color: rgba(246, 243, 236, 0.85);
-}
-.cd {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 22px;
-}
-.cd__u {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.cd__n {
-  font-family: var(--fig);
-  font-weight: 300;
-  font-size: clamp(40px, 12vw, 56px);
-  line-height: 1;
-  color: #f6f3ec;
-  transition: opacity 0.4s ease;
-}
-.cd__l {
-  margin-top: var(--sp-2);
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: rgba(246, 243, 236, 0.7);
-}
-
-/* ============ 달력 + 날짜 ============ */
-.calendar__year {
-  font-family: var(--sans);
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  color: var(--muted);
-  margin: 0 0 var(--sp-1);
-}
-.calendar__md {
-  font-family: var(--fig);
-  font-weight: 300;
-  font-size: clamp(56px, 18vw, 84px);
-  letter-spacing: 0.01em;
-  color: var(--ink);
-  line-height: 0.95;
-  margin: 0 0 var(--sp-2);
-}
-.calendar__sub {
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  color: var(--muted);
-  margin: 0 0 var(--sp-6);
-}
-.calendar__grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: var(--sp-2) 0;
+.calendar__img {
   width: 100%;
-  margin: 0 0 var(--sp-4);
+  height: auto;
 }
-.cal-cell {
-  min-height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--fig);
-  font-size: 16px;
-  color: var(--text);
+.dday {
+  text-align: center;
+  padding-bottom: min(6.6vw, 33px);
 }
-.cal-cell--head {
-  min-height: 28px;
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-}
-.cal-cell--sun {
-  color: var(--sun);
-}
-.cal-cell--target {
-  position: relative;
-  color: var(--paper);
-  font-weight: 600;
-}
-.cal-cell--target::before {
-  content: '';
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--accent-deep);
-  z-index: -1;
+.dday__rule {
+  display: block;
+  width: 1px;
+  height: min(4.72vw, 23.6px);
+  margin: min(2.52vw, 12.6px) auto min(4vw, 20px);
+  background: #a39a8d;
 }
 .dday__text {
-  font-size: 14.5px;
-  color: var(--text);
-  margin: var(--sp-1) 0 0;
-}
-.dday__text b {
-  font-family: var(--song);
-  font-weight: 600;
-  color: var(--ink);
-}
-.dday__done {
-  font-size: 16px;
-  color: var(--accent-deep);
+  /* 이미지 원본 24px / 자간 2px / 행간 40px, 글자색 추출값 — 실측으로 맞춘 값이라
+     이미지를 교체하면 여기도 다시 재야 한다. */
+  font-size: min(2.52vw, 12.6px);
+  line-height: 1.667;
+  letter-spacing: 0.083em;
+  color: #635240;
+  margin: 0;
 }
 
 /* ============ 사진첩 ============ */
