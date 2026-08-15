@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
 import Collapsible from './Collapsible'
+import branch from '../assets/sections/branch.webp'
 
 function AccountRow({ row }) {
   const [copied, setCopied] = useState(false)
@@ -44,12 +45,22 @@ function AccountRow({ row }) {
 }
 
 function AccordionGroup({ title, rows }) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   return (
     <div className={`accordion ${open ? 'accordion--open' : ''}`}>
-      <button className="accordion__head" onClick={() => setOpen((o) => !o)}>
-        {title}
-        <span className="accordion__arrow">{open ? '−' : '+'}</span>
+      <button
+        type="button"
+        className="accordion__head"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+      >
+        <span className="accordion__i" aria-hidden="true">
+          <img src={branch} alt="" />
+        </span>
+        <span className="accordion__title">{title}</span>
+        <span className="accordion__arrow" aria-hidden="true">
+          {open ? '−' : '+'}
+        </span>
       </button>
       {open && (
         <div className="accordion__body">
@@ -80,9 +91,9 @@ export default function Account() {
       <Reveal>
         <Collapsible n="04" label="마음" title="마음 전하실 곳">
           <p className="account__desc">
-            축하의 마음을 전하고 싶으신 분들을 위해
+            소중한 마음을 전해주시면
             <br />
-            계좌번호를 안내드립니다.
+            기쁨과 감사한 마음 잊지 않고 간직하겠습니다.
           </p>
           <div className="account__groups">
             {groups.map(([title, rows]) => (
