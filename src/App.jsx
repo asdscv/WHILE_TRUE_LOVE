@@ -24,11 +24,30 @@ export default function App() {
       new URLSearchParams(window.location.search).get('intro') === 'off',
   )
 
-  // 인트로 → 표지로 넘어갈 때 상태표시줄 색도 각 사진 상단색으로 맞춘다.
+  // iOS Safari 는 상태표시줄 뒤에 theme-color 로 가림막을 덮는다(페이지가 그 아래로
+  // 깔려 있어도 보이지 않는다). 그래서 지금 화면 맨 위에 무엇이 있는지에 맞춰
+  // 그 색을 계속 바꿔 준다 — 인트로 사진 → 표지 하늘 → 본문 지색.
   useEffect(() => {
-    setThemeColor(
-      introDone ? config.themeColor.cover : config.themeColor.intro,
-    )
+    if (!introDone) {
+      setThemeColor(config.themeColor.intro)
+      return
+    }
+    const update = () => {
+      const cover = document.querySelector('.cover')
+      const pastCover = cover
+        ? window.scrollY >= cover.offsetHeight - 4
+        : true
+      setThemeColor(
+        pastCover ? config.themeColor.page : config.themeColor.cover,
+      )
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [introDone])
 
   const [a, b] = config.groomFirst

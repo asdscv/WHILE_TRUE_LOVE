@@ -88,6 +88,7 @@ export const config = {
   themeColor: {
     intro: '#e7e1db', // 인트로(전환 전) 사진 상단색
     cover: '#aabddc', // 표지 사진 상단색(하늘)
+    page: '#f6f3ec', // 표지를 지나 본문을 볼 때(지색)
   },
 
   // 맨 아래 맺음말 (줄바꿈 그대로 반영)
