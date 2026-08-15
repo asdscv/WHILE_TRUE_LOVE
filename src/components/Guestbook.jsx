@@ -164,7 +164,7 @@ export default function Guestbook() {
   return (
     <>
       {showRsvp && (
-        <section className="section section--alt guestbook">
+        <section className="section guestbook">
           <Reveal id="rsvp">
             <Collapsible n="05" label="참석여부" title="참석 여부 전달">
               <p className="account__desc">

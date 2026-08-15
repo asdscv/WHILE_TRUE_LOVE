@@ -127,8 +127,12 @@ button {
 }
 
 /* ---------- 섹션 ---------- */
-/* 위아래 섹션과 구분되도록 한 톤 밝게 (02 예식 · 05 참석여부 · 07 사진첩) */
-.section--alt {
+/* 섹션 배경을 자동으로 번갈아 밝게.
+   `of .section` 덕분에 형제 중 .section 만 세므로 header.cover / footer 는 빠지고,
+   계좌 섹션처럼 조건부로 렌더되지 않는 섹션은 DOM 에서 아예 빠져 번호가 자동으로
+   다시 매겨진다 — 계좌 있는 URL / 없는 URL 양쪽 모두 교차가 어긋나지 않는다.
+   (규칙을 모르는 구형 웹뷰에서는 통째로 무시되어 전부 지색으로 보일 뿐 깨지지 않는다) */
+.frame > .section:nth-child(even of .section) {
   background: var(--paper-alt);
 }
 .section {
@@ -511,7 +515,6 @@ button {
 .cal {
   --cal-scale: 1;
   --u: calc(min(0.104822vw, 0.524109px) * var(--cal-scale));
-  background: var(--paper-alt);
   text-align: center;
   padding: calc(80 * var(--u)) 0 calc(63 * var(--u));
 }
