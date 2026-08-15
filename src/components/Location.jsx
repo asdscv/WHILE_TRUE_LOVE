@@ -3,6 +3,15 @@ import { config } from '../config'
 import Reveal from './Reveal'
 import Collapsible from './Collapsible'
 
+const Pin = () => (
+  <svg className="nav-btn__i" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M12 2a7 7 0 0 0-7 7c0 5.1 6.3 12.4 6.6 12.7a.6.6 0 0 0 .9 0C12.7 21.4 19 14.1 19 9a7 7 0 0 0-7-7Zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2Z"
+    />
+  </svg>
+)
+
 export default function Location() {
   const { venue } = config.wedding
   const { transport } = config.location
@@ -39,7 +48,8 @@ export default function Location() {
             </div>
             <div className="location__actions">
               <button className="btn-line" onClick={copyAddress}>
-                {copied ? '✓ 복사됨' : '주소 복사'}
+                {copied ? '✓' : <Pin />}
+                {copied ? '복사됨' : '주소 복사'}
               </button>
               {venue.tel && (
                 <a className="btn-line" href={`tel:${venue.tel}`}>
@@ -59,18 +69,16 @@ export default function Location() {
           </div>
 
           <div className="nav-buttons">
-            <a
-              className="nav-btn nav-btn--primary"
-              href={naver}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="nav-btn" href={naver} target="_blank" rel="noreferrer">
+              <span className="nav-btn__i">N</span>
               네이버지도
             </a>
             <a className="nav-btn" href={kakao} target="_blank" rel="noreferrer">
+              <Pin />
               카카오맵
             </a>
             <a className="nav-btn" href={tmap}>
+              <span className="nav-btn__i">T</span>
               티맵
             </a>
           </div>

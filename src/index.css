@@ -262,7 +262,7 @@ button {
   overflow: hidden;
 }
 .collapse--open .collapse__inner {
-  padding-top: var(--sp-4);
+  padding-top: var(--sp-6);
 }
 .guestbook .reveal + .reveal {
   margin-top: var(--sp-6);
@@ -372,6 +372,36 @@ button {
     opacity: 0;
     transform-origin: bottom;
   }
+}
+
+/* 공통 버튼/칩 (제품감) */
+.btn-line,
+.nav-btn,
+.copy-btn,
+.kakaopay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+.btn-line:hover,
+.nav-btn:hover,
+.copy-btn:hover {
+  border-color: var(--accent-deep);
+  color: var(--accent-deep);
 }
 
 /* ============ 01 · 초대 ============ */
@@ -711,32 +741,34 @@ button {
 
 /* ============ 오시는 길 ============ */
 .location__venue {
-  /* 장소명·주소 왼쪽, 주소복사 버튼은 그 오른편에 나란히 */
+  /* 장소명·주소 왼쪽, 주소복사 버튼은 그 오른편에 */
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-3);
-  margin-bottom: var(--sp-4);
 }
 .location__venue-text {
   min-width: 0;
 }
 .location__name {
   font-family: var(--song);
-  font-weight: 300;
-  font-size: clamp(19px, 5vw, 23px);
+  font-weight: 500;
+  font-size: clamp(20px, 5.4vw, 24px);
+  line-height: 1.3;
   color: var(--ink);
-  margin: 0 0 var(--sp-1);
+  margin: 0 0 6px;
 }
 .location__name span {
   font-family: var(--sans);
+  font-weight: 400;
   color: var(--muted);
   font-size: 14px;
 }
 .location__addr {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.5;
 }
 .location__actions {
   display: flex;
@@ -745,60 +777,71 @@ button {
 }
 .map {
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  margin: var(--sp-4) 0;
+  border-radius: 16px;
+  margin: var(--sp-6) 0 var(--sp-3);
   background: var(--paper-2);
 }
 .map iframe {
   width: 100%;
-  height: 240px;
+  height: 300px;
   border: 0;
   display: block;
   filter: grayscale(0.15) contrast(0.99);
 }
 .nav-buttons {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-2);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-6);
 }
 .nav-btn {
-  flex: 1;
-  border-radius: 8px;
+  min-height: 56px;
+  padding: 0 10px;
+  border-radius: 12px;
+  font-size: 14px;
 }
-.nav-btn--primary {
-  border-color: var(--accent-deep);
-  color: var(--accent-deep);
+.nav-btn__i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  flex: none;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
 }
-.nav-btn--primary:hover {
-  background: var(--accent-deep);
-  color: var(--paper);
+.nav-btn:hover .nav-btn__i,
+.btn-line:hover .nav-btn__i {
+  color: inherit;
 }
 .transport {
   list-style: none;
   padding: 0;
   margin: 0;
+  border-bottom: 1px solid var(--line);
 }
 .transport li {
   display: grid;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: 56px 1fr;
   align-items: baseline;
-  gap: var(--sp-3);
-  padding: var(--sp-3) 0;
+  gap: var(--sp-4);
+  padding: var(--sp-4) 0;
   border-top: 1px solid var(--line);
-  font-size: 14px;
+  font-size: 15px;
 }
 .transport__icon {
   display: none;
 }
 .transport__title {
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: var(--accent-deep);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
 }
 .transport__desc {
   color: var(--text);
+  line-height: 1.5;
 }
 
 /* ============ 마음 전하실 곳 ============ */
