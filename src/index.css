@@ -702,59 +702,13 @@ button {
   letter-spacing: 0.12em;
 }
 
-/* ============ 일정 저장 안내 ============ */
-.std {
-  text-align: center;
-  padding: var(--sp-12) var(--gutter);
-}
-.std__branch {
-  width: 84px;
-  height: auto;
-  margin: 0 auto;
-  opacity: 0.85;
-}
-.std__title {
-  white-space: pre-line;
-  font-family: var(--song);
-  font-weight: 300;
-  font-size: clamp(24px, 6.8vw, 30px);
-  line-height: 1.55;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: var(--sp-4) 0 0;
-}
-.std__rule {
-  display: block;
-  width: 1px;
-  height: 34px;
-  margin: var(--sp-4) auto;
-  background: #a9a393;
-}
-.std__when {
-  font-size: 15px;
-  line-height: 1.9;
-  letter-spacing: 0.02em;
-  color: var(--text);
-  margin: 0;
-}
-.std__when b {
-  font-family: var(--song);
-  font-weight: 500;
-  font-size: 17px;
-  color: var(--ink);
-}
-.std__msg {
-  white-space: pre-line;
-  font-size: 14.5px;
-  line-height: 1.95;
-  color: var(--muted);
-  margin: 0;
-}
-.std__actions {
+/* ---- 일정 저장 버튼 (02 예식 섹션의 D-day 아래) ---- */
+.cal-btns {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
-  margin-top: var(--sp-6);
+  gap: calc(20 * var(--u));
+  width: calc(768 * var(--u));
+  margin: calc(56 * var(--u)) auto 0;
 }
 .cal-btn {
   display: flex;

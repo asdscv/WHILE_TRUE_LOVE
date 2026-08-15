@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
 import branch from '../assets/sections/branch.webp'
+import CalendarButtons from './CalendarButtons'
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 
@@ -98,6 +99,7 @@ export default function CalendarDday() {
             <br />
             {past ? '있었습니다' : `${days}일 남았습니다`}
           </p>
+          <CalendarButtons />
         </div>
       </Reveal>
     </section>

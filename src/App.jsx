@@ -7,7 +7,6 @@ import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
 import CalendarDday from './components/CalendarDday'
-import SaveTheDate from './components/SaveTheDate'
 import Location from './components/Location'
 import Account from './components/Account'
 import Guestbook from './components/Guestbook'
@@ -63,7 +62,6 @@ export default function App() {
         <Cover />
         <Greeting />
         <CalendarDday />
-        <SaveTheDate />
         <Location />
         {accountVisible && <Account />}
         <Guestbook />
