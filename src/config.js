@@ -160,14 +160,11 @@ export const config = {
     //  · FormSubmit(가입 불필요): 'https://formsubmit.co/ajax/받는주소@example.com'
     //    첫 제출 때 오는 인증 메일을 한 번 클릭해야 이후 메일이 옵니다.
     //  · Web3Forms(가입 필요): endpoint 'https://api.web3forms.com/submit' + accessKey
-    // ⚠️ 받는 주소가 공개 JS 번들에 평문으로 남으면 수집 봇의 먹잇감이 됩니다.
-    //    endpointB64 에 base64 로 넣어 평문 문자열이 남지 않게 합니다.
-    //    가장 안전한 방법은 FormSubmit 이 발급하는 난수 alias 주소
-    //    ('https://formsubmit.co/ajax/<난수>')를 endpoint 에 넣는 것입니다.
-    //    alias 를 넣으면 endpointB64 는 지워도 됩니다(endpoint 가 우선).
+    // FormSubmit 이 발급한 난수 주소(Invisible Emails). 받는 메일 주소가
+    // 코드에 전혀 남지 않으므로 수집 봇이 가져갈 것이 없습니다.
+    // 받는 사람을 바꾸려면 FormSubmit 에서 새 주소를 발급받아 교체하세요.
     email: {
-      endpoint: '',
-      endpointB64: 'aHR0cHM6Ly9mb3Jtc3VibWl0LmNvL2FqYXgvbHVrZUByaWN0YXgua3I=',
+      endpoint: 'https://formsubmit.co/ajax/4008ff57bc5d3af1675f7be92a30349b',
       accessKey: '',
     },
     // 첫 화면(인트로)이 끝나고 본문으로 넘어갈 때 뜨는 참석 여부 안내 팝업.
