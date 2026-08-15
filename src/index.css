@@ -414,6 +414,102 @@ button {
   color: var(--accent-deep);
 }
 
+/* ============ 01 · 초대 — 이미지 재현(HTML) ============ */
+/* 원본 이미지(899px 폭)를 실측해 옮긴 값들. 모든 치수의 단위 --u 는 "이미지 1px" 이고,
+   프레임 폭(=min(100vw,500px))에 비례해 같이 줄어든다.
+   글자가 작아 키우고 싶으면 --inv-scale 하나만 올리면 전체가 비율 그대로 커진다. */
+.invite2 {
+  --inv-scale: 1;
+  --u: calc(min(0.111235vw, 0.556173px) * var(--inv-scale));
+  text-align: center;
+  padding: calc(210 * var(--u)) var(--gutter) calc(193 * var(--u));
+}
+.invite2__folio {
+  font-size: calc(27 * var(--u));
+  line-height: 1.21;
+  letter-spacing: 0.037em;
+  text-indent: 0.037em;
+  font-weight: 500;
+  color: #413a27;
+  margin: 0;
+}
+.invite2__rule-h {
+  display: block;
+  width: calc(41 * var(--u));
+  height: calc(2 * var(--u));
+  margin: calc(32 * var(--u)) auto 0;
+  background: #5b5440;
+}
+.invite2__title {
+  font-size: calc(58 * var(--u));
+  line-height: 1.21;
+  letter-spacing: 0.134em;
+  text-indent: 0.134em;
+  font-weight: 300;
+  color: #5b4e34;
+  margin: calc(94 * var(--u)) 0 0;
+}
+.invite2__dot {
+  display: block;
+  width: calc(6 * var(--u));
+  height: calc(6 * var(--u));
+  border-radius: 50%;
+  margin: calc(63 * var(--u)) auto 0;
+  background: #524528;
+}
+.invite2__lead {
+  white-space: pre-line;
+  font-size: calc(39 * var(--u));
+  line-height: 1.744;
+  letter-spacing: 0.029em;
+  text-indent: 0.029em;
+  font-weight: 300;
+  color: #584e2e;
+  margin: calc(56 * var(--u)) 0 0;
+}
+.invite2__rule-v {
+  display: block;
+  width: calc(2 * var(--u));
+  height: calc(83 * var(--u));
+  margin: calc(60 * var(--u)) auto 0;
+  background: #928a7a;
+}
+.invite2__msg {
+  white-space: pre-line;
+  font-size: calc(25 * var(--u));
+  line-height: 2.42;
+  font-weight: 500;
+  color: #2e2c1f;
+  margin: calc(70 * var(--u)) 0 0;
+}
+.invite2__parents {
+  margin-top: calc(109 * var(--u));
+}
+.invite2__parent {
+  font-size: calc(30 * var(--u));
+  line-height: 1.21;
+  margin: 0;
+}
+.invite2__parent + .invite2__parent {
+  margin-top: calc(28 * var(--u));
+}
+.invite2__rel,
+.invite2__of {
+  font-size: 0.9em;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: #5e5541;
+}
+.invite2__of {
+  margin-left: calc(18 * var(--u));
+}
+.invite2__nm {
+  margin-left: calc(40 * var(--u));
+  letter-spacing: 0.033em;
+  font-weight: 600;
+  color: #221d0e;
+}
+
 /* ============ 대형 인용구(세로 룰) ============ */
 .pullquote {
   padding: var(--sp-12) var(--gutter);
@@ -549,7 +645,15 @@ button {
 
 /* ============ 오시는 길 ============ */
 .location__venue {
+  /* 장소명·주소 왼쪽, 주소복사 버튼은 그 오른편에 나란히 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
   margin-bottom: var(--sp-4);
+}
+.location__venue-text {
+  min-width: 0;
 }
 .location__name {
   font-family: var(--song);
@@ -564,14 +668,14 @@ button {
   font-size: 14px;
 }
 .location__addr {
-  margin: 0 0 var(--sp-3);
+  margin: 0;
   color: var(--muted);
   font-size: 14px;
 }
 .location__actions {
   display: flex;
+  flex: none;
   gap: var(--sp-2);
-  justify-content: flex-start;
 }
 .map {
   overflow: hidden;
@@ -1079,10 +1183,58 @@ button {
   margin-top: var(--sp-1);
 }
 
+/* ============ 하단 고정 바(바로가기) ============ */
+/* 세이프에어리어 여백 없이 화면 맨 아래에 붙인다(요청사항).
+   홈 인디케이터를 피하려면 padding-bottom: env(safe-area-inset-bottom) 을 더하면 된다. */
+.bottomnav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 400;
+  width: 100%;
+  max-width: var(--frame-w);
+  height: 54px;
+  display: flex;
+  align-items: stretch;
+  background: rgba(246, 243, 236, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+}
+.bottomnav__btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s ease;
+}
+.bottomnav__btn + .bottomnav__btn {
+  border-left: 1px solid var(--line);
+}
+.bottomnav__btn:hover,
+.bottomnav__btn:active {
+  color: var(--accent-deep);
+}
+/* 고정 바에 가리지 않도록 마지막 여백 확보 + 앵커 이동 시 윗숨 */
+.footer {
+  padding-bottom: calc(var(--sp-8) + 54px);
+}
+#rsvp,
+#location,
+#guestbook {
+  scroll-margin-top: var(--sp-3);
+}
+
 /* ============ 개발자 미리보기 토글 ============ */
 .dev-toggle {
   position: fixed;
-  bottom: 14px;
+  bottom: 68px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 700;

@@ -29,7 +29,7 @@ function GuestbookBoard() {
   const submit = async (e) => {
     e.preventDefault()
     if (!form.name.trim() || !form.message.trim())
-      return alert('이름과 축하 메시지를 입력해주세요.')
+      return alert('이름과 축하의 글을 입력해주세요.')
     setBusy(true)
     try {
       await addGuestbook(form)
@@ -74,7 +74,7 @@ function GuestbookBoard() {
           </label>
         </div>
         <label className="field-full">
-          <span>축하 메시지</span>
+          <span>축하의 글</span>
           <textarea
             value={form.message}
             onChange={set('message')}
@@ -83,13 +83,13 @@ function GuestbookBoard() {
           />
         </label>
         <button className="submit-btn" disabled={busy}>
-          {busy ? '등록 중…' : '축하글 남기기'}
+          {busy ? '등록 중…' : '축하의 글 남기기'}
         </button>
       </form>
 
       <ul className="gb-list">
         {items.length === 0 && (
-          <li className="gb-empty">첫 번째 축하글을 남겨주세요 💌</li>
+          <li className="gb-empty">첫 번째 축하의 글을 남겨주세요 💌</li>
         )}
         {items.map((it) => (
           <li className="gb-item" key={it.id}>
@@ -120,7 +120,7 @@ export default function Guestbook() {
   return (
     <section className="section guestbook">
       {showRsvp && (
-        <Reveal>
+        <Reveal id="rsvp">
           <Collapsible n="05" label="축하" title="참석 여부 전달">
             <p className="account__desc">
               예식 장소가 협소하여 자리가 한정되어 있습니다.
@@ -133,8 +133,8 @@ export default function Guestbook() {
       )}
 
       {showGb && (
-        <Reveal>
-          <Collapsible n="06" label="메시지" title="축하 메시지">
+        <Reveal id="guestbook">
+          <Collapsible n="06" label="축하의 글" title="축하의 글">
             <GuestbookBoard />
           </Collapsible>
         </Reveal>

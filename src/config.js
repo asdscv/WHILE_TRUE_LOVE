@@ -13,8 +13,8 @@ export const config = {
   // ---------------------------------------------------------
   // 신랑 · 신부
   // ---------------------------------------------------------
-  // 이름/혼주 표기는 01·초대 섹션 이미지에 새겨져 있습니다(화면에 직접 렌더링되지 않음).
-  // 아래 값은 방명록·푸터·이미지 대체텍스트 등에서 쓰입니다.
+  // 혼주 표기는 01·초대 이미지에는 새겨져 있고(수정 불가), 바로 아래 HTML 재현 섹션에는
+  // 이 값이 그대로 반영됩니다.
   groom: {
     name: '박지용',
     label: '아들', // 아들 / 장남 / 차남 등
@@ -24,8 +24,9 @@ export const config = {
   bride: {
     name: '오애신',
     label: '딸', // 딸 / 장녀 / 차녀 등
-    father: '오OO', // TODO: 신부 아버님 성함
-    mother: '이OO', // TODO: 신부 어머님 성함
+    father: '오현상',
+    fatherLate: true, // 고인이신 경우 이름 앞에 '故' 를 붙입니다.
+    mother: '김현',
   },
   // 순서 표기(신랑 먼저 / 신부 먼저). true = 신랑 먼저
   groomFirst: true,
@@ -133,8 +134,8 @@ export const config = {
     ],
     bride: [
       { relation: '신부', name: '오애신', bank: '카카오뱅크', number: '3333-01-2345678', kakaopay: '' },
-      { relation: '아버지', name: '오OO', bank: '우리은행', number: '1002-123-456789', kakaopay: '' },
-      { relation: '어머니', name: '이OO', bank: '하나은행', number: '123-456789-01234', kakaopay: '' },
+      // 신부 아버님은 고인이시라 계좌 행을 두지 않았습니다. 필요하면 다시 추가하세요.
+      { relation: '어머니', name: '김현', bank: '하나은행', number: '123-456789-01234', kakaopay: '' },
     ],
   },
 
@@ -160,7 +161,7 @@ export const config = {
     popup: {
       enabled: true,
       delay: 900, // 본문 전환 후 이 시간(ms) 뒤에 팝업이 뜹니다.
-      eyebrow: 'INVITATION',
+      eyebrow: '초대',
       title: '참석 여부를 알려주세요',
       message: `저희 예식은 백인제가옥에서
 가까운 분들만 모시고 조용히 치러집니다.

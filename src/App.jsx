@@ -5,6 +5,7 @@ import Bgm from './components/Bgm'
 import Intro from './components/Intro'
 import Cover from './components/Cover'
 import Greeting from './components/Greeting'
+import GreetingText from './components/GreetingText'
 import Pullquote from './components/Pullquote'
 import CalendarDday from './components/CalendarDday'
 import Location from './components/Location'
@@ -12,6 +13,7 @@ import Account from './components/Account'
 import Guestbook from './components/Guestbook'
 import Gallery from './components/Gallery'
 import RsvpPopup from './components/RsvpPopup'
+import BottomNav from './components/BottomNav'
 import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
@@ -33,6 +35,7 @@ export default function App() {
       <div className={`frame ${introDone ? 'frame--in' : ''}`}>
         <Cover />
         <Greeting />
+        <GreetingText />
         <CalendarDday />
         <Location />
         <Pullquote text={config.photoQuote2} />
@@ -49,6 +52,7 @@ export default function App() {
         </footer>
       </div>
 
+      <BottomNav />
       <RsvpPopup active={introDone} />
 
       <DevVariantToggle

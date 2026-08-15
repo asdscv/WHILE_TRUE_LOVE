@@ -27,14 +27,16 @@ export default function Location() {
   }
 
   return (
-    <section className="section location">
+    <section className="section location" id="location">
       <Reveal>
         <Collapsible n="03" label="오시는 길" title="오시는 길">
           <div className="location__venue">
-            <p className="location__name">
-              {name} <span>{venue.hall}</span>
-            </p>
-            <p className="location__addr">{address}</p>
+            <div className="location__venue-text">
+              <p className="location__name">
+                {name} <span>{venue.hall}</span>
+              </p>
+              <p className="location__addr">{address}</p>
+            </div>
             <div className="location__actions">
               <button className="btn-line" onClick={copyAddress}>
                 {copied ? '✓ 복사됨' : '주소 복사'}

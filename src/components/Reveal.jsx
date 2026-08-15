@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 // 스크롤로 화면에 들어올 때 부드럽게 나타나는 래퍼
-export default function Reveal({ children, className = '', delay = 0 }) {
+export default function Reveal({ children, className = '', delay = 0, id }) {
   const ref = useRef(null)
   const [shown, setShown] = useState(false)
 
@@ -23,6 +23,7 @@ export default function Reveal({ children, className = '', delay = 0 }) {
 
   return (
     <div
+      id={id}
       ref={ref}
       className={`reveal ${shown ? 'reveal--in' : ''} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
