@@ -151,7 +151,26 @@ export const config = {
     anonKey: 'sb_publishable_ISk4ObsaY9D2wa0oawAPOQ_tTRXteh8',
   },
   guestbook: { enabled: true },
-  rsvp: { enabled: true },
+  rsvp: {
+    enabled: true,
+    // 첫 화면(인트로)이 끝나고 본문으로 넘어갈 때 뜨는 참석 여부 안내 팝업.
+    // 팝업과 본문 "참석 여부" 섹션은 같은 폼을 쓰며, 어느 쪽에서 작성해도 동일하게 저장됩니다.
+    popup: {
+      enabled: true,
+      delay: 900, // 본문 전환 후 이 시간(ms) 뒤에 팝업이 뜹니다.
+      eyebrow: 'INVITATION',
+      title: '참석 여부를 알려주세요',
+      message: `저희 예식은 백인제가옥에서
+가까운 분들만 모시고 조용히 치러집니다.
+
+공간이 협소한 탓에 준비할 수 있는 자리가
+한정되어 있어, 미리 참석 여부를 알려주시면
+한 분 한 분 부족함 없이 모실 수 있습니다.
+
+번거로우시겠지만 잠시만 시간을 내어주시면
+정말 감사하겠습니다.`,
+    },
+  },
 }
 
 export default config

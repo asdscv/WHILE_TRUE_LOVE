@@ -13,6 +13,7 @@ import Location from './components/Location'
 import Account from './components/Account'
 import Guestbook from './components/Guestbook'
 import Gallery from './components/Gallery'
+import RsvpPopup from './components/RsvpPopup'
 import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
@@ -49,8 +50,14 @@ export default function App() {
           </p>
           <p className="footer__date">{config.wedding.dateText}</p>
           <p className="footer__thanks">감사합니다</p>
+          {/* 아리따글꼴 라이선스상 필수 표기 (6px 이상) */}
+          <p className="footer__font">
+            이 제작물은 아모레퍼시픽의 아리따글꼴을 사용하여 디자인 되었습니다.
+          </p>
         </footer>
       </div>
+
+      <RsvpPopup active={introDone} />
 
       <DevVariantToggle
         visible={accountVisible}

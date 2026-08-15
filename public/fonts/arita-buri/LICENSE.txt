@@ -1,0 +1,24 @@
+아리따 부리 (Arita Buri)
+Copyright (c) AMOREPACIFIC Corporation. All rights reserved.
+
+배포처: https://www.apgroup.com/int/ko/about-us/visual-identity/arita-typeface/arita-typeface.html
+
+아리따 글꼴은 아모레퍼시픽이 무료로 나눔 배포하는 글꼴입니다.
+
+[허용]
+- 웹사이트 사용 · 웹폰트 임베딩 가능
+- 영상 사용 가능
+- 저작권자 표기 시 출판용 서책, 판매용이 아닌 인쇄물에 사용 가능
+
+[금지]
+- 글꼴 파일의 수정 · 변형 · 다른 포맷으로의 변환
+  (이 폴더의 woff2 파일은 배포본 원본 그대로이며 서브셋 등 어떤 가공도 하지 않았습니다.)
+- 글꼴 파일 자체의 유료 판매
+- 판매용 제품 및 포장용 상자에의 사용
+- CI 또는 BI 로의 사용
+
+[표기]
+이 제작물은 아모레퍼시픽의 아리따글꼴을 사용하여 디자인 되었습니다.
+(위 문구를 6px 이상 크기로 표기해야 하며, 본 사이트는 푸터에 표기하고 있습니다.)
+
+파일 출처: https://github.com/fonts-archive/AritaBuri (원본 배포본의 웹폰트 변환본, 무수정)

@@ -3,6 +3,31 @@
    "종이 매거진을 모바일 제품으로" — 빅테크 제품감 + 외국 에디토리얼
    타입 위계 · 8pt 그리드 · 뉴트럴 아이보리 + 청자옥색 단일 액센트
    ========================================================= */
+/* ---------- 아리따 부리 (아모레퍼시픽) — public/fonts 에 직접 호스팅 ----------
+   라이선스: 웹폰트 임베딩 허용 / 파일 수정·변형 금지 → 원본 woff2 그대로 사용.
+   자세한 내용은 public/fonts/arita-buri/LICENSE.txt 참고. */
+@font-face {
+  font-family: 'Arita Buri';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/arita-buri/AritaBuri-Light.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Arita Buri';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/arita-buri/AritaBuri-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Arita Buri';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/arita-buri/AritaBuri-SemiBold.woff2') format('woff2');
+}
+
 :root {
   --paper: #f6f3ec;
   --paper-2: #efeae0;
@@ -17,11 +42,12 @@
   --sun: #a8756b;
   --shadow: rgba(30, 27, 24, 0.08);
 
-  --song: 'Song Myung', 'Maru Buri', serif; /* 디스플레이·제목·이름·인용 */
-  --serif: 'Maru Buri', serif; /* 읽는 본문 */
-  --fig: 'Cormorant Garamond', serif; /* 숫자 (lining+tabular 강제) */
-  --sans: 'Pretendard Variable', 'Pretendard', -apple-system,
-    BlinkMacSystemFont, sans-serif; /* 라벨·폼·기능·제품 텍스트 */
+  /* 본문 타이포는 아리따 부리 한 벌로 통일하고, 굵기(300/500/600)로 위계를 만든다.
+     역할별 변수는 나중에 개별 교체가 가능하도록 그대로 유지한다. */
+  --song: 'Arita Buri', serif; /* 디스플레이·제목·이름·인용 */
+  --serif: 'Arita Buri', serif; /* 읽는 본문 */
+  --fig: 'Arita Buri', serif; /* 숫자 (lining+tabular 강제) */
+  --sans: 'Arita Buri', serif; /* 라벨·폼·기능·제품 텍스트 */
 
   --sp-1: 4px;
   --sp-2: 8px;
@@ -63,7 +89,7 @@ img {
 button {
   font-family: inherit;
 }
-/* 숫자는 라이닝+등폭 (Cormorant 올드스타일 깨짐 방지) */
+/* 숫자는 라이닝+등폭 (자릿수 흔들림 방지) */
 .num,
 .folio__n,
 .calendar__year,
@@ -142,7 +168,7 @@ button {
 
 .section__title {
   font-family: var(--song);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(24px, 7vw, 29px);
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -194,7 +220,7 @@ button {
 }
 .collapse__title {
   font-family: var(--song);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(22px, 6.4vw, 27px);
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -358,7 +384,7 @@ button {
 }
 .greeting__lead {
   font-family: var(--song);
-  font-weight: 400;
+  font-weight: 300;
   white-space: pre-line;
   font-size: clamp(23px, 6.4vw, 29px);
   line-height: 1.6;
@@ -455,7 +481,7 @@ button {
 }
 .pullquote__text {
   font-family: var(--song);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(22px, 6.4vw, 28px);
   line-height: 1.55;
   letter-spacing: -0.01em;
@@ -490,7 +516,7 @@ button {
   position: relative;
   z-index: 1;
   font-family: var(--song);
-  font-weight: 400;
+  font-weight: 300;
   white-space: pre-line;
   color: #f6f3ec;
   font-size: clamp(22px, 6.4vw, 30px);
@@ -546,7 +572,7 @@ button {
 }
 .cd__n {
   font-family: var(--fig);
-  font-weight: 500;
+  font-weight: 300;
   font-size: clamp(40px, 12vw, 56px);
   line-height: 1;
   color: #f6f3ec;
@@ -570,7 +596,7 @@ button {
 }
 .calendar__md {
   font-family: var(--fig);
-  font-weight: 500;
+  font-weight: 300;
   font-size: clamp(56px, 18vw, 84px);
   letter-spacing: 0.01em;
   color: var(--ink);
@@ -587,19 +613,20 @@ button {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: var(--sp-2) 0;
-  max-width: 300px;
+  width: 100%;
   margin: 0 0 var(--sp-4);
 }
 .cal-cell {
-  aspect-ratio: 1;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--fig);
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text);
 }
 .cal-cell--head {
+  min-height: 28px;
   font-family: var(--sans);
   font-size: 11px;
   letter-spacing: 0.04em;
@@ -616,8 +643,8 @@ button {
 .cal-cell--target::before {
   content: '';
   position: absolute;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--accent-deep);
   z-index: -1;
@@ -629,7 +656,7 @@ button {
 }
 .dday__text b {
   font-family: var(--song);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--ink);
 }
 .dday__done {
@@ -724,6 +751,7 @@ button {
 }
 .location__name {
   font-family: var(--song);
+  font-weight: 300;
   font-size: clamp(19px, 5vw, 23px);
   color: var(--ink);
   margin: 0 0 var(--sp-1);
@@ -993,6 +1021,7 @@ button {
 }
 .gb-item__head b {
   font-family: var(--song);
+  font-weight: 600;
   font-size: 15px;
   color: var(--ink);
 }
@@ -1062,6 +1091,7 @@ button {
 }
 .footer__names {
   font-family: var(--song);
+  font-weight: 300;
   font-size: clamp(24px, 7vw, 32px);
   color: var(--ink);
   margin: 0 0 var(--sp-2);
@@ -1081,6 +1111,177 @@ button {
   letter-spacing: 0.28em;
   color: var(--muted);
   margin: 0;
+}
+.footer__font {
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: var(--faint);
+  margin: var(--sp-4) 0 0;
+}
+
+/* ============ 참석 여부 팝업 ============ */
+.popup {
+  position: fixed;
+  inset: 0;
+  z-index: 550;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  background: rgba(24, 21, 17, 0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  overscroll-behavior: contain;
+  animation: fadeIn 0.32s ease both;
+}
+.popup__card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  max-height: calc(100dvh - var(--sp-8));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 18px 60px rgba(30, 27, 24, 0.28);
+  padding: var(--sp-6) var(--sp-4) var(--sp-4);
+  text-align: left;
+  animation: popUp 0.42s var(--ease) both;
+}
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.popup__x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: var(--faint);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+.popup__eyebrow {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  color: var(--faint);
+  margin: 0 0 var(--sp-2);
+}
+.popup__title {
+  font-family: var(--song);
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 var(--sp-4);
+}
+.popup__facts {
+  margin: 0 0 var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.popup__facts > div {
+  display: flex;
+  gap: var(--sp-3);
+}
+.popup__facts dt {
+  flex: none;
+  width: 40px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+  line-height: 1.9;
+}
+.popup__facts dd {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text);
+}
+.popup__addr {
+  color: var(--muted);
+  font-size: 13px;
+}
+.popup__msg {
+  font-family: var(--serif);
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: var(--text);
+  white-space: pre-line;
+  margin: 0 0 var(--sp-4);
+}
+.popup__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.popup__cta {
+  width: 100%;
+  margin-top: 0;
+  background: var(--accent-deep);
+  color: var(--paper);
+  cursor: pointer;
+}
+.popup__cta:hover:not(:disabled) {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.popup__later {
+  min-height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  cursor: pointer;
+}
+.popup__hide {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: var(--sp-3);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--faint);
+  cursor: pointer;
+}
+.popup__hide input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent-deep);
+}
+.popup__form .rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.popup__form .submit-btn {
+  width: 100%;
+  background: var(--accent-deep);
+  color: var(--paper);
+  cursor: pointer;
+}
+.popup__form .popup__later {
+  width: 100%;
+  margin-top: var(--sp-1);
 }
 
 /* ============ 개발자 미리보기 토글 ============ */
