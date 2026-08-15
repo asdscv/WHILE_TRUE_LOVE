@@ -5,7 +5,7 @@ const ITEMS = [
 ]
 
 // 화면 하단 고정 바. 누르면 해당 섹션으로 부드럽게 이동한다.
-// (세이프에어리어 여백 없이 화면 맨 아래에 붙인다 — 요청사항)
+// 홈 인디케이터 영역까지 바 배경이 덮도록 아래 여백을 env() 로 확보한다.
 export default function BottomNav() {
   const go = (id) => {
     document.getElementById(id)?.scrollIntoView({

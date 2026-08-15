@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { config } from './config'
 import { useAccountVisible } from './lib/useAccountVisible'
+import { setThemeColor } from './lib/themeColor'
 import Bgm from './components/Bgm'
 import Intro from './components/Intro'
 import Cover from './components/Cover'
@@ -22,6 +23,13 @@ export default function App() {
       !config.intro.enabled ||
       new URLSearchParams(window.location.search).get('intro') === 'off',
   )
+
+  // 인트로 → 표지로 넘어갈 때 상태표시줄 색도 각 사진 상단색으로 맞춘다.
+  useEffect(() => {
+    setThemeColor(
+      introDone ? config.themeColor.cover : config.themeColor.intro,
+    )
+  }, [introDone])
 
   const [a, b] = config.groomFirst
     ? [config.groom, config.bride]
