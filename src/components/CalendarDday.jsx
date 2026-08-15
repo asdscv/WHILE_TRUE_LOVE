@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
-import weddingImage from '../assets/sections/02-wedding.webp'
+import branch from '../assets/sections/branch.webp'
+
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
+
+function parseYMD(iso) {
+  const [y, m, d] = iso.split('T')[0].split('-').map(Number)
+  return { y, m, d }
+}
 
 // 남은 일수만 필요하므로 1분마다 갱신한다(자정 넘어가는 시점 반영용).
 function useDaysLeft(targetISO) {
@@ -15,30 +22,74 @@ function useDaysLeft(targetISO) {
   return { past: left <= 0, days: Math.floor(Math.max(0, left) / 86400000) }
 }
 
-// 02 · 예식 — 날짜·달력은 완성 이미지 한 장.
-// 다만 "몇 일 남았습니다" 는 매일 달라지므로 이미지에서 잘라내고 아래에 실시간으로 그린다.
-// (이미지 하단 여백/세로 룰 비율에 맞추려고 치수를 vw 로 따라가게 했다 — src/index.css 의 .dday 참고)
+// 02 · 예식 — 원본 시안 이미지(954px 폭)를 실측해 HTML/CSS 로 옮긴 섹션.
+// 달력은 dateISO 로부터 계산되고, 남은 일수도 실시간이다.
+// 치수는 모두 --u(시안 1px) 단위이며, 전체 배율은 src/index.css 의 --cal-scale 로 조절한다.
 export default function CalendarDday() {
   const { wedding } = config
+  const { y, m, d } = parseYMD(wedding.dateISO)
   const { past, days } = useDaysLeft(wedding.dateISO)
 
+  const firstWeekday = new Date(y, m - 1, 1).getDay()
+  const daysInMonth = new Date(y, m, 0).getDate()
+  const cells = [
+    ...Array.from({ length: firstWeekday }, () => null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ]
+
+  const md = `${String(m).padStart(2, '0')}.${String(d).padStart(2, '0')}`
   const [gA, gB] = config.groomFirst
     ? [config.groom.name, config.bride.name]
     : [config.bride.name, config.groom.name]
 
   return (
-    <section className="section calendar">
+    <section className="section cal">
       <Reveal>
+        <p className="cal__folio">02 · 예식</p>
+        <p className="cal__year">{y}</p>
+        <p className="cal__md">{md}</p>
+        <span className="cal__rule" aria-hidden="true" />
+        <p className="cal__date">
+          {wedding.dateText} · {wedding.timeText}
+        </p>
         <img
-          className="calendar__img"
-          src={weddingImage}
-          width={954}
-          height={1400}
-          alt={`02 예식 — ${wedding.dateText} ${wedding.timeText}`}
+          className="cal__branch"
+          src={branch}
+          width={102}
+          height={42}
+          alt=""
         />
       </Reveal>
 
-      <Reveal delay={80}>
+      <Reveal delay={60}>
+        <div className="cal__card">
+          <div className="cal__grid cal__grid--head">
+            {WEEKDAYS.map((w, i) => (
+              <div
+                key={w}
+                className={`cal__cell${i === 0 ? ' cal__cell--sun' : ''}`}
+              >
+                <span>{w}</span>
+              </div>
+            ))}
+          </div>
+          <span className="cal__hr" aria-hidden="true" />
+          <div className="cal__grid">
+            {cells.map((day, i) => (
+              <div
+                key={i}
+                className={`cal__cell${i % 7 === 0 ? ' cal__cell--sun' : ''}${
+                  day === d ? ' cal__cell--target' : ''
+                }`}
+              >
+                <span>{day || ''}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal delay={120}>
         <div className="dday">
           <span className="dday__rule" aria-hidden="true" />
           <p className="dday__text">
