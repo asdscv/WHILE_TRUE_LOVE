@@ -35,7 +35,7 @@ export default function Gallery() {
   if (galleryImages.length === 0) return null
 
   return (
-    <section className="section gallery">
+    <section className="section section--alt gallery">
       <Reveal>
         <Folio n="07" label="사진" />
         <h2 className="section__title">사진첩</h2>

@@ -157,35 +157,39 @@ export default function Guestbook() {
   if (!showRsvp && !showGb) return null
 
   return (
-    <section className="section guestbook">
+    <>
       {showRsvp && (
-        <Reveal id="rsvp">
-          <Collapsible n="05" label="축하" title="참석 여부 전달">
-            <p className="account__desc">
-              예식 장소가 협소하여 자리가 한정되어 있습니다.
-              <br />
-              참석 여부를 미리 알려주시면 정성껏 준비하겠습니다.
-            </p>
-            <RsvpForm />
-          </Collapsible>
-        </Reveal>
+        <section className="section section--alt guestbook">
+          <Reveal id="rsvp">
+            <Collapsible n="05" label="참석여부" title="참석 여부 전달">
+              <p className="account__desc">
+                예식 장소가 협소하여 자리가 한정되어 있습니다.
+                <br />
+                참석 여부를 미리 알려주시면 정성껏 준비하겠습니다.
+              </p>
+              <RsvpForm />
+            </Collapsible>
+          </Reveal>
+        </section>
       )}
 
       {showGb && (
-        <Reveal id="guestbook">
-          <Collapsible n="06" label="축하의 글" title="축하의 글">
-            <GuestbookBoard />
-          </Collapsible>
-        </Reveal>
-      )}
+        <section className="section guestbook">
+          <Reveal id="guestbook">
+            <Collapsible n="06" label="축하의 글" title="축하의 글">
+              <GuestbookBoard />
+            </Collapsible>
+          </Reveal>
 
-      {!isRemote() && (
-        <p className="gb-note">
-          ※ 현재 방명록/참석여부는 <b>이 기기에만 저장</b>됩니다. 하객들과
-          공유·보존하려면 <code>src/config.js</code> 의 supabase 값을 설정하세요.
-          (docs/supabase-setup.md)
-        </p>
+          {!isRemote() && (
+            <p className="gb-note">
+              ※ 현재 방명록/참석여부는 <b>이 기기에만 저장</b>됩니다. 하객들과
+              공유·보존하려면 <code>src/config.js</code> 의 supabase 값을
+              설정하세요. (docs/supabase-setup.md)
+            </p>
+          )}
+        </section>
       )}
-    </section>
+    </>
   )
 }

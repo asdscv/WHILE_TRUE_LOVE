@@ -12,6 +12,7 @@ import Guestbook from './components/Guestbook'
 import Gallery from './components/Gallery'
 import RsvpPopup from './components/RsvpPopup'
 import BottomNav from './components/BottomNav'
+import branch from './assets/sections/branch.webp'
 import DevVariantToggle from './components/DevVariantToggle'
 
 export default function App() {
@@ -44,7 +45,13 @@ export default function App() {
             {a.name} · {b.name}
           </p>
           <p className="footer__date">{config.wedding.dateText}</p>
-          <p className="footer__thanks">감사합니다</p>
+          <span className="footer__rule" aria-hidden="true" />
+          <p className="footer__msg">{config.footer.message}</p>
+          <div className="footer__branch" aria-hidden="true">
+            <img src={branch} alt="" />
+            <img src={branch} alt="" />
+          </div>
+          <span className="footer__end" aria-hidden="true" />
         </footer>
       </div>
 
