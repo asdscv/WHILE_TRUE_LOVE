@@ -702,6 +702,122 @@ button {
   letter-spacing: 0.12em;
 }
 
+/* ============ 일정 저장 안내 ============ */
+.std {
+  text-align: center;
+  padding: var(--sp-12) var(--gutter);
+}
+.std__branch {
+  width: 84px;
+  height: auto;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+.std__title {
+  white-space: pre-line;
+  font-family: var(--song);
+  font-weight: 300;
+  font-size: clamp(24px, 6.8vw, 30px);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: var(--sp-4) 0 0;
+}
+.std__rule {
+  display: block;
+  width: 1px;
+  height: 34px;
+  margin: var(--sp-4) auto;
+  background: #a9a393;
+}
+.std__when {
+  font-size: 15px;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin: 0;
+}
+.std__when b {
+  font-family: var(--song);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ink);
+}
+.std__msg {
+  white-space: pre-line;
+  font-size: 14.5px;
+  line-height: 1.95;
+  color: var(--muted);
+  margin: 0;
+}
+.std__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+.cal-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  min-height: 72px;
+  padding: 0 var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.cal-btn:hover {
+  border-color: var(--accent-deep);
+  background: rgba(79, 110, 100, 0.05);
+}
+.cal-btn__i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding-right: var(--sp-3);
+  border-right: 1px solid var(--line);
+  box-sizing: content-box;
+  color: var(--muted);
+}
+.cal-btn__i svg {
+  width: 30px;
+  height: 30px;
+}
+.cal-btn__text {
+  flex: 1;
+  min-width: 0;
+}
+.cal-btn__text b {
+  display: block;
+  font-family: var(--song);
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.cal-btn__text em {
+  display: block;
+  margin-top: 3px;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--muted);
+}
+.cal-btn__plus {
+  flex: none;
+  font-size: 20px;
+  color: var(--faint);
+}
+
 /* ============ 오시는 길 ============ */
 .location__venue {
   /* 장소명·주소 왼쪽, 주소복사 버튼은 그 오른편에 */
