@@ -153,8 +153,11 @@ export const config = {
     //  · FormSubmit(가입 불필요): 'https://formsubmit.co/ajax/받는주소@example.com'
     //    첫 제출 때 오는 인증 메일을 한 번 클릭해야 이후 메일이 옵니다.
     //  · Web3Forms(가입 필요): endpoint 'https://api.web3forms.com/submit' + accessKey
+    // 첫 제출 때 FormSubmit 이 보내는 인증 메일을 한 번 클릭해야 이후 알림이 옵니다.
+    // 인증 후에는 노출을 줄이기 위해 FormSubmit 이 알려주는 해시 주소
+    // ('https://formsubmit.co/ajax/<해시>')로 바꿔 두는 것을 권합니다.
     email: {
-      endpoint: '',
+      endpoint: 'https://formsubmit.co/ajax/luke@rictax.kr',
       accessKey: '',
     },
     // 첫 화면(인트로)이 끝나고 본문으로 넘어갈 때 뜨는 참석 여부 안내 팝업.
