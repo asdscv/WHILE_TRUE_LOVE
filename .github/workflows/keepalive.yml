@@ -20,7 +20,7 @@ jobs:
   keepalive:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # 1) Supabase 깨우기 — 실제 DB 쿼리(anon SELECT) 1회
       #    아래 키는 publishable(공개용) 키라 노출돼도 안전합니다.
