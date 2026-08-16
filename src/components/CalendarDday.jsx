@@ -11,16 +11,31 @@ function parseYMD(iso) {
   return { y, m, d }
 }
 
+const KST_OFFSET = 9 * 60 * 60 * 1000
+
+// 어느 지역에서 보든 한국 달력 날짜로 세도록, 해당 시각을 KST 자정으로 내림한다.
+function kstMidnight(ms) {
+  const kst = new Date(ms + KST_OFFSET)
+  return Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate())
+}
+
 // 남은 일수만 필요하므로 1분마다 갱신한다(자정 넘어가는 시점 반영용).
 function useDaysLeft(targetISO) {
-  const calc = () => new Date(targetISO).getTime() - Date.now()
-  const [left, setLeft] = useState(calc)
+  const target = new Date(targetISO).getTime()
+  const calc = () => {
+    const now = Date.now()
+    return {
+      past: now > target,
+      days: Math.max(0, (kstMidnight(target) - kstMidnight(now)) / 86400000),
+    }
+  }
+  const [state, setState] = useState(calc)
   useEffect(() => {
-    const t = setInterval(() => setLeft(calc()), 60000)
+    const t = setInterval(() => setState(calc()), 60000)
     return () => clearInterval(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetISO])
-  return { past: left <= 0, days: Math.floor(Math.max(0, left) / 86400000) }
+  return state
 }
 
 // 02 · 예식 — 원본 시안 이미지(954px 폭)를 실측해 HTML/CSS 로 옮긴 섹션.
