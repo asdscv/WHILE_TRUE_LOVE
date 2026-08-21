@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import Reveal from './Reveal'
 import Folio from './Folio'
-import { galleryImages } from '../gallery'
+import { galleryImages, galleryThumbs } from '../gallery'
 
-export default function Gallery() {
+export default function Gallery({ n }) {
   const [index, setIndex] = useState(null) // null = 닫힘
   const open = index !== null
 
@@ -37,14 +37,14 @@ export default function Gallery() {
   return (
     <section className="section gallery">
       <Reveal>
-        <Folio n="07" label="사진" />
+        <Folio n={n} label="사진" />
         <h2 className="section__title">사진첩</h2>
         <p className="section__sub">우리의 순간들</p>
       </Reveal>
 
       <Reveal delay={100}>
         <div className="gallery__grid">
-          {galleryImages.map((src, i) => (
+          {galleryThumbs.map((src, i) => (
             <button
               key={i}
               className="gallery__item"

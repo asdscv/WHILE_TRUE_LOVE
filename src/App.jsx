@@ -54,6 +54,23 @@ export default function App() {
     ? [config.groom, config.bride]
     : [config.bride, config.groom]
 
+  // 계좌를 뺀 링크는 "결혼한다고 알리기만 하는" 소식용이라,
+  // 축의금 계좌와 함께 참석 여부(섹션 · 첫 화면 팝업)도 같이 숨긴다.
+  const rsvpVisible = accountVisible && config.rsvp.enabled
+  const guestbookVisible = config.guestbook.enabled
+
+  // 폴리오 번호는 "실제로 보이는 섹션"만 세어 매긴다.
+  // (숨긴 섹션 자리에 번호가 비어 03 다음이 06 이 되는 일이 없도록.)
+  let seq = 2 // 01 초대 · 02 예식은 언제나 보인다
+  const nextFolio = () => String(++seq).padStart(2, '0')
+  const folio = {
+    location: nextFolio(),
+    account: accountVisible ? nextFolio() : null,
+    rsvp: rsvpVisible ? nextFolio() : null,
+    guestbook: guestbookVisible ? nextFolio() : null,
+    gallery: nextFolio(),
+  }
+
   return (
     <div className="app">
       <Bgm />
@@ -62,10 +79,14 @@ export default function App() {
         <Cover />
         <Greeting />
         <CalendarDday />
-        <Location />
-        {accountVisible && <Account />}
-        <Guestbook />
-        <Gallery />
+        <Location n={folio.location} />
+        {accountVisible && <Account n={folio.account} />}
+        <Guestbook
+          showRsvp={rsvpVisible}
+          rsvpN={folio.rsvp}
+          guestbookN={folio.guestbook}
+        />
+        <Gallery n={folio.gallery} />
 
         <footer className="footer">
           <img
@@ -76,8 +97,8 @@ export default function App() {
         </footer>
       </div>
 
-      <BottomNav />
-      <RsvpPopup active={introDone} />
+      <BottomNav showRsvp={rsvpVisible} />
+      {rsvpVisible && <RsvpPopup active={introDone} />}
 
       <DevVariantToggle
         visible={accountVisible}

@@ -1,7 +1,11 @@
 // 갤러리 이미지 자동 로더
 // -----------------------------------------------------------------
 // src/assets/gallery/ 폴더에 이미지(jpg/jpeg/png/webp)를 넣으면 자동으로 모두
-// 불러옵니다. 파일명 오름차순(예: 01.jpg, 02.jpg ...). 첫 사진은 표지 배경으로도 쓰입니다.
+// 불러옵니다. 파일명 오름차순(예: 01.webp, 02.webp ...).
+//
+// 같은 사진의 작은 판(정사각 썸네일)을 src/assets/gallery/thumbs/ 에 같은 파일명으로
+// 두면, 격자에서는 그 작은 판을 쓰고 크게 볼 때만 원본 판을 내려받습니다.
+// (썸네일이 없는 사진은 원본 판을 그대로 격자에도 씁니다.)
 //
 // 폴더가 비어 있는 동안에는 아래 "큐레이션된 임시 이미지"(우아한 웨딩/에디토리얼 톤,
 // Unsplash)가 사용됩니다. 실제 사진을 넣으면 임시 이미지는 자동으로 사라집니다.
@@ -11,9 +15,24 @@ const modules = import.meta.glob(
   { eager: true, import: 'default' },
 )
 
-const localImages = Object.keys(modules)
-  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  .map((key) => modules[key])
+const thumbModules = import.meta.glob(
+  './assets/gallery/thumbs/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true, import: 'default' },
+)
+
+const byName = (a, b) => a.localeCompare(b, undefined, { numeric: true })
+const fileName = (path) => path.slice(path.lastIndexOf('/') + 1)
+
+const localKeys = Object.keys(modules).sort(byName)
+const localImages = localKeys.map((key) => modules[key])
+
+// 파일명이 같은 썸네일을 짝지어 준다. 없으면 원본 판으로 대체.
+const thumbByName = new Map(
+  Object.keys(thumbModules).map((key) => [fileName(key), thumbModules[key]]),
+)
+const localThumbs = localKeys.map(
+  (key) => thumbByName.get(fileName(key)) ?? modules[key],
+)
 
 // 톤이 일관된 큐레이션 임시 사진 (순서: 0=표지, 1=인사말, 2=포토밴드, 3=카운트다운, 그 외 갤러리)
 const CURATED_IDS = [
@@ -38,4 +57,6 @@ const u = (id) =>
 const placeholders = CURATED_IDS.map(u)
 
 export const galleryImages = localImages.length > 0 ? localImages : placeholders
+export const galleryThumbs =
+  localImages.length > 0 ? localThumbs : placeholders
 export const isPlaceholder = localImages.length === 0

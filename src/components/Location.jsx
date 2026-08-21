@@ -12,7 +12,7 @@ const Pin = () => (
   </svg>
 )
 
-export default function Location() {
+export default function Location({ n }) {
   const { venue } = config.wedding
   const { transport } = config.location
   const [copied, setCopied] = useState(false)
@@ -38,7 +38,7 @@ export default function Location() {
   return (
     <section className="section location" id="location">
       <Reveal>
-        <Collapsible n="03" label="오시는 길" title="오시는 길">
+        <Collapsible n={n} label="오시는 길" title="오시는 길">
           <div className="location__venue">
             <div className="location__venue-text">
               <p className="location__name">

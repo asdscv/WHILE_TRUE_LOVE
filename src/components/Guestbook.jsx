@@ -156,8 +156,9 @@ function GuestbookBoard() {
   )
 }
 
-export default function Guestbook() {
-  const showRsvp = config.rsvp.enabled
+// 참석 여부 섹션은 계좌를 포함한 초대용 링크에서만 보인다(showRsvp).
+// 계좌 없는 소식용 링크에서는 축하의 글만 남는다.
+export default function Guestbook({ showRsvp, rsvpN, guestbookN }) {
   const showGb = config.guestbook.enabled
   if (!showRsvp && !showGb) return null
 
@@ -166,7 +167,7 @@ export default function Guestbook() {
       {showRsvp && (
         <section className="section guestbook">
           <Reveal id="rsvp">
-            <Collapsible n="05" label="참석여부" title="참석 여부 전달">
+            <Collapsible n={rsvpN} label="참석여부" title="참석 여부 전달">
               <p className="account__desc">
                 예식 장소가 협소하여 자리가 한정되어 있습니다.
                 <br />
@@ -181,7 +182,7 @@ export default function Guestbook() {
       {showGb && (
         <section className="section guestbook">
           <Reveal id="guestbook">
-            <Collapsible n="06" label="축하의 글" title="축하의 글">
+            <Collapsible n={guestbookN} label="축하의 글" title="축하의 글">
               <GuestbookBoard />
             </Collapsible>
           </Reveal>

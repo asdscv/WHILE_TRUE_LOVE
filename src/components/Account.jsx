@@ -74,7 +74,7 @@ function AccordionGroup({ title, rows }) {
   )
 }
 
-export default function Account() {
+export default function Account({ n }) {
   const { groom, bride } = config.account
   const { groomFirst } = config
   const groups = groomFirst
@@ -90,7 +90,7 @@ export default function Account() {
   return (
     <section className="section account">
       <Reveal>
-        <Collapsible n="04" label="마음" title="마음 전하실 곳">
+        <Collapsible n={n} label="마음" title="마음 전하실 곳">
           <p className="account__desc">
             소중한 마음을 전해주시면
             <br />
