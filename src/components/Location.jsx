@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
-import Collapsible from './Collapsible'
+import Folio from './Folio'
 import mapImage from '../assets/map/map.webp'
 
 const Pin = () => (
@@ -38,63 +38,65 @@ export default function Location({ n }) {
   return (
     <section className="section location" id="location">
       <Reveal>
-        <Collapsible n={n} label="오시는 길" title="오시는 길">
-          <div className="location__venue">
-            <div className="location__venue-text">
-              <p className="location__name">
-                {name} <span>{venue.hall}</span>
-              </p>
-              <p className="location__addr">{address}</p>
-            </div>
-            <div className="location__actions">
-              <button className="btn-line" onClick={copyAddress}>
-                {copied ? '✓' : <Pin />}
-                {copied ? '복사됨' : '주소 복사'}
-              </button>
-              {venue.tel && (
-                <a className="btn-line" href={`tel:${venue.tel}`}>
-                  전화하기
-                </a>
-              )}
-            </div>
-          </div>
+        {/* 약도 그림 안에 "오시는 길" 제목이 이미 들어 있어서, 01 초대·02 예식처럼
+            폴리오 한 줄만 얹고 접지 않는다(제목이 두 번 나오지 않게). */}
+        <Folio n={n} label="오시는 길" />
 
-          <div className="map">
-            <img
-              className="map__img"
-              src={mapImage}
-              alt={`${name} 약도 — ${address}. 3호선 안국역 2번 출구, 종로3가역 5번 출구 방면.`}
-              width={1296}
-              height={677}
-              loading="lazy"
-            />
+        <div className="location__venue">
+          <div className="location__venue-text">
+            <p className="location__name">
+              {name} <span>{venue.hall}</span>
+            </p>
+            <p className="location__addr">{address}</p>
           </div>
-
-          <div className="nav-buttons">
-            <a className="nav-btn" href={naver} target="_blank" rel="noreferrer">
-              <span className="nav-btn__i">N</span>
-              네이버지도
-            </a>
-            <a className="nav-btn" href={kakao} target="_blank" rel="noreferrer">
-              <Pin />
-              카카오맵
-            </a>
-            <a className="nav-btn" href={tmap}>
-              <span className="nav-btn__i">T</span>
-              티맵
-            </a>
+          <div className="location__actions">
+            <button className="btn-line" onClick={copyAddress}>
+              {copied ? '✓' : <Pin />}
+              {copied ? '복사됨' : '주소 복사'}
+            </button>
+            {venue.tel && (
+              <a className="btn-line" href={`tel:${venue.tel}`}>
+                전화하기
+              </a>
+            )}
           </div>
+        </div>
 
-          <ul className="transport">
-            {transport.map((t, i) => (
-              <li key={i}>
-                <span className="transport__icon">{t.icon}</span>
-                <span className="transport__title">{t.title}</span>
-                <span className="transport__desc">{t.desc}</span>
-              </li>
-            ))}
-          </ul>
-        </Collapsible>
+        <div className="map">
+          <img
+            className="map__img"
+            src={mapImage}
+            alt={`${name} 약도 — ${address}. 3호선 안국역 2번 출구, 종로3가역 5번 출구 방면.`}
+            width={1296}
+            height={677}
+            loading="lazy"
+          />
+        </div>
+
+        <div className="nav-buttons">
+          <a className="nav-btn" href={naver} target="_blank" rel="noreferrer">
+            <span className="nav-btn__i">N</span>
+            네이버지도
+          </a>
+          <a className="nav-btn" href={kakao} target="_blank" rel="noreferrer">
+            <Pin />
+            카카오맵
+          </a>
+          <a className="nav-btn" href={tmap}>
+            <span className="nav-btn__i">T</span>
+            티맵
+          </a>
+        </div>
+
+        <ul className="transport">
+          {transport.map((t, i) => (
+            <li key={i}>
+              <span className="transport__icon">{t.icon}</span>
+              <span className="transport__title">{t.title}</span>
+              <span className="transport__desc">{t.desc}</span>
+            </li>
+          ))}
+        </ul>
       </Reveal>
     </section>
   )
