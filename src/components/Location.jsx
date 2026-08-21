@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
 import Collapsible from './Collapsible'
+import mapImage from '../assets/map/map.webp'
 
 const Pin = () => (
   <svg className="nav-btn__i" viewBox="0 0 24 24" aria-hidden="true">
@@ -19,8 +20,7 @@ export default function Location({ n }) {
   const { lat, lng, name, address } = venue
 
   const q = encodeURIComponent(name)
-  // 키가 필요 없는 지도/길찾기 링크들
-  const mapEmbed = `https://maps.google.com/maps?q=${lat},${lng}&z=16&hl=ko&output=embed`
+  // 지도는 손그림 약도 이미지로 보여주고, 길찾기는 아래 앱 링크로 넘긴다.
   const kakao = `https://map.kakao.com/link/to/${q},${lat},${lng}`
   const naver = venue.naverUrl || `https://map.naver.com/v5/search/${q}`
   const tmap = `tmap://route?goalname=${q}&goalx=${lng}&goaly=${lat}`
@@ -60,11 +60,13 @@ export default function Location({ n }) {
           </div>
 
           <div className="map">
-            <iframe
-              title="예식장 위치"
-              src={mapEmbed}
+            <img
+              className="map__img"
+              src={mapImage}
+              alt={`${name} 약도 — ${address}. 3호선 안국역 2번 출구, 종로3가역 5번 출구 방면.`}
+              width={1296}
+              height={677}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
 

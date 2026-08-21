@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { config } from '../config'
 import Reveal from './Reveal'
 import Collapsible from './Collapsible'
@@ -25,6 +25,16 @@ function GuestbookBoard() {
   const [loadingMore, setLoadingMore] = useState(false)
   const [form, setForm] = useState({ name: '', message: '', password: '' })
   const [busy, setBusy] = useState(false)
+  const messageRef = useRef(null)
+
+  // 글이 길어지면 칸이 따라 늘어난다. 고정 높이로 두면 밑줄만 저 아래 떨어져
+  // 있어 다른 입력칸과 어긋나 보인다(이름/비밀번호는 밑줄이 글자에 붙어 있다).
+  useLayoutEffect(() => {
+    const el = messageRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight}px`
+  }, [form.message])
 
   // 처음엔 5개만, "더보기" 를 누를 때마다 5개씩 이어붙인다.
   const refresh = () =>
@@ -109,9 +119,10 @@ function GuestbookBoard() {
         <label className="field-full">
           <span>축하의 글</span>
           <textarea
+            ref={messageRef}
             value={form.message}
             onChange={set('message')}
-            rows={3}
+            rows={1}
             placeholder="따뜻한 축하 한마디를 남겨주세요."
           />
         </label>

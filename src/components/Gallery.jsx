@@ -3,8 +3,12 @@ import Reveal from './Reveal'
 import Folio from './Folio'
 import { galleryImages, galleryThumbs } from '../gallery'
 
+// 처음에 펼쳐 보여주는 장수. 3열 격자라 8장 + "더보기" 칸 = 딱 3줄로 떨어진다.
+const PREVIEW = 8
+
 export default function Gallery({ n }) {
   const [index, setIndex] = useState(null) // null = 닫힘
+  const [expanded, setExpanded] = useState(false)
   const open = index !== null
 
   const close = useCallback(() => setIndex(null), [])
@@ -34,6 +38,11 @@ export default function Gallery({ n }) {
 
   if (galleryImages.length === 0) return null
 
+  // 접힌 상태에서는 8장만 깔고, 9번째 칸은 남은 장수를 얹은 "더보기" 버튼으로 쓴다.
+  const collapsed = !expanded && galleryThumbs.length > PREVIEW + 1
+  const shown = collapsed ? galleryThumbs.slice(0, PREVIEW) : galleryThumbs
+  const restCount = galleryThumbs.length - PREVIEW
+
   return (
     <section className="section gallery">
       <Reveal>
@@ -44,7 +53,7 @@ export default function Gallery({ n }) {
 
       <Reveal delay={100}>
         <div className="gallery__grid">
-          {galleryThumbs.map((src, i) => (
+          {shown.map((src, i) => (
             <button
               key={i}
               className="gallery__item"
@@ -54,6 +63,24 @@ export default function Gallery({ n }) {
               <img src={src} alt={`웨딩 사진 ${i + 1}`} loading="lazy" />
             </button>
           ))}
+
+          {collapsed && (
+            <button
+              className="gallery__item gallery__more"
+              onClick={() => setExpanded(true)}
+              aria-label={`사진 ${restCount}장 더 보기`}
+            >
+              <img
+                src={galleryThumbs[PREVIEW]}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+              />
+              <span className="gallery__more-label">
+                <b>+{restCount}</b>
+              </span>
+            </button>
+          )}
         </div>
       </Reveal>
 
