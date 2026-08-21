@@ -26,6 +26,16 @@
 - **표지**: 원본 PNG 를 webp q85 로 변환. 이 파일이 현재 남아 있는 최고 화질본입니다.
 - **푸터**: 원본의 지색이 `#f3eae1` 이라 사이트 지색(`#f6f3ec`)과 경계가 보여
   채널별 게인으로 보정했습니다. 이 파일은 보정 후 무손실본입니다.
+  여기 있는 `03-footer.webp` 는 **가공 전 마스터**로 그대로 두고, 실제 사용 파일은
+  아래처럼 여기서 뽑습니다. 위쪽 소나무 가지가 원본에서 이미 잘려 있어(그 위는
+  남아 있지 않습니다) 여백을 덧대고 잘린 끝을 빛으로 날려 이어 보이게 한 것입니다.
+
+  ```sh
+  magick 03-footer.webp \
+    -background '#f6f2ea' -gravity north -splice 0x70 \
+    \( -size 899x170 gradient:'#f6f2ea'-none \) -gravity north -composite \
+    -strip -quality 86 -define webp:method=6 ../src/assets/sections/footer.webp
+  ```
 - **파비콘**: 원본(1254×1254)에서 반지 주변 여백을 잘라내(900×900) 확대한 뒤
   256px 로 줄이고 128색으로 양자화했습니다.
 - **장식 가지**(`src/assets/sections/branch.webp`): 달력 시안에서 잘라내
