@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `01-intro-splash.jpg` (1023×1537) | 첫 화면(전환 전) 사진 | `src/assets/intro/splash.jpg` |
 | `02-cover-header.webp` (941×1672, 9:16) | 표지 — 전환 후 첫 화면 | `src/assets/cover/cover.webp` |
-| `03-footer.webp` (899×1750, 무손실) | 맨 아래 맺음말 | `src/assets/sections/footer.webp` |
+| `03-footer.webp` (892×1764, 무손실) | 맨 아래 맺음말 | `src/assets/sections/footer.webp` |
 | `04-favicon.png` (256×256) | 브라우저 탭·홈화면 아이콘 | `public/favicon.png`, `public/apple-touch-icon.png` |
 
 ## 교체하는 법
@@ -24,18 +24,18 @@
 ## 가공 이력 (원본과 다른 점)
 
 - **표지**: 원본 PNG 를 webp q85 로 변환. 이 파일이 현재 남아 있는 최고 화질본입니다.
-- **푸터**: 원본의 지색이 `#f3eae1` 이라 사이트 지색(`#f6f3ec`)과 경계가 보여
-  채널별 게인으로 보정했습니다. 이 파일은 보정 후 무손실본입니다.
-  여기 있는 `03-footer.webp` 는 **가공 전 마스터**로 그대로 두고, 실제 사용 파일은
-  아래처럼 여기서 뽑습니다. 위쪽 소나무 가지가 원본에서 이미 잘려 있어(그 위는
-  남아 있지 않습니다) 여백을 덧대고 잘린 끝을 빛으로 날려 이어 보이게 한 것입니다.
+- **푸터**: 받은 원본 PNG(892×1764)를 **무손실 webp 로만** 바꿔 마스터로 두었습니다
+  (픽셀 동일, 1.8MB → 1.3MB). 지색이 `#f6f3ec` 라 사이트 지색과 이미 같아서 색 보정은
+  하지 않았고, 소나무 가지도 끝까지 프레임 안에 들어와 있어 따로 손댈 것이 없습니다.
+  (2026-08-21 에 받은 새 이미지입니다. 그 전 이미지는 가지가 위에서 잘려 있어
+  여백을 덧대고 페이드로 이어 보이게 하는 보정이 붙어 있었는데, 이제 필요 없어
+  걷어냈습니다.) 실제 사용 파일은 여기서 이렇게 뽑습니다.
 
   ```sh
-  magick 03-footer.webp \
-    -background '#f6f2ea' -gravity north -splice 0x70 \
-    \( -size 899x170 gradient:'#f6f2ea'-none \) -gravity north -composite \
-    -strip -quality 86 -define webp:method=6 ../src/assets/sections/footer.webp
+  magick 03-footer.webp -strip -quality 86 -define webp:method=6 \
+    ../src/assets/sections/footer.webp
   ```
+
 - **파비콘**: 원본(1254×1254)에서 반지 주변 여백을 잘라내(900×900) 확대한 뒤
   256px 로 줄이고 128색으로 양자화했습니다.
 - **장식 가지**(`src/assets/sections/branch.webp`): 달력 시안에서 잘라내
