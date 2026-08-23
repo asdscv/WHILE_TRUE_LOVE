@@ -13,17 +13,20 @@
 사진첩 격자에서는 그 작은 판을 쓰고 크게 볼 때만 원본 판을 내려받습니다.
 (없으면 원본 판을 격자에도 그대로 씁니다 — 동작은 같고 데이터만 더 씁니다.)
 
-현재 들어 있는 사진은 원본(5464×8192, 장당 약 20MB)을 아래 크기로 줄인 것입니다.
+현재 들어 있는 사진은 원본(장당 30~40MB)을 아래 크기로 줄인 것입니다.
 
 ```sh
-# 크게 볼 때 쓰는 판 — 긴 변 1600px
-magick 원본.jpg -auto-orient -strip -resize 'x1600>' -quality 80 \
+# 크게 볼 때 쓰는 판 — 긴 변 1600px (세로 사진 1067×1600, 가로 사진 1600×1067)
+magick 원본.jpg -auto-orient -strip -resize '1600x1600>' -quality 80 \
   -define webp:method=6 01.webp
 
 # 격자용 썸네일 — 가운데 기준 정사각 560×560
 magick 원본.jpg -auto-orient -strip -resize '560x560^' -gravity center \
   -extent 560x560 -quality 78 -define webp:method=6 thumbs/01.webp
 ```
+
+가로 사진도 섞여 있습니다. 격자는 정사각으로 잘라 쓰고, 크게 볼 때는
+`object-fit: contain` 이라 잘리지 않습니다.
 
 > 이 폴더가 비어 있는 동안에는 임시 이미지가 대신 표시됩니다.
 > 실제 사진을 넣으면 임시 이미지는 자동으로 사라집니다.
