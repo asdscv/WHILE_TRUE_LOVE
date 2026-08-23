@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 디자인 원본(대용량) — 프로젝트 폴더에는 두되 저장소에는 올리지 않는다.
+# design/README.md 의 "가공 이력" 에 어떻게 뽑았는지 적어 두었으니, 원본이 필요하면
+# 각자 로컬로 받아 같은 이름으로 design/ 에 넣으면 된다.
+design/*-original.png

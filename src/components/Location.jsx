@@ -38,8 +38,8 @@ export default function Location({ n }) {
   return (
     <section className="section location" id="location">
       <Reveal>
-        {/* 약도 그림 안에 "오시는 길" 제목이 이미 들어 있어서, 01 초대·02 예식처럼
-            폴리오 한 줄만 얹고 접지 않는다(제목이 두 번 나오지 않게). */}
+        {/* 약도 그림에는 제목·주소가 들어 있지 않아(2026-08-23 교체) 섹션은
+            폴리오 한 줄로 열고, 이름·주소는 아래 텍스트로만 보여준다. */}
         <Folio n={n} label="오시는 길" />
 
         <div className="location__venue">
@@ -66,9 +66,9 @@ export default function Location({ n }) {
           <img
             className="map__img"
             src={mapImage}
-            alt={`${name} 약도 — ${address}. 3호선 안국역 2번 출구, 종로3가역 5번 출구 방면.`}
-            width={1296}
-            height={677}
+            alt={`${name} 약도 — ${address}. 3호선 안국역 2번 출구에서 재동초등학교·가회동주민센터 방면 도보 10분.`}
+            width={977}
+            height={868}
             loading="lazy"
           />
         </div>
