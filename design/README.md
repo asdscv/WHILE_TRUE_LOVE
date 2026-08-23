@@ -11,7 +11,7 @@
 
 | 파일 | 어디에 쓰이나 | 실제 사용 파일 |
 | --- | --- | --- |
-| `01-intro-splash.jpg` (1023×1537) | 첫 화면(전환 전) 사진 | `src/assets/intro/splash.jpg` |
+| `01-intro-splash.jpg` (1023×1537) | 첫 화면(전환 전) — **지금은 안 씀**(영상으로 대체) | `src/assets/intro/splash.jpg` (보관용) |
 | `02-cover-header-original.png` (5464×8192, 2:3) | 표지 **원본** — 받은 그대로 | (빌드에 안 쓰임) |
 | `02-cover-header.webp` (1200×1799, 2:3) | 표지 — 전환 후 첫 화면 | `src/assets/cover/cover.webp` |
 | `03-footer.webp` (892×1764, 무손실) | 맨 아래 맺음말 | `src/assets/sections/footer.webp` |
@@ -76,6 +76,11 @@
   이전 손그림 약도에는 "오시는 길" 제목과 이름·주소가 그림 안에 들어 있었지만
   새 약도에는 없습니다. 이름·주소는 `Location.jsx` 가 텍스트로 따로 보여줍니다.
   이전 파일은 `git show 708eb65:src/assets/map/map.webp` 로 꺼낼 수 있습니다.
+- **인트로 영상**: 2026-08-24 에 첫 화면이 사진에서 영상으로 바뀌었습니다.
+  받은 mp4 를 손대지 않고 `src/assets/intro/intro.mp4` 에 그대로 넣었으므로,
+  여기에 따로 사본을 두지 않습니다. 첫 프레임에서 뽑은 `poster.webp` 와
+  재생 시간을 맞춘 `config.intro.duration` 이야기는
+  `src/assets/intro/README.md` 에 적어 두었습니다.
 - **장식 가지**(`src/assets/sections/branch.webp`): 달력 시안에서 잘라내
   배경을 투명 처리한 것입니다. 원본 시안은 남아 있지 않습니다.
 
