@@ -339,8 +339,8 @@ button {
   overflow: hidden;
   background: linear-gradient(180deg, #838383 0%, #3e3e3e 100%);
 }
-/* 인트로 영상. 카드를 꽉 채우되(object-fit:cover) 조작은 막는다 —
-   pointer-events 를 꺼서 탭이 영상을 통과해 카드의 "바로 열기" 로만 간다. */
+/* 인트로 영상. 조작은 막는다 — pointer-events 를 꺼서 일시정지·구간이동이 안 되고,
+   길게 눌러도 저장 메뉴가 뜨지 않는다. 카드 쪽에도 탭 처리는 없다. */
 .intro__video {
   position: absolute;
   inset: 0;
@@ -355,29 +355,6 @@ button {
   -webkit-user-select: none;
   user-select: none;
 }
-.intro__chevron {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  border-right: 1px solid rgba(50, 42, 34, 0.55);
-  border-bottom: 1px solid rgba(50, 42, 34, 0.55);
-  transform: translateX(-50%) rotate(45deg);
-  animation: chev 2.4s ease-in-out infinite;
-}
-@keyframes chev {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: translate(-50%, -3px) rotate(45deg);
-  }
-  50% {
-    opacity: 0.7;
-    transform: translate(-50%, 3px) rotate(45deg);
-  }
-}
-
 /* ============ 표지(사용자 완성 이미지) ============ */
 .cover {
   position: relative;
