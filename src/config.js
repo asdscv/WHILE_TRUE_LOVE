@@ -149,15 +149,16 @@ export const config = {
   account: {
     // 기본 노출 여부. false = 메인은 계좌 숨김 / ?account=on 링크에서만 계좌 보임
     defaultVisible: false,
+    // 배열 순서가 곧 화면에 쌓이는 순서다. 어른부터 위로 올리고 본인을 맨 아래 둔다.
     groom: [
-      { relation: '신랑', name: '박지용', bank: '국민은행', number: '123456-01-234567', kakaopay: '' },
-      { relation: '아버지', name: '박희서', bank: '신한은행', number: '110-123-456789', kakaopay: '' },
-      { relation: '어머니', name: '설옥선', bank: '농협은행', number: '302-1234-5678-91', kakaopay: '' },
+      { relation: '아버지', name: '박희서', bank: '부산은행', number: '0320-1045-6171', kakaopay: '' },
+      { relation: '어머니', name: '설옥선', bank: '신한은행', number: '110-260-080987', kakaopay: '' },
+      { relation: '신랑', name: '박지용', bank: '토스뱅크', number: '1000-9077-4621', kakaopay: '' },
     ],
     bride: [
-      { relation: '신부', name: '오애신', bank: '카카오뱅크', number: '3333-01-2345678', kakaopay: '' },
       // 신부 아버님은 고인이시라 계좌 행을 두지 않았습니다. 필요하면 다시 추가하세요.
-      { relation: '어머니', name: '김현', bank: '하나은행', number: '123-456789-01234', kakaopay: '' },
+      { relation: '어머니', name: '김현', bank: '신한은행', number: '110-553-358618', kakaopay: '' },
+      { relation: '신부', name: '오애신', bank: '국민은행', number: '324701-04-138026', kakaopay: '' },
     ],
   },
 
