@@ -76,6 +76,9 @@ html,
 body {
   margin: 0;
   padding: 0;
+  /* 두 번 탭해서 키우는 동작을 끈다(스크롤·탭은 그대로 산다).
+     두 손가락 핀치는 src/lib/noZoom.js 가 막는다. */
+  touch-action: manipulation;
 }
 body {
   /* 캔버스(세이프에어리어 띠 · 오버스크롤 영역)에 칠해지는 색 */
