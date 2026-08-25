@@ -971,15 +971,12 @@ button {
   padding: var(--sp-4) 0;
   border-top: 1px solid var(--line);
 }
-.account-row__top {
-  display: flex;
-  gap: 10px;
+/* 세 줄로 읽는다 — 관계 / 은행 계좌번호 / 예금주.
+   가운데 줄이 옮겨 적을 정보라 번호만 크게 두고, 은행은 작게 앞세워
+   좁은 폰에서 "국민은행 324701-04-138026" 같은 조합이 넘치지 않게 한다. */
+.account-row__rel {
   margin: 0 0 6px;
   font-size: 13px;
-  color: var(--muted);
-}
-.account-row__bank,
-.account-row__rel {
   color: var(--muted);
 }
 .account-row__num {
@@ -988,6 +985,11 @@ button {
   font-size: 19px;
   letter-spacing: 0.01em;
   color: var(--ink);
+}
+.account-row__bank {
+  margin-right: 6px;
+  font-size: 15px;
+  color: var(--muted);
 }
 .account-row__holder {
   margin: 6px 0 0;

@@ -18,11 +18,11 @@ function AccountRow({ row }) {
   return (
     <div className="account-row">
       <div className="account-row__info">
-        <p className="account-row__top">
+        <p className="account-row__rel">{row.relation}</p>
+        <p className="account-row__num">
           <span className="account-row__bank">{row.bank}</span>
-          <span className="account-row__rel">{row.relation}</span>
+          {row.number}
         </p>
-        <p className="account-row__num">{row.number}</p>
         <p className="account-row__holder">예금주 {row.name}</p>
       </div>
       <div className="account-row__actions">
