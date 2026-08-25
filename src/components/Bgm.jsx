@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { config } from '../config'
+import dancing from '../assets/bgm/dancing.webp'
+import still from '../assets/bgm/still.webp'
 
 // 페이지 진입 시 배경음악 재생 + 우측 상단 켜기/끄기 토글.
 // 브라우저 자동재생 정책상 소리는 첫 사용자 동작(탭/스크롤) 이후 시작됩니다.
@@ -73,7 +75,21 @@ export default function Bgm() {
         aria-label={playing ? '음악 끄기' : '음악 켜기'}
         title={bgm.title || '배경음악'}
       >
-        <span className="bgm-toggle__icon">{playing ? '♪' : '♪̸'}</span>
+        {/* 켜져 있으면 춤추고, 꺼져 있으면 멈춰 선다.
+            둘 다 깔아 두고 투명도만 바꾸는 이유는, src 를 갈아끼우면 켤 때마다
+            움직이는 판을 그제서야 내려받느라 버튼이 한 번 비기 때문이다. */}
+        <img
+          className="bgm-toggle__icon bgm-toggle__icon--on"
+          src={dancing}
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className="bgm-toggle__icon bgm-toggle__icon--off"
+          src={still}
+          alt=""
+          aria-hidden="true"
+        />
       </button>
     </>
   )

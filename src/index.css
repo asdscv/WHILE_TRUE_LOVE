@@ -1191,29 +1191,38 @@ button {
 }
 
 /* ============ BGM 토글 ============ */
+/* 신랑신부 그림 한 쌍이 들어가면서 40px 로는 형체가 안 잡혀 56px 로 키웠다.
+   서리 낀 원판은 남긴다 — 인트로 영상(어두움)·표지 사진·본문 종이색을 차례로
+   지나가는 자리라, 판이 없으면 흰 드레스가 종이색에 묻힌다. */
 .bgm-toggle {
   position: fixed;
   top: 16px;
   right: 16px;
   z-index: 400;
-  width: 40px;
-  height: 40px;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 4px;
   border-radius: 50%;
   border: none;
-  background: rgba(246, 243, 236, 0.55);
-  color: var(--text);
-  font-size: 16px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 1px 6px rgba(30, 27, 24, 0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-.bgm-toggle--on .bgm-toggle__icon {
-  display: inline-block;
-  animation: spin 4s linear infinite;
+/* 두 장을 같은 칸에 겹쳐 두고 투명도로만 갈아 끼운다(둘 다 미리 받아 둔다). */
+.bgm-toggle__icon {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
 }
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.bgm-toggle--on .bgm-toggle__icon--on,
+.bgm-toggle:not(.bgm-toggle--on) .bgm-toggle__icon--off {
+  opacity: 1;
 }
 
 /* ============ 푸터 ============ */
