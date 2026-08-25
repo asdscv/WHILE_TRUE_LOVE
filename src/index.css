@@ -1191,32 +1191,37 @@ button {
 }
 
 /* ============ BGM 토글 ============ */
-/* 신랑신부 그림 한 쌍이 들어가면서 40px 로는 형체가 안 잡혀 56px 로 키웠다.
-   서리 낀 원판은 남긴다 — 인트로 영상(어두움)·표지 사진·본문 종이색을 차례로
-   지나가는 자리라, 판이 없으면 흰 드레스가 종이색에 묻힌다. */
+/* 판 없이 그림만 놓는다. 버튼 상자는 누를 자리로만 남기고 테두리·배경은 없앤다.
+   대신 그림 실루엣을 따라가는 옅은 그림자를 둬서, 흰 드레스가 종이색 위에서
+   윤곽을 잃지 않게 한다. */
 .bgm-toggle {
   position: fixed;
-  top: 16px;
+  /* 표지에 박혀 있는 두 사람 이름은 이미지 세로 12~14.4% 자리에 있어서, 폭이
+     좁을수록 위로 올라온다. 맨 위 구석(16px)에 두면 어느 폭에서든 "오애신" 을
+     밟는다. 이름 아래로 내려 앉혀 어떤 폭에서도 닿지 않게 한다. */
+  top: 88px;
   right: 16px;
   z-index: 400;
-  display: grid;
-  place-items: center;
   width: 56px;
   height: 56px;
-  padding: 4px;
-  border-radius: 50%;
+  padding: 0;
   border: none;
-  background: rgba(255, 255, 255, 0.62);
-  box-shadow: 0 1px 6px rgba(30, 27, 24, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
-/* 두 장을 같은 칸에 겹쳐 두고 투명도로만 갈아 끼운다(둘 다 미리 받아 둔다). */
+/* 두 장을 겹쳐 두고 투명도로만 갈아 끼운다(둘 다 미리 받아 둔다).
+   높이를 버튼에 붙박아 두고 폭은 비율대로 따라오게 한다 — 자동 높이 칸에
+   height:100% 를 걸면 크기가 정해지기 전에 100% 를 재느라 원본 크기(160px)로
+   삐져나온다. 버튼이 fixed 라 여기 붙은 절대 위치의 기준 높이는 56px 로 확실하다. */
 .bgm-toggle__icon {
-  grid-area: 1 / 1;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   height: 100%;
-  object-fit: contain;
+  width: auto;
+  filter: drop-shadow(0 1px 2px rgba(30, 27, 24, 0.28));
   opacity: 0;
   transition: opacity 0.25s var(--ease);
 }
