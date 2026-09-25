@@ -122,7 +122,8 @@ export async function deleteGuestbook(id, password) {
 // config.rsvp.email.endpoint 가 비어 있으면 아무것도 하지 않는다.
 // 메일이 실패해도 제출 자체는 성공으로 처리한다(기록은 Supabase 에 이미 남았으므로).
 async function notifyByEmail(entry) {
-  const endpoint = config.rsvp?.email?.endpoint
+  const cfg = config.rsvp?.email
+  const endpoint = cfg?.endpoint
   if (!endpoint) return
   try {
     await fetch(endpoint, {
