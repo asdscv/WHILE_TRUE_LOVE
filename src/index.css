@@ -891,6 +891,7 @@ button {
 .transport__desc {
   color: var(--text);
   line-height: 1.5;
+  white-space: pre-line; /* 설정의 \n 을 줄바꿈으로 */
 }
 
 /* ============ 마음 전하실 곳 ============ */
