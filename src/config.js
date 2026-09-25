@@ -117,8 +117,8 @@ export const config = {
     enabled: true,
     // public/bgm/ 폴더에 넣은 파일명.
     // 파일이 없으면 재생만 안 될 뿐, 페이지는 정상 동작합니다.
-    file: 'beautiful-love.mp3',
-    title: 'Beautiful Love', // (선택) 곡 제목 표시용
+    file: 'my-one-and-only-love.mp3',
+    title: 'My One And Only Love', // (선택) 곡 제목 표시용
   },
 
   // ---------------------------------------------------------
