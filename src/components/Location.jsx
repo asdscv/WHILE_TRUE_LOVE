@@ -15,7 +15,7 @@ const Pin = () => (
 
 export default function Location({ n }) {
   const { venue } = config.wedding
-  const { transport } = config.location
+  const { transport, meal } = config.location
   const [copied, setCopied] = useState(false)
   const { lat, lng, name, address } = venue
 
@@ -61,6 +61,32 @@ export default function Location({ n }) {
             )}
           </div>
         </div>
+
+        {meal?.enabled && (
+          <div className="meal">
+            <p className="meal__label">식사 안내</p>
+            <p className="meal__note">{meal.note}</p>
+            <div className="meal__venue">
+              <p className="meal__name">{meal.name}</p>
+              <p className="meal__addr">{meal.address}</p>
+            </div>
+            <div className="meal__actions">
+              <a
+                className="meal__btn"
+                href={meal.naverUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                식당 위치 보기
+              </a>
+              {meal.tel && (
+                <a className="btn-line" href={`tel:${meal.tel}`}>
+                  전화하기
+                </a>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="map">
           <img

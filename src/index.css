@@ -822,6 +822,73 @@ button {
   flex: none;
   gap: var(--sp-2);
 }
+/* 예식장과 식사 장소가 다를 때만 뜨는 안내 카드. 지도보다 먼저 보여서,
+   길찾기 전에 "식사는 다른 곳" 임을 먼저 알게 한다. */
+.meal {
+  margin: var(--sp-6) 0;
+  padding: var(--sp-4);
+  border-radius: 16px;
+  background: var(--paper-2);
+}
+.meal__label {
+  margin: 0 0 var(--sp-2);
+  font-family: var(--sans);
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  color: var(--accent-deep);
+}
+.meal__note {
+  margin: 0 0 var(--sp-4);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-line;
+}
+.meal__venue {
+  margin: 0 0 var(--sp-4);
+}
+.meal__name {
+  font-family: var(--song);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.meal__addr {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.meal__actions {
+  display: flex;
+  gap: var(--sp-2);
+}
+.meal__btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--accent-deep);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease;
+}
+.meal__btn:hover {
+  background: var(--btn-hover);
+}
+.meal__actions .btn-line {
+  flex: none;
+  min-height: 48px;
+}
+
 .map {
   overflow: hidden;
   border-radius: 16px;

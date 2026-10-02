@@ -142,6 +142,16 @@ export const config = {
       { icon: '🅿️', title: '주차', desc: '전용 주차장이 없어 대중교통 이용을 권장드립니다' },
       { icon: '💐', title: '화환', desc: '화환은 정중히 사양합니다.\n축하해 주시는 마음만 감사히 받겠습니다' },
     ],
+    // 식사 장소가 예식장과 다를 때만 사용. enabled 를 false 로 두면 안내가 빠집니다.
+    meal: {
+      enabled: true,
+      name: '유담헌',
+      note: '식사는 예식장인 백인제가옥이 아닌\n아래 장소에서 준비했습니다',
+      address: '서울 종로구 창덕궁길 61',
+      tel: '02-515-9924',
+      naverUrl:
+        'https://map.naver.com/p/search/%EC%9C%A0%EB%8B%B4%ED%97%8C/place/1936370536?placePath=%3Fbk_query%3D%25EC%259C%25A0%25EB%258B%25B4%25ED%2597%258C%26entry%3Dpll%26from%3Dnx%26fromNxList%3Dtrue&placeSearchOption=bk_query%3D%25EC%259C%25A0%25EB%258B%25B4%25ED%2597%258C%26entry%3Dpll%26fromNxList%3Dtrue%26originalQuery%3D%25EC%259C%25A0%25EB%258B%25B4%25ED%2597%258C%26x%3D127.063582%26y%3D37.659958&searchType=place',
+    },
   },
 
   // ---------------------------------------------------------
