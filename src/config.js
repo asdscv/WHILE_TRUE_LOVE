@@ -146,7 +146,7 @@ export const config = {
     meal: {
       enabled: true,
       name: '유담헌',
-      note: '식사는 예식장인 백인제가옥이 아닌\n아래 장소에서 준비했습니다',
+      note: '식사는 예식장인 백인제가옥이 아닌\n아래 장소에서 정성껏 준비하였습니다',
       address: '서울 종로구 창덕궁길 61',
       tel: '02-515-9924',
       naverUrl:

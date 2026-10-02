@@ -62,32 +62,6 @@ export default function Location({ n }) {
           </div>
         </div>
 
-        {meal?.enabled && (
-          <div className="meal">
-            <p className="meal__label">식사 안내</p>
-            <p className="meal__note">{meal.note}</p>
-            <div className="meal__venue">
-              <p className="meal__name">{meal.name}</p>
-              <p className="meal__addr">{meal.address}</p>
-            </div>
-            <div className="meal__actions">
-              <a
-                className="meal__btn"
-                href={meal.naverUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                식당 위치 보기
-              </a>
-              {meal.tel && (
-                <a className="btn-line" href={`tel:${meal.tel}`}>
-                  전화하기
-                </a>
-              )}
-            </div>
-          </div>
-        )}
-
         <div className="map">
           <img
             className="map__img"
@@ -113,6 +87,33 @@ export default function Location({ n }) {
             티맵
           </a>
         </div>
+
+        {meal?.enabled && (
+          <div className="meal">
+            <p className="meal__eyebrow">식사 안내</p>
+            <p className="meal__note">{meal.note}</p>
+            <div className="meal__venue">
+              <p className="meal__name">{meal.name}</p>
+              <p className="meal__addr">{meal.address}</p>
+            </div>
+            <div className="meal__actions">
+              <a
+                className="btn-line meal__btn"
+                href={meal.naverUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Pin />
+                식당 위치 보기
+              </a>
+              {meal.tel && (
+                <a className="btn-line" href={`tel:${meal.tel}`}>
+                  전화하기
+                </a>
+              )}
+            </div>
+          </div>
+        )}
 
         <ul className="transport">
           {transport.map((t, i) => (
