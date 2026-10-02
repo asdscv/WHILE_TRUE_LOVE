@@ -845,7 +845,14 @@ button {
   white-space: pre-line;
 }
 .meal__venue {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
   margin: 0 0 var(--sp-4);
+}
+.meal__venue-text {
+  min-width: 0;
 }
 .meal__name {
   font-family: var(--song);
@@ -859,13 +866,6 @@ button {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
-}
-.meal__actions {
-  display: flex;
-  gap: var(--sp-2);
-}
-.meal__btn {
-  flex: 1;
 }
 
 .map {
@@ -885,7 +885,8 @@ button {
 }
 .nav-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* 전용 주차장이 없어 승용차 내비(티맵)는 빼고, 대중교통용 지도 두 곳만 둔다. */
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-2);
   margin-bottom: var(--sp-6);
 }

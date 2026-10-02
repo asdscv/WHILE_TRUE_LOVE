@@ -21,9 +21,15 @@ export default function Location({ n }) {
 
   const q = encodeURIComponent(name)
   // 지도는 손그림 약도 이미지로 보여주고, 길찾기는 아래 앱 링크로 넘긴다.
+  // 전용 주차장이 없어 승용차 내비(티맵)는 빼고 대중교통용 지도 두 곳만 둔다.
   const kakao = `https://map.kakao.com/link/to/${q},${lat},${lng}`
   const naver = venue.naverUrl || `https://map.naver.com/v5/search/${q}`
-  const tmap = `tmap://route?goalname=${q}&goalx=${lng}&goaly=${lat}`
+
+  // 유담헌은 좌표 없이 상호명으로만 검색 링크를 만든다(지번 좌표가 부정확하면
+  // 엉뚱한 핀을 찍을 수 있어, 검증된 네이버 장소 링크 외에는 이름 검색만 쓴다).
+  const mealKakao = meal?.enabled
+    ? `https://map.kakao.com/link/search/${encodeURIComponent(meal.name)}`
+    : null
 
   const copyAddress = async () => {
     try {
@@ -82,10 +88,6 @@ export default function Location({ n }) {
             <Pin />
             카카오맵
           </a>
-          <a className="nav-btn" href={tmap}>
-            <span className="nav-btn__i">T</span>
-            티맵
-          </a>
         </div>
 
         {meal?.enabled && (
@@ -93,24 +95,35 @@ export default function Location({ n }) {
             <p className="meal__eyebrow">식사 안내</p>
             <p className="meal__note">{meal.note}</p>
             <div className="meal__venue">
-              <p className="meal__name">{meal.name}</p>
-              <p className="meal__addr">{meal.address}</p>
-            </div>
-            <div className="meal__actions">
-              <a
-                className="btn-line meal__btn"
-                href={meal.naverUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Pin />
-                식당 위치 보기
-              </a>
+              <div className="meal__venue-text">
+                <p className="meal__name">{meal.name}</p>
+                <p className="meal__addr">{meal.address}</p>
+              </div>
               {meal.tel && (
                 <a className="btn-line" href={`tel:${meal.tel}`}>
                   전화하기
                 </a>
               )}
+            </div>
+            <div className="nav-buttons">
+              <a
+                className="nav-btn"
+                href={meal.naverUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="nav-btn__i">N</span>
+                네이버지도
+              </a>
+              <a
+                className="nav-btn"
+                href={mealKakao}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Pin />
+                카카오맵
+              </a>
             </div>
           </div>
         )}
