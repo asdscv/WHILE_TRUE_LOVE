@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+  결혼식 당일 테이블에 놓고 나눠줄 식사 장소 안내 카드.
+  A4 한 장에 같은 카드 4개(2x2) — 집/편의점 흑백 프린터로 인쇄해도
+  선명하도록 색 없이 검정 텍스트 + 흰 배경만 쓴다.
+
+  내용은 src/config.js 의 config.location.meal 과 같은 값이다(이 파일은
+  Vite 빌드에 포함되지 않는 독립 파일이라 자동으로 동기화되지 않는다 —
+  식당 정보가 바뀌면 이 파일도 같이 고칠 것).
+
+  인쇄 방법: 이 파일을 브라우저로 열고 Cmd+P → 용지 A4, 배율 100%,
+  여백 "없음"(또는 최소)으로 설정 후 인쇄. 점선을 따라 가위로 자른다.
+-->
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>식사 안내 카드 — 인쇄용</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ddd; /* 화면에서만 보이는 배경 — 인쇄 시 흰 종이와 카드 경계를 구분하려고 */
+  }
+  body {
+    font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+
+  .notice {
+    max-width: 210mm;
+    margin: 16px auto;
+    padding: 12px 16px;
+    background: #fffbe6;
+    border: 1px solid #e8d98a;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #4a3f00;
+  }
+  .notice b { color: #000; }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    display: grid;
+    /* mm 고정값 — 1fr 를 쓰면 칸 내용이 살짝만 넘쳐도 행이 늘어나 전체가
+       297mm 를 넘기고 2페이지로 밀려난다(실제로 한 번 겪었다). */
+    grid-template-columns: 105mm 105mm;
+    grid-template-rows: 148.5mm 148.5mm;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7mm;
+    padding: 10mm;
+    text-align: center;
+    overflow: hidden; /* 혹시라도 내용이 넘치면 페이지가 밀리는 대신 칸 안에서 잘리게 */
+  }
+  .card p {
+    margin: 0; /* 문단 기본 여백을 없애 간격을 gap 하나로만 통제한다 */
+  }
+  /* 가운데 십자 점선 — 자르는 기준선. 바깥 테두리(종이 끝)에는 넣지 않는다. */
+  .card--tl { border-right: 0.3mm dashed #999; border-bottom: 0.3mm dashed #999; }
+  .card--tr { border-bottom: 0.3mm dashed #999; }
+  .card--bl { border-right: 0.3mm dashed #999; }
+
+  .card__couple {
+    font-size: 9pt;
+    letter-spacing: 0.04em;
+    color: #777;
+  }
+  .card__eyebrow {
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: #000;
+  }
+  .card__note {
+    font-size: 10.5pt;
+    line-height: 1.7;
+    color: #333;
+    white-space: pre-line;
+  }
+  .card__name {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+  .card__addr,
+  .card__tel {
+    font-size: 10.5pt;
+    color: #333;
+    margin: 0;
+  }
+  .card__qr {
+    width: 30mm;
+    height: 30mm;
+  }
+  .card__qr svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .card__qr-label {
+    font-size: 8.5pt;
+    color: #777;
+    margin-top: -3mm;
+  }
+
+  @media print {
+    .notice { display: none; }
+    html, body { background: #fff; }
+    .page { margin: 0; }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="notice">
+    <b>인쇄 안내 (화면에만 보이고 인쇄되지 않습니다)</b><br />
+    Cmd+P(또는 Ctrl+P) → 용지 <b>A4</b>, 배율 <b>100%(맞춤 아님)</b>,
+    여백 <b>없음</b>으로 설정 후 인쇄하세요. 인쇄된 종이를 가운데 점선을
+    따라 가위로 자르면 카드 4장이 나옵니다.
+  </div>
+
+  <div class="page">
+
+    <div class="card card--tl">
+      <p class="card__couple">박지용 · 오애신 결혼식 · 2026. 10. 18.</p>
+      <p class="card__eyebrow">식사 안내</p>
+      <p class="card__note">식사는 예식장인 백인제가옥이 아닌
+아래 장소에서 정성껏 준비하였습니다</p>
+      <p class="card__name">유담헌</p>
+      <p class="card__addr">서울 종로구 창덕궁길 61</p>
+      <p class="card__tel">02-515-9924</p>
+      <div class="card__qr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h45v45H0z"/><path stroke="#000000" d="M4 4.5h7m1 0h1m1 0h1m2 0h1m2 0h2m1 0h3m2 0h2m2 0h1m1 0h7M4 5.5h1m5 0h1m1 0h2m4 0h2m1 0h1m3 0h2m1 0h1m2 0h1m2 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h9m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m4 0h1m1 0h2m1 0h2m1 0h1m3 0h3m4 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h2m1 0h1m4 0h2m5 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m4 0h2m1 0h2m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m1 0h1m3 0h3m2 0h3m1 0h1m2 0h1m1 0h1M6 12.5h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m2 0h3m2 0h3M4 13.5h4m1 0h1m3 0h2m3 0h1m1 0h4m1 0h1m1 0h6m4 0h1m1 0h1M4 14.5h1m4 0h5m2 0h1m1 0h1m2 0h1m1 0h1m2 0h7m1 0h1m3 0h3M11 15.5h1m1 0h1m1 0h1m1 0h2m2 0h3m2 0h3m1 0h1m1 0h1m1 0h1m4 0h1M5 16.5h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h2m4 0h1m4 0h2m1 0h3m1 0h4M5 17.5h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h2M5 18.5h3m1 0h2m1 0h1m1 0h3m5 0h1m2 0h5m1 0h1m1 0h3m1 0h1m2 0h1M5 19.5h1m1 0h2m2 0h2m1 0h8m4 0h3m1 0h1m4 0h1m4 0h1M4 20.5h1m2 0h1m2 0h2m1 0h1m1 0h1m4 0h1m3 0h1m2 0h5m1 0h4m1 0h1m1 0h1M4 21.5h2m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m8 0h2m5 0h1m2 0h1M5 22.5h1m2 0h5m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h4M7 23.5h1m6 0h3m1 0h1m1 0h1m2 0h4m1 0h1m1 0h1m9 0h1M7 24.5h1m2 0h1m1 0h2m1 0h2m6 0h1m5 0h3m1 0h8M4 25.5h2m1 0h1m3 0h4m6 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1M4 26.5h1m1 0h1m1 0h5m4 0h3m1 0h2m1 0h1m2 0h5m5 0h1m1 0h2M5 27.5h1m2 0h1m4 0h1m1 0h2m1 0h1m2 0h2m2 0h4m5 0h2m1 0h1m1 0h2M5 28.5h2m2 0h2m1 0h2m1 0h3m1 0h4m2 0h1m6 0h2m1 0h1m1 0h2m1 0h1M4 29.5h1m3 0h1m4 0h4m3 0h2m1 0h4m1 0h2m1 0h1m2 0h1M4 30.5h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h3m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h3m3 0h1M4 31.5h1m4 0h1m1 0h1m3 0h1m4 0h3m1 0h2m2 0h1m1 0h2m1 0h1m1 0h3m1 0h2M4 32.5h1m2 0h2m1 0h1m3 0h1m1 0h1m1 0h4m1 0h2m1 0h1m1 0h12M12 33.5h1m1 0h4m1 0h2m4 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1M4 34.5h7m2 0h2m5 0h5m1 0h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2M4 35.5h1m5 0h1m4 0h3m1 0h1m2 0h1m3 0h1m3 0h1m1 0h1m3 0h1m2 0h2M4 36.5h1m1 0h3m1 0h1m1 0h1m4 0h3m2 0h1m3 0h11m1 0h1m1 0h1M4 37.5h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m2 0h2m1 0h1m5 0h1m2 0h1m1 0h1m1 0h1M4 38.5h1m1 0h3m1 0h1m1 0h2m3 0h3m1 0h1m1 0h3m1 0h2m4 0h1m1 0h1m1 0h2m1 0h1M4 39.5h1m5 0h1m2 0h2m3 0h1m1 0h8m4 0h5m3 0h1M4 40.5h7m2 0h1m3 0h4m2 0h2m1 0h5m2 0h8"/></svg>
+      </div>
+      <p class="card__qr-label">QR 코드 — 네이버지도로 길찾기</p>
+    </div>
+
+    <div class="card card--tr">
+      <p class="card__couple">박지용 · 오애신 결혼식 · 2026. 10. 18.</p>
+      <p class="card__eyebrow">식사 안내</p>
+      <p class="card__note">식사는 예식장인 백인제가옥이 아닌
+아래 장소에서 정성껏 준비하였습니다</p>
+      <p class="card__name">유담헌</p>
+      <p class="card__addr">서울 종로구 창덕궁길 61</p>
+      <p class="card__tel">02-515-9924</p>
+      <div class="card__qr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h45v45H0z"/><path stroke="#000000" d="M4 4.5h7m1 0h1m1 0h1m2 0h1m2 0h2m1 0h3m2 0h2m2 0h1m1 0h7M4 5.5h1m5 0h1m1 0h2m4 0h2m1 0h1m3 0h2m1 0h1m2 0h1m2 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h9m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m4 0h1m1 0h2m1 0h2m1 0h1m3 0h3m4 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h2m1 0h1m4 0h2m5 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m4 0h2m1 0h2m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m1 0h1m3 0h3m2 0h3m1 0h1m2 0h1m1 0h1M6 12.5h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m2 0h3m2 0h3M4 13.5h4m1 0h1m3 0h2m3 0h1m1 0h4m1 0h1m1 0h6m4 0h1m1 0h1M4 14.5h1m4 0h5m2 0h1m1 0h1m2 0h1m1 0h1m2 0h7m1 0h1m3 0h3M11 15.5h1m1 0h1m1 0h1m1 0h2m2 0h3m2 0h3m1 0h1m1 0h1m1 0h1m4 0h1M5 16.5h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h2m4 0h1m4 0h2m1 0h3m1 0h4M5 17.5h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h2M5 18.5h3m1 0h2m1 0h1m1 0h3m5 0h1m2 0h5m1 0h1m1 0h3m1 0h1m2 0h1M5 19.5h1m1 0h2m2 0h2m1 0h8m4 0h3m1 0h1m4 0h1m4 0h1M4 20.5h1m2 0h1m2 0h2m1 0h1m1 0h1m4 0h1m3 0h1m2 0h5m1 0h4m1 0h1m1 0h1M4 21.5h2m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m8 0h2m5 0h1m2 0h1M5 22.5h1m2 0h5m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h4M7 23.5h1m6 0h3m1 0h1m1 0h1m2 0h4m1 0h1m1 0h1m9 0h1M7 24.5h1m2 0h1m1 0h2m1 0h2m6 0h1m5 0h3m1 0h8M4 25.5h2m1 0h1m3 0h4m6 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1M4 26.5h1m1 0h1m1 0h5m4 0h3m1 0h2m1 0h1m2 0h5m5 0h1m1 0h2M5 27.5h1m2 0h1m4 0h1m1 0h2m1 0h1m2 0h2m2 0h4m5 0h2m1 0h1m1 0h2M5 28.5h2m2 0h2m1 0h2m1 0h3m1 0h4m2 0h1m6 0h2m1 0h1m1 0h2m1 0h1M4 29.5h1m3 0h1m4 0h4m3 0h2m1 0h4m1 0h2m1 0h1m2 0h1M4 30.5h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h3m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h3m3 0h1M4 31.5h1m4 0h1m1 0h1m3 0h1m4 0h3m1 0h2m2 0h1m1 0h2m1 0h1m1 0h3m1 0h2M4 32.5h1m2 0h2m1 0h1m3 0h1m1 0h1m1 0h4m1 0h2m1 0h1m1 0h12M12 33.5h1m1 0h4m1 0h2m4 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1M4 34.5h7m2 0h2m5 0h5m1 0h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2M4 35.5h1m5 0h1m4 0h3m1 0h1m2 0h1m3 0h1m3 0h1m1 0h1m3 0h1m2 0h2M4 36.5h1m1 0h3m1 0h1m1 0h1m4 0h3m2 0h1m3 0h11m1 0h1m1 0h1M4 37.5h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m2 0h2m1 0h1m5 0h1m2 0h1m1 0h1m1 0h1M4 38.5h1m1 0h3m1 0h1m1 0h2m3 0h3m1 0h1m1 0h3m1 0h2m4 0h1m1 0h1m1 0h2m1 0h1M4 39.5h1m5 0h1m2 0h2m3 0h1m1 0h8m4 0h5m3 0h1M4 40.5h7m2 0h1m3 0h4m2 0h2m1 0h5m2 0h8"/></svg>
+      </div>
+      <p class="card__qr-label">QR 코드 — 네이버지도로 길찾기</p>
+    </div>
+
+    <div class="card card--bl">
+      <p class="card__couple">박지용 · 오애신 결혼식 · 2026. 10. 18.</p>
+      <p class="card__eyebrow">식사 안내</p>
+      <p class="card__note">식사는 예식장인 백인제가옥이 아닌
+아래 장소에서 정성껏 준비하였습니다</p>
+      <p class="card__name">유담헌</p>
+      <p class="card__addr">서울 종로구 창덕궁길 61</p>
+      <p class="card__tel">02-515-9924</p>
+      <div class="card__qr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h45v45H0z"/><path stroke="#000000" d="M4 4.5h7m1 0h1m1 0h1m2 0h1m2 0h2m1 0h3m2 0h2m2 0h1m1 0h7M4 5.5h1m5 0h1m1 0h2m4 0h2m1 0h1m3 0h2m1 0h1m2 0h1m2 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h9m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m4 0h1m1 0h2m1 0h2m1 0h1m3 0h3m4 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h2m1 0h1m4 0h2m5 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m4 0h2m1 0h2m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m1 0h1m3 0h3m2 0h3m1 0h1m2 0h1m1 0h1M6 12.5h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m2 0h3m2 0h3M4 13.5h4m1 0h1m3 0h2m3 0h1m1 0h4m1 0h1m1 0h6m4 0h1m1 0h1M4 14.5h1m4 0h5m2 0h1m1 0h1m2 0h1m1 0h1m2 0h7m1 0h1m3 0h3M11 15.5h1m1 0h1m1 0h1m1 0h2m2 0h3m2 0h3m1 0h1m1 0h1m1 0h1m4 0h1M5 16.5h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h2m4 0h1m4 0h2m1 0h3m1 0h4M5 17.5h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h2M5 18.5h3m1 0h2m1 0h1m1 0h3m5 0h1m2 0h5m1 0h1m1 0h3m1 0h1m2 0h1M5 19.5h1m1 0h2m2 0h2m1 0h8m4 0h3m1 0h1m4 0h1m4 0h1M4 20.5h1m2 0h1m2 0h2m1 0h1m1 0h1m4 0h1m3 0h1m2 0h5m1 0h4m1 0h1m1 0h1M4 21.5h2m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m8 0h2m5 0h1m2 0h1M5 22.5h1m2 0h5m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h4M7 23.5h1m6 0h3m1 0h1m1 0h1m2 0h4m1 0h1m1 0h1m9 0h1M7 24.5h1m2 0h1m1 0h2m1 0h2m6 0h1m5 0h3m1 0h8M4 25.5h2m1 0h1m3 0h4m6 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1M4 26.5h1m1 0h1m1 0h5m4 0h3m1 0h2m1 0h1m2 0h5m5 0h1m1 0h2M5 27.5h1m2 0h1m4 0h1m1 0h2m1 0h1m2 0h2m2 0h4m5 0h2m1 0h1m1 0h2M5 28.5h2m2 0h2m1 0h2m1 0h3m1 0h4m2 0h1m6 0h2m1 0h1m1 0h2m1 0h1M4 29.5h1m3 0h1m4 0h4m3 0h2m1 0h4m1 0h2m1 0h1m2 0h1M4 30.5h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h3m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h3m3 0h1M4 31.5h1m4 0h1m1 0h1m3 0h1m4 0h3m1 0h2m2 0h1m1 0h2m1 0h1m1 0h3m1 0h2M4 32.5h1m2 0h2m1 0h1m3 0h1m1 0h1m1 0h4m1 0h2m1 0h1m1 0h12M12 33.5h1m1 0h4m1 0h2m4 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1M4 34.5h7m2 0h2m5 0h5m1 0h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2M4 35.5h1m5 0h1m4 0h3m1 0h1m2 0h1m3 0h1m3 0h1m1 0h1m3 0h1m2 0h2M4 36.5h1m1 0h3m1 0h1m1 0h1m4 0h3m2 0h1m3 0h11m1 0h1m1 0h1M4 37.5h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m2 0h2m1 0h1m5 0h1m2 0h1m1 0h1m1 0h1M4 38.5h1m1 0h3m1 0h1m1 0h2m3 0h3m1 0h1m1 0h3m1 0h2m4 0h1m1 0h1m1 0h2m1 0h1M4 39.5h1m5 0h1m2 0h2m3 0h1m1 0h8m4 0h5m3 0h1M4 40.5h7m2 0h1m3 0h4m2 0h2m1 0h5m2 0h8"/></svg>
+      </div>
+      <p class="card__qr-label">QR 코드 — 네이버지도로 길찾기</p>
+    </div>
+
+    <div class="card card--br">
+      <p class="card__couple">박지용 · 오애신 결혼식 · 2026. 10. 18.</p>
+      <p class="card__eyebrow">식사 안내</p>
+      <p class="card__note">식사는 예식장인 백인제가옥이 아닌
+아래 장소에서 정성껏 준비하였습니다</p>
+      <p class="card__name">유담헌</p>
+      <p class="card__addr">서울 종로구 창덕궁길 61</p>
+      <p class="card__tel">02-515-9924</p>
+      <div class="card__qr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h45v45H0z"/><path stroke="#000000" d="M4 4.5h7m1 0h1m1 0h1m2 0h1m2 0h2m1 0h3m2 0h2m2 0h1m1 0h7M4 5.5h1m5 0h1m1 0h2m4 0h2m1 0h1m3 0h2m1 0h1m2 0h1m2 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h9m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m4 0h1m1 0h2m1 0h2m1 0h1m3 0h3m4 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h2m1 0h1m4 0h2m5 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m1 0h1m3 0h1m1 0h1m2 0h1m4 0h2m1 0h2m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m1 0h1m3 0h3m2 0h3m1 0h1m2 0h1m1 0h1M6 12.5h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m2 0h3m2 0h3M4 13.5h4m1 0h1m3 0h2m3 0h1m1 0h4m1 0h1m1 0h6m4 0h1m1 0h1M4 14.5h1m4 0h5m2 0h1m1 0h1m2 0h1m1 0h1m2 0h7m1 0h1m3 0h3M11 15.5h1m1 0h1m1 0h1m1 0h2m2 0h3m2 0h3m1 0h1m1 0h1m1 0h1m4 0h1M5 16.5h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h2m4 0h1m4 0h2m1 0h3m1 0h4M5 17.5h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m3 0h2m1 0h1m1 0h2M5 18.5h3m1 0h2m1 0h1m1 0h3m5 0h1m2 0h5m1 0h1m1 0h3m1 0h1m2 0h1M5 19.5h1m1 0h2m2 0h2m1 0h8m4 0h3m1 0h1m4 0h1m4 0h1M4 20.5h1m2 0h1m2 0h2m1 0h1m1 0h1m4 0h1m3 0h1m2 0h5m1 0h4m1 0h1m1 0h1M4 21.5h2m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m8 0h2m5 0h1m2 0h1M5 22.5h1m2 0h5m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h4M7 23.5h1m6 0h3m1 0h1m1 0h1m2 0h4m1 0h1m1 0h1m9 0h1M7 24.5h1m2 0h1m1 0h2m1 0h2m6 0h1m5 0h3m1 0h8M4 25.5h2m1 0h1m3 0h4m6 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1M4 26.5h1m1 0h1m1 0h5m4 0h3m1 0h2m1 0h1m2 0h5m5 0h1m1 0h2M5 27.5h1m2 0h1m4 0h1m1 0h2m1 0h1m2 0h2m2 0h4m5 0h2m1 0h1m1 0h2M5 28.5h2m2 0h2m1 0h2m1 0h3m1 0h4m2 0h1m6 0h2m1 0h1m1 0h2m1 0h1M4 29.5h1m3 0h1m4 0h4m3 0h2m1 0h4m1 0h2m1 0h1m2 0h1M4 30.5h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h3m1 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h3m3 0h1M4 31.5h1m4 0h1m1 0h1m3 0h1m4 0h3m1 0h2m2 0h1m1 0h2m1 0h1m1 0h3m1 0h2M4 32.5h1m2 0h2m1 0h1m3 0h1m1 0h1m1 0h4m1 0h2m1 0h1m1 0h12M12 33.5h1m1 0h4m1 0h2m4 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1M4 34.5h7m2 0h2m5 0h5m1 0h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2M4 35.5h1m5 0h1m4 0h3m1 0h1m2 0h1m3 0h1m3 0h1m1 0h1m3 0h1m2 0h2M4 36.5h1m1 0h3m1 0h1m1 0h1m4 0h3m2 0h1m3 0h11m1 0h1m1 0h1M4 37.5h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m2 0h2m1 0h1m5 0h1m2 0h1m1 0h1m1 0h1M4 38.5h1m1 0h3m1 0h1m1 0h2m3 0h3m1 0h1m1 0h3m1 0h2m4 0h1m1 0h1m1 0h2m1 0h1M4 39.5h1m5 0h1m2 0h2m3 0h1m1 0h8m4 0h5m3 0h1M4 40.5h7m2 0h1m3 0h4m2 0h2m1 0h5m2 0h8"/></svg>
+      </div>
+      <p class="card__qr-label">QR 코드 — 네이버지도로 길찾기</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

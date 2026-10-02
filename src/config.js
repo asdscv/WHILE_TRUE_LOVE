@@ -149,8 +149,9 @@ export const config = {
       note: '식사는 예식장인 백인제가옥이 아닌\n아래 장소에서 정성껏 준비하였습니다',
       address: '서울 종로구 창덕궁길 61',
       tel: '02-515-9924',
-      naverUrl:
-        'https://map.naver.com/p/search/%EC%9C%A0%EB%8B%B4%ED%97%8C/place/1936370536?placePath=%3Fbk_query%3D%25EC%259C%25A0%25EB%258B%25B4%25ED%2597%258C%26entry%3Dpll%26from%3Dnx%26fromNxList%3Dtrue&placeSearchOption=bk_query%3D%25EC%259C%25A0%25EB%258B%25B4%25ED%2597%258C%26entry%3Dpll%26fromNxList%3Dtrue%26originalQuery%3D%25EC%259C%25A0%25EB%258B%25B4%25ED%2597%258C%26x%3D127.063582%26y%3D37.659958&searchType=place',
+      // 검색결과 링크 대신 장소 고유 링크(entry/place)를 쓴다 — 훨씬 짧아서
+      // QR 코드로 바꿨을 때 모듈이 성기고 인쇄 후 스캔이 더 잘 된다.
+      naverUrl: 'https://map.naver.com/p/entry/place/1936370536',
     },
   },
 
